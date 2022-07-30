@@ -1,2 +1,3 @@
 # full-stack-finance-todo
-Fullstack application for portfolio
+Full stack application for portfolio MERN
+
