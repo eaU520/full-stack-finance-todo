@@ -1,0 +1,35 @@
+{
+  "name": "mern_finance_todo",
+  "version": "1.0.0",
+  "description": "Basic CRUD application to track financial todos",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "app": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eaU520/full-stack-finance-todo.git"
+  },
+  "keywords": [
+    "finance",
+    "goals"
+  ],
+  "author": "ebonyac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eaU520/full-stack-finance-todo/issues"
+  },
+  "homepage": "https://github.com/eaU520/full-stack-finance-todo#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.0",
+    "validation": "^0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
