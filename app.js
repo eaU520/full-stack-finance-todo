@@ -3,9 +3,9 @@ const connectDB = require('./backend/database/db');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello world!'));
-
 connectDB();
+
+app.get('/', (req, res) => res.send('Hello world!'));
 
 const port = process.env.PORT || 8082;
 

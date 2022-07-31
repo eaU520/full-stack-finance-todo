@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://test:test@cluster0.az1z3.mongodb.net/?retryWrites=true&w=majority"
+}
+//TODO: Password configuration
