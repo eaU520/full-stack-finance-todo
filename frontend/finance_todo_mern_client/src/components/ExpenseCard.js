@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
-class showExpenseDetails extends Component {
+class ExpenseCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -136,5 +136,4 @@ class showExpenseDetails extends Component {
     );
   }
 }
-
-export default showExpenseDetails;
+export default ExpenseCard;
