@@ -46,7 +46,7 @@ class CreateExpense extends Component{
               type:'',
               funded: false
             })
-            this.props.history.push('/');
+            // this.props.history.push('/');
           })
           .catch(err => {
             console.log("Error in CreateExpense!");
@@ -137,6 +137,7 @@ class CreateExpense extends Component{
                       />
                     </div>
                     <div className='form-group'>
+                      <h6>Funded? </h6>
                       <input
                         type='checkbox'
                         name='funded'
