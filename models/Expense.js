@@ -26,7 +26,7 @@ const ExpenseSchema = new mongoose.Schema({
   },
   funded: {
     type: Boolean,
-    default: "No"
+    default: false//TODO: Make a checkbox
   }
 });
 
