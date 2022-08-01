@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <Router>
         <Routes>
-          <Route exact path='./' element={<ShowExpenseList/>} />
+          <Route exact path='/' element={<ShowExpenseList/>} />
           <Route path='/create-expense' element={<CreateExpense/>} />
           <Route path='/edit-expense/:id' element={<UpdateExpenseInfo/>} />
           <Route path='/show-expense/:id' element={<ShowExpenseDetails/>} />
