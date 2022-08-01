@@ -36,12 +36,12 @@ class CreateExpense extends Component{
           .post('http://localhost:8082/api/expenses', data)
           .then(res => {
             this.setState({
-              title: '',
-              isbn:'',
-              author:'',
+              name: '',
+              urgency:'',
+              amount:0,
               description:'',
-              published_date:'',
-              publisher:''
+              due_date:'',
+              type:''
             })
             this.props.history.push('/');
           })
