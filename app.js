@@ -3,9 +3,22 @@ const connectDB = require('./backend/database/db');
 
 const app = express();
 
+var cors = require('cors');
+
+//routes
+const expenses = require("./routes/api/expenses");
+
 connectDB();
 
+//cors
+app.use(cors({ origin: true, credentials: true}));
+
+//JSON parsing/middleware
+app.use(express.json({extended: false}));
+
 app.get('/', (req, res) => res.send('Hello world!'));
+
+app.use("/api/expenses", expenses);
 
 const port = process.env.PORT || 8082;
 

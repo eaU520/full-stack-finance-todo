@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import CreateExpense from './components/CreateExpense';
@@ -11,15 +11,16 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path='/' component={ShowExpenseList} />
-          <Route path='/create-expense' component={CreateExpense} />
-          <Route path='/edit-expense/:id' component={UpdateExpenseInfo} />
-          <Route path='/show-expense/:id' component={ShowExpenseDetails} />
-        </div>
+        <Routes>
+          <Route exact path='./' element={<ShowExpenseList/>} />
+          <Route path='/create-expense' element={<CreateExpense/>} />
+          <Route path='/edit-expense/:id' element={<UpdateExpenseInfo/>} />
+          <Route path='/show-expense/:id' element={<ShowExpenseDetails/>} />
+        </Routes>
       </Router>
     );
   }
 }
+
 
 export default App;
