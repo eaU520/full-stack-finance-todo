@@ -12,7 +12,8 @@ class CreateExpense extends Component{
           type:'',
           description:'',
           due_date:'',
-          urgency:''
+          urgency:'',
+          funded:false
         };
       }
     
@@ -29,7 +30,8 @@ class CreateExpense extends Component{
             type: this.state.type,
             description: this.state.description,
             due_date: this.state.due_date,
-            urgency: this.state.urgency
+            urgency: this.state.urgency,
+            funded: this.state.funded
         };
     
         axios
@@ -41,7 +43,8 @@ class CreateExpense extends Component{
               amount:0,
               description:'',
               due_date:'',
-              type:''
+              type:'',
+              funded: false
             })
             this.props.history.push('/');
           })
@@ -133,7 +136,15 @@ class CreateExpense extends Component{
                         onChange={this.onChange}
                       />
                     </div>
-    
+                    <div className='form-group'>
+                      <input
+                        type='checkbox'
+                        name='funded'
+                        className='form-control'
+                        value={this.state.funded}
+                        onChange={this.onChange}
+                      />
+                    </div>
                     <input
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"

@@ -82,6 +82,11 @@ class ShowExpenseDetails extends Component {
               <td>Urgency</td>
               <td>{ expense.urgency }</td>
             </tr>
+            <tr>
+              <th scope="row">7</th>
+              <td>Funded</td>
+              <td>{ expense.funded }</td>
+            </tr>
           </tbody>
         </table>
       </div>

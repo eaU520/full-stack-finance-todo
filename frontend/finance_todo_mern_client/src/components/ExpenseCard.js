@@ -87,6 +87,11 @@ class ExpenseCard extends Component {
             <td>Description</td>
             <td>{ expense.description }</td>
           </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Funded?</td>
+            <td>{ expense.funded }</td>
+          </tr>
         </tbody>
       </table>
     </div>

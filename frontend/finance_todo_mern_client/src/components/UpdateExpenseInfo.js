@@ -154,7 +154,18 @@ class UpdateExpenseInfo extends Component {
                   onChange={this.onChange}
                 />
               </div>
-  
+
+              <div className='form-group'>
+              <label htmlFor="funded">Funded?</label>
+                <input
+                  type='checkbox'
+                  name='funded'
+                  className='form-control'
+                  value={this.state.funded}
+                  onChange={this.onChange}
+                />
+              </div>
+
               <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Book</button>
               </form>
             </div>
