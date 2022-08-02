@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-
+// import { useHistory } from 'react-router-dom';
+import { withRouter } from "react-router";
+//TODO: Clean up node_modules
 class CreateExpense extends Component{
     constructor() {
         super();
@@ -46,7 +48,7 @@ class CreateExpense extends Component{
               type:'',
               funded: false
             })
-            // this.props.history.push('/');
+            this.props.history.push('/');//Adds to database FIXME: What is this error?
           })
           .catch(err => {
             console.log("Error in CreateExpense!");
@@ -159,4 +161,5 @@ class CreateExpense extends Component{
       }
 }
 
-export default CreateExpense;
+// export default CreateExpense;
+export default withRouter(CreateExpense);
