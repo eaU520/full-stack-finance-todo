@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import {React,  Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import ExpenseCard from './ExpenseCard';
 
 class ShowExpenseList extends Component {
     constructor(props) {

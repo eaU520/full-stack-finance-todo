@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import {React,  Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import '../App.css';
-import axios from 'axios';
-
+import { withRouter } from "react-router";
 class ExpenseCard extends Component {
   constructor(props) {
     super(props);
@@ -70,7 +65,7 @@ class ExpenseCard extends Component {
           <tr>
             <th scope="row">3</th>
             <td>Amount</td>
-            <td>{ Expense.amount }</td>
+            <td>{ expense.amount }</td>
           </tr>
           <tr>
             <th scope="row">4</th>
@@ -108,7 +103,7 @@ class ExpenseCard extends Component {
             </div>
             <br />
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Book's Record</h1>
+              <h1 className="display-4 text-center">Expense's Record</h1>
               <p className="lead text-center">
                   View Expense's Info
               </p>
@@ -141,4 +136,4 @@ class ExpenseCard extends Component {
     );
   }
 }
-export default ExpenseCard;
+export default withRouter(ExpenseCard);
