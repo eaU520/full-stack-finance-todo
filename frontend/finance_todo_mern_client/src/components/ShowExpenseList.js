@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 import ExpenseCard from './ExpenseCard';
+import {withRouter} from 'react-router';
 
 class ShowExpenseList extends Component {
     constructor(props) {
@@ -11,11 +12,11 @@ class ShowExpenseList extends Component {
         expenses: []
       };
     }
-  
     componentDidMount() {
       axios
-        .get('http://localhost:8082/api/expenses')
+        .get('http://localhost:8082/')
         .then(res => {
+          console.log(this.state);
           this.setState({
             expenses: res.data
           })

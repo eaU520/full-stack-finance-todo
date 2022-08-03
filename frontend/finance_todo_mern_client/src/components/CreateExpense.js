@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-// import { useHistory } from 'react-router-dom';
 import { withRouter } from "react-router";
 //TODO: Clean up node_modules
 class CreateExpense extends Component{
@@ -161,5 +160,4 @@ class CreateExpense extends Component{
       }
 }
 
-// export default CreateExpense;
 export default withRouter(CreateExpense);
