@@ -16,7 +16,7 @@ app.use(cors({ origin: true, credentials: true}));
 //JSON parsing/middleware
 app.use(express.json({extended: false}));
 
-app.get('/', (req, res) => res.send('Running!'));
+app.get('/', (req, res) => res.send(''));
 
 app.use("/api/expenses", expenses);
 

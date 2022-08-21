@@ -28,15 +28,14 @@ class ShowExpenseList extends Component {
   
     render() {
       const expenses = this.state.expenses;
-      console.log("PrintExpenses: " + expenses);
       let expenseList;
   
-      if(expenses.length == 0 || expenseList === undefined) {
+      if(expenses.length == 0 ||  !(Array.isArray(expenses))) {
         expenseList = "there are no expense records!";
       } else {
-        const expenseList = expenses.map((expense, k) =>
-          <ExpenseCard expense={expense} key={k} />
-      );
+            const expenseList = expenses.map((expense, k) =>
+            <ExpenseCard expense={expense} key={k} />
+        );
       }
       return (
         <div className="ShowExpenseList">

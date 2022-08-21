@@ -43,14 +43,14 @@ class ShowExpenseDetails extends Component {
       const expense = this.state.expense;
       let ExpenseItem = <div>
         <table className="table table-hover table-dark">
-          {/* <thead>
+          <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Name</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Type</th>
             </tr>
-          </thead> */}
+          </thead>
           <tbody>
             <tr>
               <th scope="row">1</th>
@@ -127,9 +127,9 @@ class ShowExpenseDetails extends Component {
               </div>
   
             </div>
-              {/* <br />
-              <button type="button" class="btn btn-outline-info btn-lg btn-block">Edit Book</button>
-              <button type="button" class="btn btn-outline-danger btn-lg btn-block">Delete Book</button> */}
+               <br />
+              <button type="button" class="btn btn-outline-info btn-lg btn-block">Edit Expense</button>
+              <button type="button" class="btn btn-outline-danger btn-lg btn-block">Delete Expense</button>
   
           </div>
         </div>
