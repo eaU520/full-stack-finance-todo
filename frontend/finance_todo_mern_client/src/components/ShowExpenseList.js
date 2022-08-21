@@ -65,4 +65,4 @@ class ShowExpenseList extends Component {
       );
     }
   }
-  export default withRouter(ShowExpenseList);
+  export default withRouter(ShowExpenseList)

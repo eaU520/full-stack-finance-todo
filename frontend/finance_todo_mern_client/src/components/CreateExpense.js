@@ -160,4 +160,4 @@ class CreateExpense extends Component{
       }
 }
 
-export default withRouter(CreateExpense);
+export default withRouter(CreateExpense)

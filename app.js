@@ -6,7 +6,7 @@ const app = express();
 var cors = require('cors');
 
 //routes
-const expenses = require("./routes/api/expenses");
+const expensesAPI = require("./routes/api/expenses");
 
 connectDB();
 
@@ -18,7 +18,7 @@ app.use(express.json({extended: false}));
 
 app.get('/', (req, res) => res.send(''));
 
-app.use("/api/expenses", expenses);
+app.use("/api/expenses", expensesAPI);
 
 const port = process.env.PORT || 8082;
 
