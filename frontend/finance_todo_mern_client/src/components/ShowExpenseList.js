@@ -16,7 +16,6 @@ class ShowExpenseList extends Component {
       axios
         .get('http://localhost:8082/')
         .then(res => {
-          console.log(this.state);
           this.setState({
             expenses: res.data
           })
@@ -32,14 +31,13 @@ class ShowExpenseList extends Component {
       console.log("PrintExpenses: " + expenses);
       let expenseList;
   
-      if(!expenses) {
-        expenseList = "there is no expense record!";
+      if(expenses.length == 0 || expenseList === undefined) {
+        expenseList = "there are no expense records!";
       } else {
-        expenseList = expenses.map((expense, k) =>
+        const expenseList = expenses.map((expense, k) =>
           <ExpenseCard expense={expense} key={k} />
-        );
+      );
       }
-  
       return (
         <div className="ShowExpenseList">
           <div className="container">
@@ -68,5 +66,4 @@ class ShowExpenseList extends Component {
       );
     }
   }
-  
   export default withRouter(ShowExpenseList);
