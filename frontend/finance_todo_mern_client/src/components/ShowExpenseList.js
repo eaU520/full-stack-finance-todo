@@ -1,9 +1,8 @@
-import {React,  Component } from 'react';
+import React, {  Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 import ExpenseCard from './ExpenseCard';
-import {withRouter} from 'react-router';
 
 class ShowExpenseList extends Component {
     constructor(props) {
@@ -31,7 +30,7 @@ class ShowExpenseList extends Component {
       let expenseList;
   
       if(expenses.length == 0 ||  !(Array.isArray(expenses))) {
-        expenseList = "there are no expense records!";
+        expenseList = "There are no expense records!";
       } else {
             const expenseList = expenses.map((expense, k) =>
             <ExpenseCard expense={expense} key={k} />
@@ -65,4 +64,4 @@ class ShowExpenseList extends Component {
       );
     }
   }
-  export default withRouter(ShowExpenseList)
+  export default ShowExpenseList;
