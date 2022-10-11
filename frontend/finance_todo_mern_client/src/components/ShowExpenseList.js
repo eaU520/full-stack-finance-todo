@@ -55,7 +55,17 @@ class ShowExpenseList extends Component {
               </div>
   
             </div>
-  
+            <div>
+            <nav
+              style={{
+                borderBottom: "solid 1px",
+                paddingBottom: "1rem",
+              }}>
+              <Link to="/create_expense">Create an Expense</Link> |{" "}
+              <Link to="/view_expenses">Expenses</Link> |{" "}
+              <Link to="/login">Login</Link>
+            </nav>
+            </div>
             <div className="list">
                   {expenseList}
             </div>
