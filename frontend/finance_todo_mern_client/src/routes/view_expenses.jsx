@@ -1,8 +1,8 @@
-import React, {  Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import axios from 'axios';
-import ExpenseCard from '../components/ExpenseCard';
+// import axios from 'axios';
+// import ExpenseCard from '../components/ExpenseCard';
 
 export default function ViewExpenses(props) {
   return (
@@ -30,7 +30,7 @@ export default function ViewExpenses(props) {
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
           }}>
-          <Link to="/create_expense">Create an Expense</Link> |{" "}
+          <Link to="/create_expense">Create an Expense </Link> |{" "}
           <Link to="/view_expenses">Expenses</Link> |{" "}
           <Link to="/login">Login</Link>
         </nav>
