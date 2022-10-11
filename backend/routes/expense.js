@@ -15,7 +15,7 @@ const objectID = require("mongodb").ObjectId;
 // @access Public
 expensesRouter.get('/test', (req, res) => res.send('expense route testing!'));
 
-// @route GET api/expenses
+// @route GET expenses
 // @description Get all expenses
 // @access Public
 // router.get('/', (req, res) => {
@@ -36,7 +36,7 @@ expensesRouter.route('/').get(function (req, res){
 // @route GET api/expenses/:id
 // @description Get single expense by id
 // @access Public
-router.get('/:id', (req, res) => {
+expensesRouter.get('/:id', (req, res) => {
     Expenses.findById(req.params.id)
     .then(expense => res.json(expense))
     .catch(err => res.status(404).json({ noexpensefound: 'No Expense found' }));

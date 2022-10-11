@@ -30,7 +30,7 @@ export default function App() {
           paddingBottom: "1rem",
         }}>
         <Link to="/create_expense">Create an Expense</Link> |{" "}
-        <Link to="/view_expenses">Expenses</Link> |{" "}
+        <Link to="/expenses">Expenses</Link> |{" "}
         <Link to="/login">Login</Link>
       </nav>
     </div>

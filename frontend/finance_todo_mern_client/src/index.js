@@ -37,7 +37,7 @@ render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="create_expense" element={<CreateExpense />} />
-      <Route path="view_expenses" element={<ViewExpenses/>} />
+      <Route path="expenses" element={<ViewExpenses/>} />
       <Route path="login" element={<Login/>} />
     </Routes>
   </BrowserRouter>,

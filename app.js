@@ -18,7 +18,7 @@ app.use(express.json({extended: false}));
 
 app.get('/', (req, res) => res.send(''));
 
-app.use("/api/expenses", expensesAPI);
+app.use("/expenses", expensesAPI);
 
 const port = process.env.PORT || 8082;
 

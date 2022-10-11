@@ -1,4 +1,4 @@
-import React, {  Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function CreateExpense() {
@@ -14,7 +14,7 @@ export default function CreateExpense() {
             paddingBottom: "1rem",
           }}>
           <Link to="/create_expense">Create an Expense</Link> |{" "}
-          <Link to="/view_expenses">Expenses</Link> |{" "}
+          <Link to="/expenses">Expenses</Link> |{" "}
           <Link to="/login">Login</Link>
         </nav>
           </div>
