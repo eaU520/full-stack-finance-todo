@@ -1,21 +1,26 @@
-const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect(
-      db,
+const { MongoClient } = require("mongodb");
+const Db = process.env.mongoURI;
+const client = new MongoClient(Db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+ 
+var _db;
+ 
+module.exports = {
+  connectToServer: function (callback) {
+    client.connect(function (err, db) {
+      // Verify we got a good "db" object
+      if (db)
       {
-        useNewUrlParser: true
+        _db = db.db("expenses");
+        console.log("Successfully connected to MongoDB."); 
       }
-    );
-
-    console.log('MongoDB is Connected...');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
+      return callback(err);
+         });
+  },
+ 
+  getDb: function () {
+    return _db;
+  },
 };
-
-module.exports = connectDB;
