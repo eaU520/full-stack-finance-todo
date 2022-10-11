@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
-import {Route, Switch } from 'react-router-dom';
-import './App.css';
+import { Link } from "react-router-dom";
 
-import CreateExpense from './components/CreateExpense';
-import ShowExpenseList from './components/ShowExpenseList';
-import ShowExpenseDetails from './components/ShowExpenseDetails';
-import UpdateExpenseInfo from './components/UpdateExpenseInfo';
-
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path='/' component={ShowExpenseList}/>
-            <Route path='/create-expense' component={CreateExpense}/>
-            <Route path='/edit-expense/:id' component={UpdateExpenseInfo} />
-            <Route path='/show-expense/:id' component={ShowExpenseDetails} />
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+export default function App() {
+  return (
+    <div>
+      <h1>Finance Tracker</h1>
+      <nav
+        style={{
+          borderBottom: "solid 1px",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Link to="/create-expense">Create an Expense</Link> |{" "}
+        <Link to="/">View Expenses</Link> |{" "}
+        <Link to="/login">Login</Link>
+      </nav>
+    </div>
+  );
 }
-
-export default App;
