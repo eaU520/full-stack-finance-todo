@@ -23,7 +23,7 @@ expensesRouter.get('/test', (req, res) => res.send('expense route testing!'));
 //     .then(books => res.json(expenses))
 //     .catch(err => res.status(404).json({ noexpensesfound: 'No Expenses found' }));
 // });
-expensesRouter.route('/').get(function (req, res){
+expensesRouter.route('/expenses').get(function (req, res){
   let connection = databaseObject.getDb("test");//TODO: Extract in someway
   connection.collection("expenses").find({}).toArray(
     function (err, result){
@@ -33,16 +33,23 @@ expensesRouter.route('/').get(function (req, res){
   );
   });
 
+// @route GET /
+// @description Get homepage by id
+// @access Public
+expensesRouter.get('/', (req, res) => {
+  res.send("Homepage");
+});
+
 // @route GET api/expenses/:id
 // @description Get single expense by id
 // @access Public
 expensesRouter.get('/:id', (req, res) => {
-    Expenses.findById(req.params.id)
+    Expense.findById(req.params.id)
     .then(expense => res.json(expense))
     .catch(err => res.status(404).json({ noexpensefound: 'No Expense found' }));
 });
 
-// @route GET api/expenses
+// @route GET /expenses
 // @description add/save expense
 // @access Public
 expensesRouter.post('/', (req, res) => {
@@ -51,7 +58,7 @@ expensesRouter.post('/', (req, res) => {
     .catch(err => res.status(400).json({ error: 'Unable to add this expense' }));
 });
 
-// @route GET api/expenses/:id
+// @route GET /expense/:id
 // @description Update expense
 // @access Public
 expensesRouter.put('/:id', (req, res) => {
@@ -62,11 +69,11 @@ expensesRouter.put('/:id', (req, res) => {
     );
 });
 
-// @route GET api/books/:id
-// @description Delete book by id
+// @route GET /expense/:id
+// @description Delete expense by id
 // @access Public
 expensesRouter.delete('/:id', (req, res) => {
-  Book.findByIdAndRemove(req.params.id, req.body)
+  Expense.findByIdAndRemove(req.params.id, req.body)
     .then(expense => res.json({ mgs: 'Expense entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such expense' }));
 });

@@ -29,10 +29,11 @@ export default function App() {
           borderBottom: "solid 1px",
           paddingBottom: "1rem",
         }}>
+        <Link to="/">Homepage</Link> |{" "}  
         <Link to="/create_expense">Create an Expense</Link> |{" "}
         <Link to="/expenses">Expenses</Link> |{" "}
         <Link to="/login">Login</Link>
       </nav>
     </div>
   );
-}
+}//TODO: Extra nav to separate Navbar component
