@@ -13,6 +13,7 @@ export default function CreateExpense() {
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
           }}>
+          <Link to="/">Homepage</Link> |{" "}
           <Link to="/create_expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
           <Link to="/login">Login</Link>
@@ -38,7 +39,7 @@ export default function CreateExpense() {
               <div className='form-group'>
                 <input
                   type='number'
-                  placeholder='amount'
+                  placeholder='Amount'
                   name='amount'
                   className='form-control'
                 />

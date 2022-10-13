@@ -73,6 +73,16 @@ export default function ExpenseList() {
   return (
     <div>
       <h3>Expense List</h3>
+      <nav
+          style={{
+            borderBottom: "solid 1px",
+            paddingBottom: "1rem",
+          }}>
+          <Link to="/">Homepage</Link> |{" "}
+          <Link to="/create_expense">Create an Expense</Link> |{" "}
+          <Link to="/expenses">Expenses</Link> |{" "}
+          <Link to="/login">Login</Link>
+        </nav>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>

@@ -7,18 +7,24 @@ export default function Login() {
     //TODO: validate and login
   }
     return (
-      <main style={{ padding: "1rem 0" }}>
-        <h2>Login</h2>
-        <nav
+      <div className="Login">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 m-auto">
+          <nav
           style={{
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
           }}>
+          <Link to="/">Homepage</Link> |{" "}
           <Link to="/create_expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
           <Link to="/login">Login</Link>
         </nav>
-        <form onSubmit={e => {loginUser(e)}}>
+          <p className="lead text-center">
+                Login
+            </p>
+            <form onSubmit={e => {loginUser(e)}}>
         <label>Username</label>
         <br />
         <input 
@@ -39,7 +45,9 @@ export default function Login() {
           value='Log In' 
         />
       </form>
-
-      </main>
+        </div>
+        </div>
+      </div>
+      </div>
     );
   }
