@@ -5,11 +5,12 @@ import '../App.css';
 //TODO: Search expenses
 //TODO: Sort by date, amount, name
 //TODO: Pagination of expenses
+//TODO: Change to due_date for sorting
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
     <td>{props.expense.amount}</td>
-    <td>{props.expense.funded}</td>
+    <td>{props.expense.type}</td>
     <td>
       <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
       <button className="btn btn-link"
@@ -82,7 +83,7 @@ export default function ExpenseList() {
                 paddingBottom: "1rem",
               }}>
               <Link to="/">Homepage</Link> |{" "}
-              <Link to="/create_expense">Create an Expense</Link> |{" "}
+              <Link to="/create-expense">Create an Expense</Link> |{" "}
               <Link to="/expenses">Expenses</Link> |{" "}
               <Link to="/login">Login</Link>
             </nav>

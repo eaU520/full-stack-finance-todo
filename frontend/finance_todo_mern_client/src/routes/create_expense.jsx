@@ -14,7 +14,7 @@ export default function CreateExpense() {
             paddingBottom: "1rem",
           }}>
           <Link to="/">Homepage</Link> |{" "}
-          <Link to="/create_expense">Create an Expense</Link> |{" "}
+          <Link to="/create-expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
           <Link to="/login">Login</Link>
         </nav>

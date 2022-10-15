@@ -40,26 +40,33 @@ expensesRouter.route('/expenses').get(function (req, res){
 // @description Get homepage by id
 // @access Public
 //TODO: Fix homepage with routes to render React component
-expensesRouter.get('/', (req, res) => {
-  res.send("Homepage");
+expensesRouter.post('/', (req, res) => {
+  res.send("");//TODO: Fix Homepage rendering
 });
 
 // @route GET api/expenses/:id
 // @description Get single expense by id
 // @access Public
-expensesRouter.get('/:id', (req, res) => {
+expensesRouter.get('expenses/:id', (req, res) => {
     Expense.findById(req.params.id)
     .then(expense => res.json(expense))
     .catch(err => res.status(404).json({ noexpensefound: 'No Expense found' }));
 });
 
-// @route GET /expenses
+// @route POST /create-expense
 // @description add/save expense
 // @access Public
-expensesRouter.post('/', (req, res) => {
+expensesRouter.post('/create-expense', (req, res) => {
     Expense.create(req.body)
     .then(expense => res.json({ msg: 'Expense added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this expense' }));
+});
+
+// @route GET /create-expense
+// @description get the page expense
+// @access Public
+expensesRouter.get('/create-expense', (req, res) => {
+  
 });
 
 // @route GET /expense/:id
@@ -76,7 +83,7 @@ expensesRouter.put('/:id', (req, res) => {
 // @route GET /expense/:id
 // @description Delete expense by id
 // @access Public
-expensesRouter.delete('/:id', (req, res) => {
+expensesRouter.delete('expenses/:id', (req, res) => {
   Expense.findByIdAndRemove(req.params.id, req.body)
     .then(expense => res.json({ mgs: 'Expense entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such expense' }));
