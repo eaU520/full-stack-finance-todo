@@ -1,3 +1,6 @@
+//TODO: Search expenses
+//TODO: Sort by date, amount, name
+//TODO: Pagination of expenses
 const express = require('express');
 const expensesRouter = express.Router();
 
@@ -28,7 +31,7 @@ expensesRouter.route('/expenses').get(function (req, res){
   connection.collection("expenses").find({}).toArray(
     function (err, result){
       if (err) throw err;
-      res.json(result);
+      res.send(result);
     }
   );
   });
@@ -36,6 +39,7 @@ expensesRouter.route('/expenses').get(function (req, res){
 // @route GET /
 // @description Get homepage by id
 // @access Public
+//TODO: Fix homepage with routes to render React component
 expensesRouter.get('/', (req, res) => {
   res.send("Homepage");
 });

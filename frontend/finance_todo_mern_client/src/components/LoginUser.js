@@ -35,19 +35,19 @@ class LoginUser extends Component{
             this.props.history.push('/');
           })
           .catch(err => {
-            console.log("Error in CreateExpense!");
+            console.log("Error in Login!");
           })
       };
     
       render() {
         return (
-          <div className="CreateExpense">
+          <div className="Login">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
                   <br />
                   <Link to="/" className="btn btn-outline-warning float-left">
-                      Show Expense List
+                      Homepage
                   </Link>
                 </div>
                 <div className="col-md-8 m-auto">

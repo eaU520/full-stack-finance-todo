@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-// import axios from 'axios';
-// import ExpenseCard from '../components/ExpenseCard';
 
+//TODO: Search expenses
+//TODO: Sort by date, amount, name
+//TODO: Pagination of expenses
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
@@ -29,14 +30,13 @@ export default function ExpenseList() {
   // This method fetches the expenses from the database.
   useEffect(() => {
     async function getExpenses() {
-      const response = await fetch(`http://localhost:3000/expenses`);
+      const response = await fetch(`/expenses`);
   
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
         return;
       }
-  
       const expenses = await response.json();
       setExpenses(expenses);
     }
@@ -59,6 +59,7 @@ export default function ExpenseList() {
   // This method will map out the expenses on the table
   function expenseList() {
     return expenses.map((expense) => {
+
       return (
         <Expense
           expense={expense}
@@ -71,18 +72,26 @@ export default function ExpenseList() {
   
   // This following section will display the table with the expenses
   return (
-    <div>
-      <h3>Expense List</h3>
-      <nav
-          style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem",
-          }}>
-          <Link to="/">Homepage</Link> |{" "}
-          <Link to="/create_expense">Create an Expense</Link> |{" "}
-          <Link to="/expenses">Expenses</Link> |{" "}
-          <Link to="/login">Login</Link>
-        </nav>
+    <div className='ViewExpenses'>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 m-auto">
+          <nav
+              style={{
+                borderBottom: "solid 1px",
+                paddingBottom: "1rem",
+              }}>
+              <Link to="/">Homepage</Link> |{" "}
+              <Link to="/create_expense">Create an Expense</Link> |{" "}
+              <Link to="/expenses">Expenses</Link> |{" "}
+              <Link to="/login">Login</Link>
+            </nav>
+        </div>
+          <div className="col-md-8 m-auto">
+            <h1 className="display-4 text-center">All Expenses</h1>
+            <p className="lead text-center">
+              Expense List
+            </p>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
@@ -94,6 +103,9 @@ export default function ExpenseList() {
         </thead>
         <tbody>{expenseList()}</tbody>
       </table>
+      </div>
+        </div>
+      </div>
     </div>
   );
  }

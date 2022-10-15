@@ -41,13 +41,13 @@ class CreateUser extends Component{
             this.props.history.push('/');//Adds to database FIXME: What is this error?
           })
           .catch(err => {
-            console.log("Error in CreateExpense!");
+            console.log("Error in Registration!");
           })
       };
     
       render() {
         return (
-          <div className="CreateExpense">
+          <div className="Registration">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">

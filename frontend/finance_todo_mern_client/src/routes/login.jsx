@@ -5,7 +5,7 @@ export default function Login() {
   const loginUser = (data) => {
     data.preventDefault();
     //TODO: validate and login
-  }
+  }//TODO: Navigation bar React
     return (
       <div className="Login">
       <div className="container">
