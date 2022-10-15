@@ -98,8 +98,7 @@ export default function ExpenseList() {
           <tr>
             <th>Name</th>
             <th>Amount</th>
-            <th>Due Date</th>
-            <th>Funded</th>
+            <th>Type</th>
           </tr>
         </thead>
         <tbody>{expenseList()}</tbody>
