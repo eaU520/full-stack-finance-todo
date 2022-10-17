@@ -9,6 +9,7 @@ const Expense = require('../database/models/Expense');
 
 // Connection to the database
 const databaseObject = require("../database/db");
+const { ObjectId } = require('mongodb');
 
 // ID to Object
 const objectID = require("mongodb").ObjectId;
@@ -77,10 +78,13 @@ expensesRouter.route('/expenses').get(function (req, res){
 // @route GET /expense/:id
 // @description Delete expense by id
 // @access Public
-expensesRouter.delete('/expenses/:id', (req, res) => {
-  Expense.findByIdAndRemove(req.params.id, req.body)
-    .then(expense => res.json({ mgs: 'Expense entry deleted successfully' }))
-    .catch(err => res.status(404).json({ error: 'No such expense' }));
+expensesRouter.route('/expenses/:id').delete((req, res) => {
+  let connection = databaseObject.getDb();//TODO: Extract in someway
+  let query = {_id: ObjectId(req.params.id)};
+  connection.collection("expenses").deleteOne(query, function(err,obj){
+    if (err) throw err;
+    res.json(obj);
+  });
 });
 
 module.exports = expensesRouter;

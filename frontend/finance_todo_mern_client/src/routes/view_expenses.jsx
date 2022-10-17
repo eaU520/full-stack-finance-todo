@@ -48,8 +48,7 @@ export default function ExpenseList() {
   
   // This method will delete an expense
   async function deleteExpense(id) {
-    const del = `/expenses/`+ id;
-    await fetch(del, {
+    await fetch(`http://localhost:8080/expenses/${id}`, {
       method: "DELETE"
     });
   
