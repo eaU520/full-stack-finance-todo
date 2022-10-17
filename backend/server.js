@@ -5,10 +5,10 @@ require("dotenv").config();
 const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/expense"));
+app.use(require("../backend/routes/expense"));
 // get driver connection
 const dbconn = require("./database/db");
- 
+
 app.listen(port, () => {
   // perform a database connection when server starts
   dbconn.connectToServer(function (err) {

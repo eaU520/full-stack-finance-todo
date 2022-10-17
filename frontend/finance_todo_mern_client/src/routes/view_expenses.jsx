@@ -31,8 +31,7 @@ export default function ExpenseList() {
   // This method fetches the expenses from the database.
   useEffect(() => {
     async function getExpenses() {
-      const response = await fetch(`/expenses`);
-  
+      const response = await fetch(`http://localhost:8080/expenses`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -49,7 +48,8 @@ export default function ExpenseList() {
   
   // This method will delete an expense
   async function deleteExpense(id) {
-    await fetch(`http://localhost:3000/expenses/${id}`, {
+    const del = `/expenses/`+ id;
+    await fetch(del, {
       method: "DELETE"
     });
   
