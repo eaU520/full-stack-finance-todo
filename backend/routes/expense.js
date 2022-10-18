@@ -4,7 +4,7 @@
 const express = require('express');
 const expensesRouter = express.Router();
 
-// Load Expense model FIXME: Not needed?
+// Load Expense model
 const Expense = require('../database/models/Expense');
 
 // Connection to the database
@@ -48,25 +48,39 @@ expensesRouter.route('/expenses').get(function (req, res){
 //     .catch(err => res.status(404).json({ noexpensefound: 'No Expense found' }));
 // });
 
-// // @route POST /create-expense
-// // @description add/save expense
-// // @access Public
-// expensesRouter.post('/create-expense', (req, res) => {
-//     Expense.create(req.body)
-//     .then(expense => res.json({ msg: 'Expense added successfully' }))
-//     .catch(err => res.status(400).json({ error: 'Unable to add this expense' }));
-// });
+// @route POST /edit/:id
+// @description Get single expense by id and update
+// @access Public
+expensesRouter.route('edit/:id').post(function (req, res) {
+    
+});
 
-// // @route GET /create-expense
-// // @description get the page expense
-// // @access Public
-// expensesRouter.get('/create-expense', (req, res) => {
-  
-// });
+// @route POST /create-expense
+// @description add expense
+// @access Public
+expensesRouter.route('/create-expense').post(function (req, response){
+    let connection = databaseObject.getDb();
 
-// // @route GET /expense/:id
-// // @description Update expense
-// // @access Public
+    let expenseAdd = {
+      name : req.body.name,
+      amount: req.body.amount, 
+      description: req.body.description,
+      due_date: req.body.due_date,
+      funded: req.body.funded,
+      type: req.body.type,
+      urgency: req.body.urgency,
+    };
+    connection.collection("expenses").insertOne(expenseAdd, function (err, res){
+      if(err){
+         throw err;
+      }
+      response.json(res);
+    });
+});
+
+// @route GET /expense/:id
+// @description Update expense
+// @access Public
 // expensesRouter.put('/:id', (req, res) => {
 //     Expense.findByIdAndUpdate(req.params.id, req.body)
 //     .then(expense => res.json({ msg: 'Updated successfully' }))
@@ -75,7 +89,7 @@ expensesRouter.route('/expenses').get(function (req, res){
 //     );
 // });
 
-// @route GET /expense/:id
+// @route DELETE /expense/:id
 // @description Delete expense by id
 // @access Public
 expensesRouter.route('/expenses/:id').delete((req, res) => {
