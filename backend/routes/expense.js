@@ -39,20 +39,35 @@ expensesRouter.route('/expenses').get(function (req, res){
 //   res.send("");//TODO: Fix Homepage rendering
 // });
 
-// // @route GET api/expenses/:id
-// // @description Get single expense by id
-// // @access Public
-// expensesRouter.get('expenses/:id', (req, res) => {
-//     Expense.findById(req.params.id)
-//     .then(expense => res.json(expense))
-//     .catch(err => res.status(404).json({ noexpensefound: 'No Expense found' }));
-// });
+// @route GET /expenses/:id
+// @description Get single expense by id
+// @access Public
+expensesRouter.route('/expenses/:id').get(function (req, res) {
+  let connection = databaseObject.getDb();
+  debugger
+  let query = {_id: ObjectId(req.params.id)};
+  connection
+  .collection("expenses")
+  .findOne(query, function(err, result){
+    if(err) throw err;
+    res.json(result);
+  });
+});
 
 // @route POST /edit/:id
 // @description Get single expense by id and update
 // @access Public
-expensesRouter.route('edit/:id').post(function (req, res) {
-    
+expensesRouter.route('/edit/:id').get(function (req, res) {
+  let connection = databaseObject.getDb();
+  debugger
+  let query = {_id: ObjectId(req.params.id)};
+  connection
+  .collection("expenses")
+  .findOne(query, function(err, result){
+    if(err) throw err;
+    res.json(result);
+  });
+
 });
 
 // @route POST /create-expense
@@ -66,7 +81,7 @@ expensesRouter.route('/create-expense').post(function (req, response){
       amount: req.body.amount, 
       description: req.body.description,
       due_date: req.body.due_date,
-      funded: req.body.funded,
+      funded: req.body.funded=="on"? true:false,
       type: req.body.type,
       urgency: req.body.urgency,
     };

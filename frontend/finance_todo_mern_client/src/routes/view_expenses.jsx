@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 //TODO: Search expenses
@@ -12,7 +12,14 @@ const Expense = (props) => (
     <td>{props.expense.amount}</td>
     <td>{props.expense.type}</td>
     <td>
-      <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
+      <button className="btn btn-link" 
+        onClick={() => {
+          props.editExpense(props.expense._id);
+          }}
+          >
+            Edit
+      </button> |
+
       <button className="btn btn-link"
         onClick={() => {
           props.deleteExpense(props.expense._id);
@@ -27,9 +34,11 @@ const Expense = (props) => (
 
 export default function ExpenseList() {
   const [expenses, setExpenses] = useState([]);
+  const navigate = useNavigate();
   
   // This method fetches the expenses from the database.
   useEffect(() => {
+
     async function getExpenses() {
       const response = await fetch(`http://localhost:8080/expenses`);
       if (!response.ok) {
@@ -45,7 +54,19 @@ export default function ExpenseList() {
   
     return;
   }, [expenses.length]);
-  
+
+  //This function gets and existing expense and puts the data in the form
+  async function editExpense(id){
+    const response = await fetch(`http://localhost:8080/expenses/${id}`);
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      const expense = await response.json();
+      navigate('/create-expense',{state: {editExpenseValue:expense, edit: true},replace:true});
+  }
+
   // This method will delete an expense
   async function deleteExpense(id) {
     await fetch(`http://localhost:8080/expenses/${id}`, {
@@ -63,6 +84,7 @@ export default function ExpenseList() {
       return (
         <Expense
           expense={expense}
+          editExpense={() => editExpense(expense._id)}
           deleteExpense={() => deleteExpense(expense._id)}
           key={expense._id}
         />

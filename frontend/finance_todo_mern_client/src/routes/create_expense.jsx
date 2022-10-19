@@ -1,20 +1,36 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-export default function CreateExpense() {
+export default function CreateExpense(props) {
+let navigate = useNavigate();
+const {state} = useLocation();
+if (state !== null){
+  let editExpenseValue = state.editExpenseValue;
+  const [formData, setForm] = useState({
+    name: editExpenseValue['name'],
+    amount: editExpenseValue['amount'], 
+    type: editExpenseValue['type'],
+    description: editExpenseValue['description'],
+    due_date: editExpenseValue['due_date'],
+    urgency: editExpenseValue['urgency'],
+    funded: editExpenseValue['funded'],
+    edit: state.edit,
+    id: editExpenseValue['_id']
+  });
+}else{
+  const [formData, setForm] = useState({
+    name: "",
+    amount: 0, 
+    type: "",
+    description: "",
+    due_date: "",
+    urgency: "",
+    funded: false,
+    edit: false,
+  });
+}
 
-const [formData, setForm] = useState({
-  name: "",
-  amount: 0, 
-  type: "",
-  description: "",
-  due_date: "",
-  urgency: "",
-  funded: false,
-});
-
-const navigate = useNavigate();//TODO: Need this, what for?
 function updateForm(value){
   return setForm((prev) =>{
     return {...prev, ...value};//Updates the form state properties
@@ -25,9 +41,34 @@ function updateForm(value){
 async function onSubmit(data){
   data.preventDefault();
   const newExpense = {...formData};
-  if (validateExpense(data) === true){
+  if (validateExpense(data) === true && !this.props.edit){
     await fetch("http://localhost:8080/create-expense",{//TODO: Need await in front of fetch?
       method: "POST",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newExpense),
+    })
+    .catch(error=>{
+      window.alert(error);
+      return;
+    });
+    setForm(
+      {
+        name: "",
+        amount: 0, 
+        type: "",
+        description: "",
+        due_date: "",
+        urgency: "",
+        funded: ""
+      });//Clear the form
+    navigate("/expenses");//Goes to the list of expenses
+  }
+  //edit the existing expense
+  else if (validateExpense(data) === true && this.props.edit){
+    await fetch(`http://localhost:8080/edit/${this.props.id}`,{
+      method: "PUT",
       headers:{
         "Content-Type": "application/json"
       },
