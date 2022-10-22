@@ -12,7 +12,7 @@ const { ObjectId } = require('mongodb');
 const objectID = require("mongodb").ObjectId;
 
 // @route POST /register
-// @description add expense
+// @description add a user
 // @access Public
 expensesRouter.route('/register').post(function (req, response){
     let connection = databaseObject.getDb();

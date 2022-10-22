@@ -6,31 +6,48 @@ const Registration = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    password:""
+    username: "",
+    password:"",
+    repeatPassword: ""
   })
-  const handleChange = event =>{
-    const {name,value} = event.target.setUser({
-        setUser({
-            ...user, [name]:value
-        })
-    })
-  }
+  const handleChange = (field) => (event) =>{
+    setUser({...user, [field]: event.target.value})
+    }
+//TODO: Email, password, etc. validation
+//TODO: Show/hide password
   const validateInput = (registrationInformation)=>{
-    if (registrationInformation.userName === "" || registrationInformation.userName === null ||
+    if (registrationInformation.username === "" || registrationInformation.username === null ||
     registrationInformation.password === "" || registrationInformation === null ||
     registrationInformation.email === "" || registrationInformation.email === null) return false;
     return true;
   }
-  const registerUser = (data) => {
+  async function registerUser(data){
     data.preventDefault();
-    //TODO: validate and login
     if (validateInput(data)){
-        axios.post("http://localhost:8080/register",data)
+        await fetch("http://localhost:8080/register",{
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: user.name,
+                email: user.email,
+                password: user.password,
+                username: user.username
+            }),
+        })
         .then(res => console.log(res))
     }else{
         alert("Could not register the user");//TODO: Check already registered, repeated username, email, etc.
     }
-  }//TODO: Navigation bar React
+    setUser({
+        name: "",
+        email: "",
+        password:"",
+        username: "",
+        repeatPassword: ""
+    })
+  }//TODO: Navigation bar component React
     return (
       <div className="Login">
       <div className="container">
@@ -51,18 +68,28 @@ const Registration = () => {
                 Registration
             </p>
             <form onSubmit={e => {registerUser(e)}}>
+            <label>Name</label>
+                <br />
+                <input 
+                name='name' 
+                type='text' 
+                onChange={handleChange('name')}
+                />
+                <br />
             <label>Email</label>
                 <br />
                 <input 
                 name='email' 
                 type='email' 
+                onChange={handleChange('email')}
                 />
                 <br />
                 <label>Username</label>
                 <br />
                 <input 
-                name='userName' 
+                name='username' 
                 type='text' 
+                onChange={handleChange('username')}
                 />
                 <br />
                 <label>Password</label>
@@ -70,12 +97,21 @@ const Registration = () => {
                 <input
                 name='password' 
                 type='password'
+                onChange={handleChange('password')}
+                />
+                <br/>
+                <label>Password Again</label>
+                <br />
+                <input
+                name='repeatPassword' 
+                type='password'
+                onChange={handleChange('repeatPassword')}
                 />
                 <br/>
                 <input 
                 className='submitButton'
                 type='submit' 
-                value='Log In' 
+                value='Register' 
                 />
             </form>
         </div>
