@@ -6,7 +6,6 @@ export default function CreateExpense(props) {
 let navigate = useNavigate();
 const {state} = useLocation();
 let editExpenseValue = state !== null? state.editExpenseValue: {};
-console.log(editExpenseValue['funded']);
 const [formData, setForm] = useState({
     name: state !== null? editExpenseValue['name']: "",
     amount: state !== null? editExpenseValue['amount']: 0, 
@@ -23,10 +22,6 @@ function updateForm(value){
     return {...prev, ...value};//Updates the form state properties
   });
 }
-// function editForm(data){
-
-// }
-// editForm(formData);
 
 
 async function onSubmit(data){

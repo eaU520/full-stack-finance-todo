@@ -104,17 +104,6 @@ expensesRouter.route('/create-expense').post(function (req, response){
     });
 });
 
-// @route GET /expense/:id
-// @description Update expense
-// @access Public
-// expensesRouter.put('/:id', (req, res) => {
-//     Expense.findByIdAndUpdate(req.params.id, req.body)
-//     .then(expense => res.json({ msg: 'Updated successfully' }))
-//     .catch(err =>
-//       res.status(400).json({ error: 'Unable to update the Database' })
-//     );
-// });
-
 // @route DELETE /expense/:id
 // @description Delete expense by id
 // @access Public
