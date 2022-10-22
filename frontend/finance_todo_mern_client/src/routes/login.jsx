@@ -57,8 +57,10 @@ export default function Login() {
         <label>Username</label>
         <br />
         <input 
-          name='userName' 
+          name='username' 
           type='text' 
+          value={user.username}
+          onChange={handleChange('username')}
         />
         <br />
         <label>Password</label>
@@ -66,6 +68,8 @@ export default function Login() {
         <input
           name='password' 
           type='password'
+          value={user.password}
+          onChange={handleChange('password')}
         />
         <br/>
         <input 
