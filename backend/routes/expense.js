@@ -17,9 +17,6 @@ const objectID = require("mongodb").ObjectId;
 // @route GET expenses
 // @description Get all expenses
 // @access Public
-// expensesRouter.get('/', (req, res, next) => {
-//   //returns React index.html?
-// });
 expensesRouter.route('/expenses').get(function (req, res){
   let connection = databaseObject.getDb("test");//TODO: Extract in someway
   connection.collection("expenses")

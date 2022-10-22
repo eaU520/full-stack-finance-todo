@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
+  let navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -47,6 +48,7 @@ const Registration = () => {
         username: "",
         repeatPassword: ""
     })
+    navigate("/login");
   }//TODO: Navigation bar component React
     return (
       <div className="Login">
