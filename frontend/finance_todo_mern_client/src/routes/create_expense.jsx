@@ -1,47 +1,39 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+//Test
 export default function CreateExpense(props) {
 let navigate = useNavigate();
 const {state} = useLocation();
-if (state !== null){
-  let editExpenseValue = state.editExpenseValue;
-  const [formData, setForm] = useState({
-    name: editExpenseValue['name'],
-    amount: editExpenseValue['amount'], 
-    type: editExpenseValue['type'],
-    description: editExpenseValue['description'],
-    due_date: editExpenseValue['due_date'],
-    urgency: editExpenseValue['urgency'],
-    funded: editExpenseValue['funded'],
-    edit: state.edit,
-    id: editExpenseValue['_id']
+let editExpenseValue = state !== null? state.editExpenseValue: {};
+console.log(editExpenseValue['funded']);
+const [formData, setForm] = useState({
+    name: state !== null? editExpenseValue['name']: "",
+    amount: state !== null? editExpenseValue['amount']: 0, 
+    type: state !== null? editExpenseValue['type']: "",
+    description: state !== null? editExpenseValue['description']: "",
+    due_date: state !== null? editExpenseValue['due_date']: "",
+    urgency: state !== null? editExpenseValue['urgency']: "",
+    funded: state !== null && editExpenseValue['funded']? true:false,
+    edit: state !== null? state.edit: false,
+    id: state !== null? editExpenseValue['_id']: ""
   });
-}else{
-  const [formData, setForm] = useState({
-    name: "",
-    amount: 0, 
-    type: "",
-    description: "",
-    due_date: "",
-    urgency: "",
-    funded: false,
-    edit: false,
-  });
-}
-
 function updateForm(value){
   return setForm((prev) =>{
     return {...prev, ...value};//Updates the form state properties
   });
 }
+// function editForm(data){
+
+// }
+// editForm(formData);
 
 
 async function onSubmit(data){
   data.preventDefault();
   const newExpense = {...formData};
-  if (validateExpense(data) === true && !this.props.edit){
+   //create a new expense
+  if (validateExpense(data) === true && newExpense.edit === false){
     await fetch("http://localhost:8080/create-expense",{//TODO: Need await in front of fetch?
       method: "POST",
       headers:{
@@ -53,31 +45,21 @@ async function onSubmit(data){
       window.alert(error);
       return;
     });
-    setForm(
-      {
-        name: "",
-        amount: 0, 
-        type: "",
-        description: "",
-        due_date: "",
-        urgency: "",
-        funded: ""
-      });//Clear the form
-    navigate("/expenses");//Goes to the list of expenses
-  }
-  //edit the existing expense
-  else if (validateExpense(data) === true && this.props.edit){
-    await fetch(`http://localhost:8080/edit/${this.props.id}`,{
-      method: "PUT",
+     //edit the existing expense
+  }else if(validateExpense(data) === true && newExpense.edit === true) {
+    const edittedExpense = {...formData};
+    await fetch(`http://localhost:8080/edit/${edittedExpense.id}`,{
+      method: "POST",
       headers:{
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newExpense),
+      body: JSON.stringify(edittedExpense),
     })
     .catch(error=>{
       window.alert(error);
       return;
     });
+  }
     setForm(
       {
         name: "",
@@ -90,7 +72,6 @@ async function onSubmit(data){
       });//Clear the form
     navigate("/expenses");//Goes to the list of expenses
   }
-}
 //TODO: Validate expense form
 function validateExpense(data){
   if (data.name === "" || !isNaN(data.amount) || data.type === "" ||
@@ -115,6 +96,7 @@ return (
           <Link to="/">Homepage</Link> |{" "}
           <Link to="/create-expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
+          <Link to="/register">Register</Link> |{" "}
           <Link to="/login">Login</Link>
         </nav>
           </div>
@@ -130,6 +112,7 @@ return (
                   type='text'
                   placeholder='Name of the Expense'
                   name='name'
+                  value ={formData.name}
                   className='form-control'
                   onChange={(event) => updateForm({name: event.target.value})}
                 />
@@ -141,6 +124,7 @@ return (
                   type='number'
                   placeholder='Amount'
                   name='amount'
+                  value={formData.amount}
                   className='form-control'
                   onChange={(event) => updateForm({amount: event.target.value})}
                 />
@@ -150,6 +134,7 @@ return (
                 <input
                   type='text'
                   placeholder='Type'
+                  value={formData.type}
                   name='type'
                   className='form-control'
                   onChange={(event) => updateForm({type: event.target.value})}
@@ -161,6 +146,7 @@ return (
                   type='text'
                   placeholder='Describe this expense'
                   name='description'
+                  value={formData.description}
                   className='form-control'
                   onChange={(event) => updateForm({description: event.target.value})}
                 />
@@ -171,6 +157,7 @@ return (
                   type='date'
                   placeholder='due_date'
                   name='due_date'
+                  value={formData.due_date}
                   className='form-control'
                   onChange={(event) => updateForm({due_date: event.target.value})}
                 />
@@ -180,6 +167,7 @@ return (
                   type='text'
                   placeholder='Priority of this Expense'
                   name='urgency'
+                  value={formData.urgency}
                   className='form-control'
                   onChange={(event) => updateForm({urgency: event.target.value})}
                 />
@@ -189,8 +177,10 @@ return (
                 <input
                   type='checkbox'
                   name='funded'
+                  checked={formData.funded}
+                  // value={checked}
                   className='form-control'
-                  onChange={(event) => updateForm({funded: event.target.value})}
+                  onChange = {(event) => updateForm({funded: event.target.checked})}
                 />
               </div>
               <input

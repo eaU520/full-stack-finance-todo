@@ -54,19 +54,30 @@ expensesRouter.route('/expenses/:id').get(function (req, res) {
   });
 });
 
-// @route POST /edit/:id
-// @description Get single expense by id and update
+// @route PUT /edit/:id
+// @description Edit a single expense by id
 // @access Public
-expensesRouter.route('/edit/:id').get(function (req, res) {
+expensesRouter.route('/edit/:id').post(function (req, res) {
   let connection = databaseObject.getDb();
-  debugger
   let query = {_id: ObjectId(req.params.id)};
+  let edittedExpense = {
+    $set: {
+      name: req.body.name,
+      amount: req.body.amount, 
+      type: req.body.type,
+      description: req.body.description,
+      due_date: req.body.due_date,
+      urgency: req.body.urgency,
+      funded: req.body.funded,
+    },
+  };
   connection
   .collection("expenses")
-  .findOne(query, function(err, result){
+  .updateOne(query, edittedExpense, function(err, result){
     if(err) throw err;
     res.json(result);
   });
+  console.log(query +" : "+ query);
 
 });
 

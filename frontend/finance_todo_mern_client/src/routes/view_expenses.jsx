@@ -106,6 +106,7 @@ export default function ExpenseList() {
               <Link to="/">Homepage</Link> |{" "}
               <Link to="/create-expense">Create an Expense</Link> |{" "}
               <Link to="/expenses">Expenses</Link> |{" "}
+              <Link to="/register">Register</Link> |{" "}
               <Link to="/login">Login</Link>
             </nav>
         </div>
