@@ -21,6 +21,7 @@ userRouter.route('/register').post(function (req, response){
       username : req.body.username,
       email: req.body.email, 
       password: req.body.password,
+      name: req.body.name,
       admin: false,
     };
     connection.collection("users").insertOne(userAdd, function (err, res){

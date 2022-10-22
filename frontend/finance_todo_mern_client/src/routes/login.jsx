@@ -2,16 +2,36 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
+  const [user, setUser] = useState({
+    username:'',
+    password:''
+  })
+  const handleChange = (field) => (event) =>{
+    setUser({ ... user, [field]: event.target.value})
+  }
   const validateInput = (loginInformation)=>{
     if (loginInformation.userName === "" || loginInformation.userName === null ||
      loginInformation.password === "" || loginInformation === null) return false;
     return true;
   }
-  const loginUser = (data) => {
+  async function loginUser(data){
     data.preventDefault();
     //TODO: validate and login
     if (validateInput(data)){
-
+      await fetch("http://localhost:8080/login",{
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: user.username,
+          password: user.password
+        })
+      })
+      setUser({
+        username: '',
+        password: ''
+      })
     }
   }//TODO: Navigation bar React
     return (
