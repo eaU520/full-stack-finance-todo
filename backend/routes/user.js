@@ -10,7 +10,7 @@ const { ObjectId } = require('mongodb');
 
 // ID to Object
 const objectID = require("mongodb").ObjectId;
-
+//TODO: encrypt and store password
 // @route POST /register
 // @description add a user
 // @access Public
@@ -24,6 +24,7 @@ userRouter.route('/register').post(function (req, response){
       name: req.body.name,
       admin: false,
     };
+    //TODO: Check if user already exists
     connection.collection("users").insertOne(userAdd, function (err, res){
       if(err){
          throw err;
@@ -37,14 +38,15 @@ userRouter.route('/register').post(function (req, response){
 // @access Public
 userRouter.route('/login').post(function (req, response){
   let connection = databaseObject.getDb();
-  let userAdd = {
+  let userLog = {
     username : req.body.username,
     password: req.body.password,
   };
-  connection.collection("users").find(userAdd, function (err, res){
+  connection.collection("users").findOne(userLog, function (err, res){
     if(err){
        throw err;
     }
+    //TODO: check the username then check the password matches bcrypt
     response.json(res);
   });
 });

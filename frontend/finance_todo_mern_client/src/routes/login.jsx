@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login() {
-  const [user, setUser] = useState({
+const Login = () =>{
+  let navigate = useNavigate();
+  const [login, setLogin] = useState({
     username:'',
     password:''
   })
   const handleChange = (field) => (event) =>{
-    setUser({ ... user, [field]: event.target.value})
+    setLogin({ ... login, [field]: event.target.value})
   }
   const validateInput = (loginInformation)=>{
     if (loginInformation.userName === "" || loginInformation.userName === null ||
@@ -24,11 +26,11 @@ export default function Login() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: user.username,
-          password: user.password
+          username: login.username,
+          password: login.password
         })
       })
-      setUser({
+      setLogin({
         username: '',
         password: ''
       })
@@ -59,7 +61,7 @@ export default function Login() {
         <input 
           name='username' 
           type='text' 
-          value={user.username}
+          value={login.username}
           onChange={handleChange('username')}
         />
         <br />
@@ -68,7 +70,7 @@ export default function Login() {
         <input
           name='password' 
           type='password'
-          value={user.password}
+          value={login.password}
           onChange={handleChange('password')}
         />
         <br/>
@@ -84,3 +86,4 @@ export default function Login() {
       </div>
     );
   }
+  export default Login
