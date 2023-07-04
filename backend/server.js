@@ -5,7 +5,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const mongo = require('mongoose');
-const mongoDBSession = require('connect-mongodb-session')(session)
+// const mongoDBSession = require('connect-mongodb-session')(session);
+const mongoDBSession = require('connect-mongo');
 
 const port = process.env.PORT || 8080;
 app.use(cors());
