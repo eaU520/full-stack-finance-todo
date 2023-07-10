@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     default: false
   }
 },
-  {timestamps: true}//When created?
+  {timestamps: true}//FIXME: /When created?
 );
 
 module.exports = User = mongoose.model('user', UserSchema);
