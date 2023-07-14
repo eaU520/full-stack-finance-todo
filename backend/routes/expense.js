@@ -10,10 +10,15 @@ const Expense = require('../database/models/Expense');
 // Connection to the database
 const databaseObject = require("../database/db");
 const { ObjectId } = require('mongodb');
+const { db } = require('../database/models/Expense');
 
 // ID to Object
 const objectID = require("mongodb").ObjectId;
-
+expensesRouter.get("/", async (req,res) => {
+  let collection = await databaseObject.collection("test");
+  let results = await collection.find({}).toArray();
+  res.send(results).status(200);
+});
 // @route GET expenses
 // @description Get all expenses
 // @access Public
@@ -114,3 +119,4 @@ expensesRouter.route('/expenses/:id').delete((req, res) => {
 });
 
 module.exports = expensesRouter;
+// export default expensesRouter;
