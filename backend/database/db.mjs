@@ -1,22 +1,22 @@
-const { MongoClient } = require("mongodb");
-const Db = process.env.mongoURI;
+import { MongoClient } from "mongodb";
+// const Db = process.env.mongoURI;
 const connectionString = process.env.mongoURI || "";
-const client1 = new MongoClient(connectionString);
+const client = new MongoClient(connectionString);
 // console.log(Db);
-const client = new MongoClient(Db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// const client = new MongoClient(Db, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
  
-var _db;
+// var _db;
 let connection;
 try{
-  connection = await client1.connect();
+  connection = await client.connect();
 }catch(e){
   console.error(e);
 }
-let db1 = connection.db("I_don't_know_what_goes_here");
-export default db1;
+let db = connection.db("I_don't_know_what_goes_here");
+export default db;
 // module.exports = {
 //   connectToServer: function (callback) {
 //     client.connect(function (err, db) {
