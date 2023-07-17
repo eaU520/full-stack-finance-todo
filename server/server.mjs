@@ -9,6 +9,7 @@ import "./loadEnvironment.mjs";
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
 const port = process.env.PORT || 5050;
+console.log("PORT: ",port);
 const app = express();
 
 app.use(cors());
