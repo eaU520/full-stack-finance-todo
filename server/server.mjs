@@ -1,8 +1,7 @@
 import express from "express";
 // const session = require('express-session');
-const app = express();
 import cors  from "cors";
-import expenses from "./routes/expenses.mjs"
+import expenses from "./routes/expense.mjs"
 import "./loadEnvironment.mjs";
 // require("dotenv").config();
 
@@ -10,12 +9,13 @@ import "./loadEnvironment.mjs";
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
 const port = process.env.PORT || 5050;
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("./routes/expenses",expenses);
-app.use("./routes/user",users);
+app.use("/expense",expenses);
+// app.use("./routes/user",users);
 // get driver connection
 // const dbconn = require("./database/db");
 
