@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 // const Db = process.env.mongoURI;
-const connectionString = process.env.mongoURI || "";
+const connectionString = process.env.ATLAS_URI || "";
 const client = new MongoClient(connectionString);
 // console.log(Db);
 // const client = new MongoClient(Db, {
@@ -9,13 +9,13 @@ const client = new MongoClient(connectionString);
 // });
  
 // var _db;
-let connection;
+let conn;
 try{
-  connection = await client.connect();
+  conn = await client.connect();
 }catch(e){
   console.error(e);
 }
-let db = connection.db("I_don't_know_what_goes_here");
+let db = connection.db("sample_training");
 export default db;
 // module.exports = {
 //   connectToServer: function (callback) {
