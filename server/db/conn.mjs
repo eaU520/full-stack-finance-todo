@@ -15,7 +15,7 @@ try{
 }catch(e){
   console.error(e);
 }
-let db = connection.db("sample_training");
+let db = conn.db("sample_training");
 export default db;
 // module.exports = {
 //   connectToServer: function (callback) {

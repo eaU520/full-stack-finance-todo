@@ -1,8 +1,8 @@
 import express from "express";
 // const session = require('express-session');
 import cors  from "cors";
-import expenses from "./routes/expense.mjs"
 import "./loadEnvironment.mjs";
+import expenses from "./routes/expense.mjs"
 // require("dotenv").config();
 
 // const mongo = require('mongoose');

@@ -1,12 +1,12 @@
 const express = require('express');
-const connectDB = require('./backend/database/db');
+const connectDB = require('./conn.mjs');
 
 const app = express();
 
 var cors = require('cors');
 
 //routes
-const expensesAPI = require("/backend/routes/expense");
+const expensesAPI = require("/server/routes/expense");
 
 connectDB();
 
@@ -25,7 +25,7 @@ app.use("/expenses", expensesAPI);
 
 app.use("/create-expense", expensesAPI);
 
-const port = process.env.PORT || 8082;
+const port = process.env.PORT || 5050;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
 //TODO: DELETE
