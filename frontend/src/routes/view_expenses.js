@@ -40,7 +40,7 @@ export default function ExpenseList() {
   useEffect(() => {
 
     async function getExpenses() {
-      const response = await fetch(`http://localhost:8080/expenses`);
+      const response = await fetch(`http://localhost:5050/expenses`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -54,10 +54,10 @@ export default function ExpenseList() {
   
     return;
   }, [expenses.length]);
-
+//TODO: Extract port #
   //This function gets and existing expense and puts the data in the form
   async function editExpense(id){
-    const response = await fetch(`http://localhost:8080/expenses/${id}`);
+    const response = await fetch(`http://localhost:5050/expenses/${id}`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -69,7 +69,7 @@ export default function ExpenseList() {
 
   // This method will delete an expense
   async function deleteExpense(id) {
-    await fetch(`http://localhost:8080/expenses/${id}`, {
+    await fetch(`http://localhost:5050/expenses/${id}`, {
       method: "DELETE"
     });
   

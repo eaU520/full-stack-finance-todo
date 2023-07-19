@@ -29,10 +29,10 @@ class ShowExpenseList extends Component {
       const expenses = this.state.expenses;
       let expenseList;
   
-      if(expenses.length == 0 ||  !(Array.isArray(expenses))) {
+      if(expenses.length === 0 ||  !(Array.isArray(expenses))) {
         expenseList = "There are no expense records!";
       } else {
-            const expenseList = expenses.map((expense, k) =>
+            expenses.map((expense, k) =>
             <ExpenseCard expense={expense} key={k} />
         );
       }

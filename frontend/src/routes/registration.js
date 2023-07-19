@@ -25,7 +25,7 @@ const Registration = () => {
   async function registerUser(data){
     data.preventDefault();
     if (validateInput(data)){
-        await fetch("http://localhost:8080/register",{
+        await fetch("http://localhost:5050/register",{
             method: "POST",
             headers:{
                 'Content-Type': 'application/json',

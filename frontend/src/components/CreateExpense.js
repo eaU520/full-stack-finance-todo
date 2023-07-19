@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 //TODO: Clean up node_modules
 class CreateExpense extends Component{
     constructor() {

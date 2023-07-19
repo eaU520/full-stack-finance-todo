@@ -29,7 +29,7 @@ async function onSubmit(data){
   const newExpense = {...formData};
    //create a new expense
   if (validateExpense(data) === true && newExpense.edit === false){
-    await fetch("http://localhost:8080/create-expense",{//TODO: Need await in front of fetch?
+    await fetch("http://localhost:5050/create-expense",{//TODO: Need await in front of fetch?
       method: "POST",
       headers:{
         "Content-Type": "application/json"
@@ -43,7 +43,7 @@ async function onSubmit(data){
      //edit the existing expense
   }else if(validateExpense(data) === true && newExpense.edit === true) {
     const edittedExpense = {...formData};
-    await fetch(`http://localhost:8080/edit/${edittedExpense.id}`,{
+    await fetch(`http://localhost:5050/edit/${edittedExpense.id}`,{
       method: "POST",
       headers:{
         "Content-Type": "application/json"

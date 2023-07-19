@@ -20,7 +20,7 @@ const Login = () =>{
     data.preventDefault();
     //TODO: validate and login
     if (validateInput(data)){
-      await fetch("http://localhost:8080/login",{
+      await fetch("http://localhost:5050/login",{
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
