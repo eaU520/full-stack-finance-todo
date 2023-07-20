@@ -2,7 +2,7 @@ import express from "express";
 // const session = require('express-session');
 import cors  from "cors";
 import "./loadEnvironment.mjs";
-import expenses from "./routes/expense.mjs"
+import expenses from "./routes/expenses.mjs"
 // require("dotenv").config();
 
 // const mongo = require('mongoose');
@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/expense",expenses);
+app.use("/expenses",expenses);
 // app.use("./routes/user",users);
 // get driver connection
 // const dbconn = require("./database/db");

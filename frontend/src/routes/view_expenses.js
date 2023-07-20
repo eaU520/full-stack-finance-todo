@@ -64,7 +64,7 @@ export default function ExpenseList() {
         return;
       }
       const expense = await response.json();
-      navigate('/create-expense',{state: {editExpenseValue:expense, edit: true},replace:true});
+      navigate('/create_expense',{state: {editExpenseValue:expense, edit: true},replace:true});
   }
 
   // This method will delete an expense
@@ -106,8 +106,6 @@ export default function ExpenseList() {
               <Link to="/">Homepage</Link> |{" "}
               <Link to="/create-expense">Create an Expense</Link> |{" "}
               <Link to="/expenses">Expenses</Link> |{" "}
-              <Link to="/register">Register</Link> |{" "}
-              <Link to="/login">Login</Link>
             </nav>
         </div>
           <div className="col-md-8 m-auto">

@@ -1,41 +1,60 @@
-import React, {  Component } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import axios from 'axios';
-import ExpenseCard from './ExpenseCard';
 
-class ShowExpenseList extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        expenses: []
-      };
+const Expense = (props) =>(
+  <tr>
+  <td>{props.expense.name}</td>
+  <td>{props.expense.description}</td>
+  <td>{props.expense.urgency}</td>
+  <td>
+    <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
+    <button className="btn btn-link"
+        onClick={() => {
+          props.deleteExpense(props.expense._id);
+        }}
+      >
+        Delete
+      </button>
+    </td>
+  </tr>
+);
+export default function ExpenseList(){
+  const [expenses, setExpenses] = useState([])
+    useEffect(() =>{
+      async function getExpenses(){
+        const response = await fetch('http://localhost:5050/expenses/');
+       
+        if (!response.ok){
+          console.log('Error from ShowExpenseList: ', response);
+          return;
+        }
+        const expensesList = await response.json();
+        setExpenses(expensesList);
     }
-    componentDidMount() {
-      axios
-        .get('http://localhost:8082/')
-        .then(res => {
-          this.setState({
-            expenses: res.data
-          })
-        })
-        .catch(err =>{
-          console.log('Error from ShowExpenseList');
-        })
-    };
+    getExpenses();
+    return;
+  },[expenses.length]);
+    
+  async function deleteExpense(id) {
+    await fetch(`http://localhost:5050/expenses/${id}`, {
+      method: "DELETE"
+    });
   
-  
-    render() {
-      const expenses = this.state.expenses;
-      let expenseList;
-  
-      if(expenses.length === 0 ||  !(Array.isArray(expenses))) {
-        expenseList = "There are no expense records!";
-      } else {
-            expenses.map((expense, k) =>
-            <ExpenseCard expense={expense} key={k} />
-        );
-      }
+    const newExpenses = expenses.filter((el) => el._id !== id);
+    setExpenses(newExpenses);
+  }
+  function expenseList(){
+    return expenses.map((expense) => {
+      return (
+        <Expense
+          expense={expense}
+          deleteExpense={() => deleteExpense(expense._id)}
+          key={expense._id}
+        />
+      );
+    });
+  }
       return (
         <div className="ShowExpenseList">
           <div className="container">
@@ -43,15 +62,6 @@ class ShowExpenseList extends Component {
               <div className="col-md-12">
                 <br />
                 <h2 className="display-4 text-center">Expenses List</h2>
-              </div>
-  
-              <div className="col-md-11">
-                <Link to="/create-expense" className="btn btn-outline-warning float-right">
-                  + Add New Expense
-                </Link>
-                <br />
-                <br />
-                <hr />
               </div>
   
             </div>
@@ -62,8 +72,7 @@ class ShowExpenseList extends Component {
                 paddingBottom: "1rem",
               }}>
               <Link to="/create_expense">Create an Expense</Link> |{" "}
-              <Link to="/view_expenses">Expenses</Link> |{" "}
-              <Link to="/login">Login</Link>
+              <Link to="/view_expenses">Expenses</Link>{" "}
             </nav>
             </div>
             <div className="list">
@@ -73,5 +82,3 @@ class ShowExpenseList extends Component {
         </div>
       );
     }
-  }
-  export default ShowExpenseList;

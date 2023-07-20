@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-//Test
+//TODO: React-dom render deprecated use createRoot
 export default function CreateExpense(props) {
 let navigate = useNavigate();
 const {state} = useLocation();
@@ -89,10 +89,10 @@ return (
             paddingBottom: "1rem",
           }}>
           <Link to="/">Homepage</Link> |{" "}
-          <Link to="/create-expense">Create an Expense</Link> |{" "}
+          <Link to="/create_expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
-          <Link to="/register">Register</Link> |{" "}
-          <Link to="/login">Login</Link>
+          {/* <Link to="/register">Register</Link> |{" "}
+          <Link to="/login">Login</Link> */}
         </nav>
           </div>
           <div className="col-md-8 m-auto">
