@@ -1,6 +1,7 @@
 //TODO: Search expenses
 //TODO: Sort by date, amount, name
 //TODO: Pagination of expenses
+//TODO: CRUD
 import express from "express";
 import db from "../db/conn.mjs";
 import {ObjectId} from "mongodb";
