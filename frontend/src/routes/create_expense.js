@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 //TODO: React-dom render deprecated use createRoot
 export default function CreateExpense(props) {
-let navigate = useNavigate();
 const {state} = useLocation();
 let editExpenseValue = state !== null? state.editExpenseValue: {};
 const [formData, setForm] = useState({
@@ -18,7 +17,7 @@ const [formData, setForm] = useState({
     id: state !== null? editExpenseValue['_id']: ""
   });
 function updateForm(value){
-  return setForm((prev) =>{
+  return setForm((prev) =>{//TODO: nesting?
     return {...prev, ...value};//Updates the form state properties
   });
 }
@@ -91,6 +90,7 @@ return (
           <Link to="/">Homepage</Link> |{" "}
           <Link to="/create_expense">Create an Expense</Link> |{" "}
           <Link to="/expenses">Expenses</Link> |{" "}
+          {/* TODO: Cretae navigation component, repeat? */}
           {/* <Link to="/register">Register</Link> |{" "}
           <Link to="/login">Login</Link> */}
         </nav>
