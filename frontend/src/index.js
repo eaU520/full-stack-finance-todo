@@ -1,15 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
-ReactDOM.render(
+const index = ReactDOM.createRoot(document.getElementById("root"));
+  index.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
 // import CreateExpense from "./routes/create_expense";
 // import ViewExpenses from "./routes/view_expenses";
