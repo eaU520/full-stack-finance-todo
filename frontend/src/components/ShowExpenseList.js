@@ -1,7 +1,7 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-
+//TODO: Add all links and wanted pages
 const Expense = (props) =>(
   <tr>
   <td>{props.expense.name}</td>

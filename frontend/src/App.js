@@ -6,7 +6,7 @@ import {Route, Routes} from "react-router-dom";
 import ExpenseList from "./components/ShowExpenseList";
 // import Edit from "./components/edit";
 import Create from "./components/CreateExpense";
- 
+ //TODO: Add all links/wanted pages and create all components
 const App = () => {
  return (
    <div>
