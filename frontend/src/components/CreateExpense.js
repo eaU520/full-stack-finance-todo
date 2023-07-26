@@ -1,6 +1,6 @@
 import { set } from 'mongoose';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router-dom";
 // import '../App.css';
 // import { withRouter } from "react-router";
 //TODO: Clean up node_modules
@@ -23,27 +23,37 @@ export default function CreateExpense() {
         });
       }
 
-      onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-      };
+      // onChange = e => {
+      //   this.setState({ [e.target.name]: e.target.value });
+      // };
     
-      onSubmit = e => {
+     async function onSubmit(e) {
         e.preventDefault();
     
-        const data = {
-            name: this.state.name,
-            amount: this.state.amount,
-            type: this.state.type,
-            description: this.state.description,
-            due_date: this.state.due_date,
-            urgency: this.state.urgency,
-            funded: this.state.funded
-        };
+        const newExpense = {...form};
+
+        // const data = {
+        //     name: this.state.name,
+        //     amount: this.state.amount,
+        //     type: this.state.type,
+        //     description: this.state.description,
+        //     due_date: this.state.due_date,
+        //     urgency: this.state.urgency,
+        //     funded: this.state.funded
+        // };
     
-        axios
-          .post('http://localhost:8082/api/expenses', data)
-          .then(res => {
-            this.setState({
+        await fetch('http://localhost:8082/api/expenses',{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newExpense),
+        })
+          .catch(error => {
+            window.alert(error);
+            return;
+          });
+            setForm({
               name: '',
               urgency:'',
               amount:0,
@@ -52,38 +62,30 @@ export default function CreateExpense() {
               type:'',
               funded: false
             })
-            this.props.history.push('/');//Adds to database FIXME: What is this error?
-          })
-          .catch(err => {
-            console.log("Error in CreateExpense!");
-          })
-      };
+            navigate('/');//Adds to database FIXME: What is this error?
+  
+      }
     
         return (
           <div className="CreateExpense">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
-                  <br />
-                  <Link to="/" className="btn btn-outline-warning float-left">
-                      Show Expense List
-                  </Link>
-                </div>
-                <div className="col-md-8 m-auto">
                   <h1 className="display-4 text-center">Add Expense</h1>
                   <p className="lead text-center">
                       Create new expense
                   </p>
     
-                  <form noValidate onSubmit={this.onSubmit}>
-                    <div className='form-group'>
+                  <form onSubmit={onSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="name">Name</label>
                       <input
-                        type='text'
-                        placeholder='Name of the Expense'
-                        name='name'
-                        className='form-control'
-                        value={this.state.name}
-                        onChange={this.onChange}
+                        type="text"
+                        placeholder="Name of the Expense"
+                        id="name"
+                        className="form-control"
+                        value={form.name}
+                        onChange={(e) => updateForm({ name: e.target.value})}
                       />
                     </div>
                     <br />
