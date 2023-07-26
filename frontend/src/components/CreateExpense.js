@@ -1,23 +1,28 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import '../App.css';
-import axios from 'axios';
+import { set } from 'mongoose';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+// import '../App.css';
 // import { withRouter } from "react-router";
 //TODO: Clean up node_modules
-class CreateExpense extends Component{
-    constructor() {
-        super();
-        this.state = {
-          name: '',
+export default function CreateExpense() {
+  const [form, setForm] = useState({
+          name: "",
           amount:0,
           type:'',
           description:'',
           due_date:'',
           urgency:'',
           funded:false
-        };
-      }
+      });
+
+      const navigate = useNavigate();
     
+      function updateForm(value){
+        return setForm((prev)=> {
+          return {...prev, ...value};
+        });
+      }
+
       onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
       };
@@ -54,7 +59,6 @@ class CreateExpense extends Component{
           })
       };
     
-      render() {
         return (
           <div className="CreateExpense">
             <div className="container">
@@ -158,6 +162,3 @@ class CreateExpense extends Component{
           </div>
         );
       }
-}
-
-export default CreateExpense;
