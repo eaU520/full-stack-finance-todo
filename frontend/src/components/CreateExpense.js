@@ -10,7 +10,7 @@ export default function CreateExpense() {
           amount:0,
           type:'',
           description:'',
-          due_date:'',
+          dueDate:'',
           urgency:'',
           funded:false
       });
@@ -93,11 +93,11 @@ export default function CreateExpense() {
                     <div className='form-group'>
                       <input
                         type='number'
-                        placeholder='amount'
-                        name='amount'
+                        placeholder='Expense Amount'
+                        id='amount'
                         className='form-control'
-                        value={this.state.amount}
-                        onChange={this.onChange}
+                        value={form.amount}
+                        onChange={(e) => updateForm({ amount: e.target.value})}
                       />
                     </div>
     
@@ -105,10 +105,10 @@ export default function CreateExpense() {
                       <input
                         type='text'
                         placeholder='Type'
-                        name='type'
+                        id='type'
                         className='form-control'
-                        value={this.state.type}
-                        onChange={this.onChange}
+                        value={form.type}
+                        onChange={(e) => updateForm({ type: e.target.value})}
                       />
                     </div>
     
@@ -116,10 +116,10 @@ export default function CreateExpense() {
                       <input
                         type='text'
                         placeholder='Describe this expense'
-                        name='description'
+                        id='description'
                         className='form-control'
-                        value={this.state.description}
-                        onChange={this.onChange}
+                        value={form.description}
+                        onChange={(e) => updateForm({ description: e.target.value})}
                       />
                     </div>
     
@@ -127,30 +127,30 @@ export default function CreateExpense() {
                       <input
                         type='date'
                         placeholder='due_date'
-                        name='due_date'
+                        id='due_date'
                         className='form-control'
-                        value={this.state.due_date}
-                        onChange={this.onChange}
+                        value={this.state.dueDate}
+                        onChange={(e) => updateForm({ dueDate: e.target.value})}
                       />
                     </div>
                     <div className='form-group'>
                       <input
                         type='text'
                         placeholder='Priority of this Expense'
-                        name='urgency'
+                        id='urgency'
                         className='form-control'
-                        value={this.state.urgency}
-                        onChange={this.onChange}
+                        value={form.urgency}
+                        onChange={(e) => updateForm({ urgency: e.target.value})}
                       />
                     </div>
                     <div className='form-group'>
                       <h6>Funded? </h6>
                       <input
                         type='checkbox'
-                        name='funded'
+                        id='funded'
                         className='form-control'
-                        value={this.state.funded}
-                        onChange={this.onChange}
+                        value={form.funded}
+                        onChange={(e) => updateForm({ funded: e.target.value})}
                       />
                     </div>
                     <input
