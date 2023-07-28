@@ -1,4 +1,3 @@
-import { set } from 'mongoose';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 // import '../App.css';
@@ -42,7 +41,7 @@ export default function CreateExpense() {
         //     funded: this.state.funded
         // };
     
-        await fetch('http://localhost:8082/api/expenses',{
+        await fetch('http://localhost:5050/expenses',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,8 +60,9 @@ export default function CreateExpense() {
               due_date:'',
               type:'',
               funded: false
-            })
-            navigate('/');//Adds to database FIXME: What is this error?
+            });
+            navigate('/');//Adds to database
+            //FIXME: What is this error?
   
       }
     
@@ -129,7 +129,7 @@ export default function CreateExpense() {
                         placeholder='due_date'
                         id='due_date'
                         className='form-control'
-                        value={this.state.dueDate}
+                        value={form.dueDate}
                         onChange={(e) => updateForm({ dueDate: e.target.value})}
                       />
                     </div>
