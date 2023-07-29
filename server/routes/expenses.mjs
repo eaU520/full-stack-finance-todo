@@ -8,7 +8,7 @@ import {ObjectId} from "mongodb";
 
 const router = express.Router();
 // This section will help you get a list of all the records.
-router.get("/expense", async (req, res) => {
+router.get("/", async (req, res) => {
   let collection = await db.collection("test");
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // This section will help you create a new record.
-router.post("/", async (req, res) => {
+router.post("/expenses", async (req, res) => {
   let newDocument = {
     name: req.body.name,
     position: req.body.position,
