@@ -11,7 +11,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   let collection = await db.collection("test");
   let results = await collection.find({}).toArray();
-  res.send(results).status(200);
+  if (!results) res.send("Not found").status(404);
+  else res.send(results).status(200);
 });
 
 // This section will help you get a single record by id
