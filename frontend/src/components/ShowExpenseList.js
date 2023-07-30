@@ -23,7 +23,7 @@ export default function ExpenseList(){
   const [expenses, setExpenses] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
-        const response = await fetch(`http://localhost:5050/expenses/`);
+        const response = await fetch(`http://localhost:5050/`);
        
         if (!response.ok){
           window.alert(`Error from displaying expenses:${response.statusText}`);
@@ -37,7 +37,7 @@ export default function ExpenseList(){
   },[expenses.length]);
     
   async function deleteExpense(id) {
-    await fetch(`http://localhost:5050/expenses/${id}`, {
+    await fetch(`http://localhost:5050/${id}`, {
       method: "DELETE"
     });
   
