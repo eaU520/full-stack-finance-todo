@@ -4,29 +4,29 @@ import '../App.css';
 //TODO: Add all links and wanted pages
 const Expense = (props) =>(
   <tr>
-  <td>{props.expense.name}</td>
-  <td>{props.expense.description}</td>
-  <td>{props.expense.urgency}</td>
-  <td>
-    <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
-    <button className="btn btn-link"
-        onClick={() => {
-          props.deleteExpense(props.expense._id);
-        }}
-      >
+    <td>{props.expense.name}</td>
+    <td>{props.expense.description}</td>
+    <td>{props.expense.urgency}</td>
+    <td>
+      <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
+      <button className="btn btn-link"
+          onClick={() => {
+            props.deleteExpense(props.expense._id);
+          }}
+        >
         Delete
       </button>
     </td>
   </tr>
 );
 export default function ExpenseList(){
-  const [expenses, setExpenses] = useState([])
+  const [expenses, setExpenses] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
-        const response = await fetch('http://localhost:5050/expenses');
+        const response = await fetch(`http://localhost:5050/expenses/`);
        
         if (!response.ok){
-          console.log('Error from ShowExpenseList: ', response);
+          window.alert(`Error from displaying expenses:${response.statusText}`);
           return;
         }
         const expensesList = await response.json();

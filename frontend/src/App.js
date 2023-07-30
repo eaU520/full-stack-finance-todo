@@ -5,10 +5,10 @@ import {Route, Routes} from "react-router-dom";
 // import Navbar from "./components/navbar";
 import ExpenseList from "./components/ShowExpenseList.js";
 import Create from "./components/CreateExpense.js";
+
 const App = () => {
  return (
    <div>
-     {/* <Navbar /> */}
      <Routes>
       <Route path="/" element={<ExpenseList />} />
        <Route path="/view_expenses" element={<ExpenseList />} />
