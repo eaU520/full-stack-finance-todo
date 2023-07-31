@@ -11,6 +11,7 @@ try{
   console.error(e);
 }
 let db = conn.db("test");
+console.log(db.databaseName);
 export default db;
 
 //_db = db.db("test");//TODO: database or collection?

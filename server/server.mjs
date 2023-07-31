@@ -9,13 +9,13 @@ import expenses from "./routes/expenses.mjs"
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
 const port = process.env.PORT || 5050;
-console.log("PORT: ",port);
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/expenses",expenses);
+window.alert(app);
 // app.use("./routes/user",users);
 // get driver connection
 // const dbconn = require("./database/db");
