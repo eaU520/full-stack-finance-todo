@@ -9,15 +9,15 @@ import {ObjectId} from "mongodb";
 const router = express.Router();
 // This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
-  let collection = await db.collection("test");
+  let collection = await db.collection("expenses");
   let results = await collection.find({}).toArray();
-  if (!results) res.send("Not found").status(404);
+  if (!results) res.send("Not ??????").status(404);
   else res.send(results).status(200);
 });
 
 // This section will help you get a single record by id
 router.get("/:id", async (req, res) => {
-  let collection = await db.collection("test");
+  let collection = await db.collection("expenses");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
 
@@ -28,11 +28,11 @@ router.get("/:id", async (req, res) => {
 // This section will help you create a new record.
 router.post("/expenses", async (req, res) => {
   let newDocument = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    name: req.body.name//TODO: Add all fields
+    // position: req.body.position,
+    // level: req.body.level,
   };
-  let collection = await db.collection("test");
+  let collection = await db.collection("expenses");
   let result = await collection.insertOne(newDocument);
   res.send(result).status(204);
 });
@@ -42,13 +42,13 @@ router.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
   const updates =  {
     $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level
+      name: req.body.name//TODO: Add all fields
+      // position: req.body.position,
+      // level: req.body.level
     }
   };
 
-  let collection = await db.collection("test");
+  let collection = await db.collection("expenses");
   let result = await collection.updateOne(query, updates);
 
   res.send(result).status(200);
@@ -58,7 +58,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
 
-  const collection = db.collection("test");
+  const collection = db.collection("expenses");
   let result = await collection.deleteOne(query);
 
   res.send(result).status(200);

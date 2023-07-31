@@ -23,9 +23,12 @@ export default function ExpenseList(){
   const [expenses, setExpenses] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
-        const response = await fetch(`http://localhost:5050/`);
+        const response = await fetch(`http://localhost:5050/`,{
+          method: "GET"
+        });
        
         if (!response.ok){
+          console.log(response);
           window.alert(`Error from displaying expenses:${response.statusText}`);
           return;
         }
