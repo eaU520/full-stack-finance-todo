@@ -7,13 +7,12 @@ import db from "../db/conn.mjs";
 import {ObjectId} from "mongodb";
 
 const router = express.Router();
-console.log(router);
 // This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
   let collection = await db.collection("expenses");
   let results = await collection.find({}).toArray();
-  console.log("Here?");
-  if (!results) res.send("Not ??????").status(404);
+  console.log("Getting all");
+  if (!results) res.send("No expenses found").status(404);
   else res.send(results).status(200);
 });
 
@@ -28,13 +27,15 @@ router.get("/:id", async (req, res) => {
 });
 
 // This section will help you create a new record.
-router.post("/expenses", async (req, res) => {
+router.post("/", async (req, res) => {
+  console.log("New expense");
   let newDocument = {
     name: req.body.name//TODO: Add all fields
     // position: req.body.position,
     // level: req.body.level,
   };
   let collection = await db.collection("expenses");
+  console.log("Adding a new song");
   let result = await collection.insertOne(newDocument);
   res.send(result).status(204);
 });

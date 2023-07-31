@@ -23,7 +23,7 @@ export default function ExpenseList(){
   const [expenses, setExpenses] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
-        const response = await fetch(`http://localhost:5050/expenses/`,{
+        const response = await fetch(`http://localhost:5050/expense/`,{
           method: "GET"
         });
        
@@ -75,7 +75,7 @@ export default function ExpenseList(){
                 paddingBottom: "1rem",
               }}>
               <Link to="/create_expense">Create an Expense</Link> |{" "}
-              <Link to="/view_expenses">Expenses</Link>{" "}
+              <Link to="/">Expenses</Link>{" "}
             </nav>
             </div>
             <div className="list">

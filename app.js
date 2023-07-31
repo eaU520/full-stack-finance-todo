@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send(''));
 
-app.use("/expenses", expensesAPI);
+app.use("/expense", expensesAPI);//all /expense/details
 
 // // app.use("/",()=>{res.render()});
 

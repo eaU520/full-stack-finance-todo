@@ -41,7 +41,7 @@ export default function CreateExpense() {
         //     funded: this.state.funded
         // };
     
-        await fetch('http://localhost:5050/expenses',{
+        await fetch('http://localhost:5050/expense',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

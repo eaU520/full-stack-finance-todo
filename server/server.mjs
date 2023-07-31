@@ -14,8 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/expenses",expenses);
-window.alert(app);
+app.use("/expense",expenses);
 // app.use("./routes/user",users);
 // get driver connection
 // const dbconn = require("./database/db");
