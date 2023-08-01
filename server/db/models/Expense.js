@@ -16,7 +16,7 @@ const ExpenseSchema = new mongoose.Schema({
   description: {
     type: String
   },
-  date_due: {
+  dateDue: {
     type: Date
   },
   urgency: {

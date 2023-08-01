@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// import '../App.css';
+import '../App.css';
 // import { withRouter } from "react-router";
 //TODO: Clean up node_modules
 export default function CreateExpense() {

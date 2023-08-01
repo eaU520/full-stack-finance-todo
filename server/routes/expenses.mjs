@@ -7,7 +7,7 @@ import db from "../db/conn.mjs";
 import {ObjectId} from "mongodb";
 
 const router = express.Router();
-// This section will help you get a list of all the records.
+// This section will help you get a list of all the expenses.
 router.get("/", async (req, res) => {
   let collection = await db.collection("expenses");
   let results = await collection.find({}).toArray();
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   else res.send(results).status(200);
 });
 
-// This section will help you get a single record by id
+// This section will help you get a single expense by id
 router.get("/:id", async (req, res) => {
   let collection = await db.collection("expenses");
   let query = {_id: new ObjectId(req.params.id)};
@@ -30,24 +30,34 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log("New expense");
   let newDocument = {
-    name: req.body.name//TODO: Add all fields
+    name: req.body.name,
+    urgency: req.body.urgency,
+    amount: req.body.amount,
+    description: req.body.description,
+    dueDate: req.body.dueDate,
+    type: req.body.type,
+    funded: req.body.funded
     // position: req.body.position,
     // level: req.body.level,
   };
   let collection = await db.collection("expenses");
-  console.log("Adding a new song");
+  console.log("Adding a new expense");
   let result = await collection.insertOne(newDocument);
   res.send(result).status(204);
 });
 
-// This section will help you update a record by id.
+// This section will help you update an expense by id.
 router.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
   const updates =  {
     $set: {
-      name: req.body.name//TODO: Add all fields
-      // position: req.body.position,
-      // level: req.body.level
+      name: req.body.name,
+      urgency: req.body.urgency,
+      amount: req.body.amount,
+      description: req.body.description,
+      dueDate: req.body.dueDaate,
+      type: req.body.type,
+      funded: req.body.funded
     }
   };
 
@@ -66,7 +76,7 @@ router.delete("/:id", async (req, res) => {
 
   res.send(result).status(200);
 });
-
+// modules.exports = router;
 export default router;
 // // Load Expense model
 // const Expense = require('../database/models/Expense');

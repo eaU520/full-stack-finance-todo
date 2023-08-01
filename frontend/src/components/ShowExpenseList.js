@@ -1,7 +1,7 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
-//TODO: Add all links and wanted pages
+// import '../App.css';
+
 const Expense = (props) =>(
   <tr>
     <td>{props.expense.name}</td>
@@ -28,7 +28,6 @@ export default function ExpenseList(){
         });
        
         if (!response.ok){
-          console.log(response);
           window.alert(`Error from displaying expenses:${response.statusText}`);
           return;
         }

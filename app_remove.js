@@ -3,10 +3,11 @@ const express = require('express');
 
 const app = express();
 
-var cors = require('cors');
+// var cors = require('cors');
 
 //routes
-const expensesAPI = require("./server/routes/expense.mjs");
+const expensesAPI = import("./server/routes/expenses.mjs");
+// const expensesAPI = require("");
 
 // connectDB();
 
@@ -17,10 +18,10 @@ const expensesAPI = require("./server/routes/expense.mjs");
 // // app.use(express.json({extended: false}));
 app.use(express.json());
 
-app.get('/', (req, res) => res.send(''));
+app.get('/', (req, res) => res.send(''));//TODO: Second call on start up?
 
 app.use("/expense", expensesAPI);//all /expense/details
-
+//TODO: ERROR here TypeError: Router.use() requires a middleware function but got a Promise
 // // app.use("/",()=>{res.render()});
 
 // app.use("/create-expense", expensesAPI);
@@ -29,3 +30,4 @@ app.use("/expense", expensesAPI);//all /expense/details
 
 // app.listen(port, () => console.log(`Server running on port ${port}`));
 // //TODO: DELETE
+modules.exports = app;
