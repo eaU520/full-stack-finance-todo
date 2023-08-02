@@ -11,7 +11,6 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   let collection = await db.collection("expenses");
   let results = await collection.find({}).toArray();
-  console.log("Getting all");
   if (!results) res.send("No expenses found").status(404);
   else res.send(results).status(200);
 });

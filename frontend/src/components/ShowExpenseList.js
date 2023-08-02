@@ -2,7 +2,7 @@ import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import '../App.css';
 
-const Expense = (props) =>(
+const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
     <td>{props.expense.description}</td>
@@ -39,7 +39,7 @@ export default function ExpenseList(){
   },[expenses.length]);
     
   async function deleteExpense(id) {
-    await fetch(`http://localhost:5050/${id}`, {
+    await fetch(`http://localhost:5050/expense/${id}`, {
       method: "DELETE"
     });
   
@@ -58,29 +58,19 @@ export default function ExpenseList(){
     });
   }
       return (
-        <div className="ShowExpenseList">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <br />
-                <h2 className="display-4 text-center">Expenses List</h2>
-              </div>
-  
+
+        <div>
+          <h3 >Expenses List</h3>
+          <table className="table table-striped" style={{ marginTop:20}}>
+            <thead>
+              <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Urgency</th>
+              </tr>
+            </thead>
+            <tbody>{expenseList()}</tbody>
+            </table>
             </div>
-            <div>
-            <nav
-              style={{
-                borderBottom: "solid 1px",
-                paddingBottom: "1rem",
-              }}>
-              <Link to="/create_expense">Create an Expense</Link> |{" "}
-              <Link to="/">Expenses</Link>{" "}
-            </nav>
-            </div>
-            <div className="list">
-                  {expenseList}
-            </div>
-          </div>
-        </div>
       );
     }
