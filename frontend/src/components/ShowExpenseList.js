@@ -1,6 +1,9 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import '../App.css';
+import LoginUser from "./components/LoginUser";
+import Create from "./components/CreateExpense.js";
+import CreateExpense from './CreateExpense';
 
 const Expense = (props) => (
   <tr>
@@ -58,7 +61,9 @@ export default function ExpenseList(){
     });
   }
       return (
-
+        <>
+        <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
+        <Link className="btn btn-link" to="/user/login">Login</Link> 
         <div>
           <h3 >Expenses List</h3>
           <table className="table table-striped" style={{ marginTop:20}}>
@@ -72,5 +77,6 @@ export default function ExpenseList(){
             <tbody>{expenseList()}</tbody>
             </table>
             </div>
+            </>
       );
     }

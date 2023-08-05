@@ -3,6 +3,7 @@ import express from "express";
 import cors  from "cors";
 import "./loadEnvironment.mjs";
 import expenses from "./routes/expenses.mjs"
+import users from "./routes/users.mjs"
 // require("dotenv").config();
 
 // const mongo = require('mongoose');
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/expense",expenses);
-// app.use("./routes/user",users);
+app.use("/user",users);
 // get driver connection
 // const dbconn = require("./database/db");
 
