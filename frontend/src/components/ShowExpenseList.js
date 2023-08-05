@@ -1,9 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import '../App.css';
-import LoginUser from "./components/LoginUser";
-import Create from "./components/CreateExpense.js";
-import CreateExpense from './CreateExpense';
+import '../App.css';
 
 const Expense = (props) => (
   <tr>

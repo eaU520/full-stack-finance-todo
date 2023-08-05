@@ -4,7 +4,7 @@ import React from "react";
 import {Route, Routes} from "react-router-dom";
 import ExpenseList from "./components/ShowExpenseList.js";
 import LoginUser from "./components/LoginUser";
-import Register from "./components/RegisterUser";
+import RegisterUser from "./components/RegisterUser";
 import Create from "./components/CreateExpense.js";
 const App = () => {
  return (
