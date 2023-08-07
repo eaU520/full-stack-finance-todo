@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-// import { withRouter } from "react-router";
 //TODO: Validation
 export default function LoginUser(){
+    const [login, setLogin] = useState({
+      username: "",
+      password: ""
+    });
     
+        function updateLogin(value){
+          return setLogin((prev)=> {
+            return {...prev, ...value};
+          });
+        }
       async function onSubmit(e) {
         e.preventDefault();
-    
-        const data = {
-            username: this.state.username,
-            password: this.state.password
-        };
-    
         axios
-          .post('http://localhost:5050/user/', data)
+          .post('http://localhost:5050/user/login', login)
           .then(res => {
             this.setState({
                 username: '',
@@ -43,20 +45,20 @@ export default function LoginUser(){
                   </Link>
                 </div>
                 <div className="col-md-8 m-auto">
-                  <h1 className="display-4 text-center">Add User</h1>
+                  <h1 className="display-4 text-center">Account Access</h1>
                   <p className="lead text-center">
                       Login
                   </p>
-    
-                  <form noValidate onSubmit={onSubmit}>
+    {/* TODO: noValidate? */}
+                  <form onSubmit={onSubmit}>
                     <div className='form-group'>
                       <input
                         type='text'
                         placeholder='Username'
                         name='username'
                         className='form-control'
-                        value={this.state.name}
-                        onChange={this.onChange}
+                        value={login.username}
+                        onChange={(e) => updateLogin({ username: e.target.username})}
                       />
                     </div>
                     <br />
@@ -67,8 +69,8 @@ export default function LoginUser(){
                         placeholder='Password'
                         name='password'
                         className='form-control'
-                        value={this.state.password}
-                        onChange={this.onChange}
+                        value={login.password}
+                        onChange={(e) => updateLogin({password: e.target.password})}
                       />
                     </div>
                     <input

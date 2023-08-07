@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import { Link } from 'react-router-dom';
-// import { withRouter } from "react-router";
 //TODO: Clean up node_modules
 export default function CreateExpense() {
   const [form, setForm] = useState({

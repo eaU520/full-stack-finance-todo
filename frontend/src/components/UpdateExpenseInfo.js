@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
-class UpdateExpenseInfo extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        name: '',
-        amount:0,
-        type:'',
-        description:'',
-        due_date:'',
-        urgency:''
-      };
-    }
+const UpdateExpenseInfo = () => {
+  const [form, setForm] = useState({
+      name: "",
+      amount:0,
+      type:'',
+      description:'',
+      dueDate:'',
+      urgency:'',
+      funded:false
+  });
+
+  const navigate = useNavigate();
+
+  function updateForm(value){
+    return setForm((prev)=> {
+      return {...prev, ...value};
+    });
+  }
   
-    componentDidMount() {
+    function componentDidMount() {
       // console.log("Print id: " + this.props.match.params.id);
       axios
         .get('http://localhost:8082/api/expenses/'+this.props.match.params.id)
@@ -36,11 +42,11 @@ class UpdateExpenseInfo extends Component {
         })
     };
   
-    onChange = e => {
+    function onChange(e){
       this.setState({ [e.target.name]: e.target.value });
     };
   
-    onSubmit = e => {
+    function onSubmit(e) {
       e.preventDefault();
   
       const data = {
@@ -53,7 +59,7 @@ class UpdateExpenseInfo extends Component {
       };
   
       axios
-        .put('http://localhost:8082/api/expenses/'+this.props.match.params.id, data)
+        .put('http://localhost:5050/expense/expenses/'+this.props.match.params.id, data)
         .then(res => {
           this.props.history.push('/show-expense/'+this.props.match.params.id);
         })
@@ -63,9 +69,12 @@ class UpdateExpenseInfo extends Component {
     };
   
   
-    render() {
       return (
         <div className="UpdateExpenseInfo">
+          <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
+            <Link className="btn btn-link" to="/user/login">Login</Link> |
+            <Link className="btn btn-link" to="/">View All Expenses</Link> |
+            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
@@ -174,6 +183,3 @@ class UpdateExpenseInfo extends Component {
         </div>
       );
     }
-  }
-  
-  export default UpdateExpenseInfo;
