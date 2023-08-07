@@ -47,7 +47,7 @@ export default function CreateExpense() {
               type:'',
               funded: false
             });
-            navigate('/');//Adds to database
+            navigate('/', {replace: true});//Adds to database
             //FIXME: What is this error?
   
       }

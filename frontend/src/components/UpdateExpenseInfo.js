@@ -39,7 +39,8 @@ const UpdateExpenseInfo = () => {
         })
         .catch(err => {
           console.log("Error from UpdateExpenseInfo");
-        })
+        });
+        navigate('/', {replace: true});
     };
   
     function onChange(e){

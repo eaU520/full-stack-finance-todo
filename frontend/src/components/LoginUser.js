@@ -27,7 +27,8 @@ export default function LoginUser(){
           })
           .catch(err => {
             console.log("Error in Login!");
-          })
+          });
+          navigate('/', {replace: true});
       };
     
         return (

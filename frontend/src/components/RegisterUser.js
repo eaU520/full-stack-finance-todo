@@ -42,7 +42,8 @@ class CreateUser extends Component{
           })
           .catch(err => {
             console.log("Error in Registration!");
-          })
+          });
+          navigate('/', {replace: true});
       };
     
       render() {
