@@ -1,23 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 //TODO: Validation
-class LoginUser extends Component{
-    constructor() {
-        super();
-        this.state = {
-          username: '',
-          password:''
-        };
-      }
+export default function LoginUser(){
     
-      onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-      };
-    
-      onSubmit = e => {
+      async function onSubmit(e) {
         e.preventDefault();
     
         const data = {
@@ -26,22 +15,25 @@ class LoginUser extends Component{
         };
     
         axios
-          .post('http://localhost:8082/api/expenses', data)
+          .post('http://localhost:5050/user/', data)
           .then(res => {
             this.setState({
                 username: '',
                 password:''
             })
-            this.props.history.push('/');
+            // this.props.history.push('/');//TODO: History, breadcrumbs?
           })
           .catch(err => {
             console.log("Error in Login!");
           })
       };
     
-      render() {
         return (
           <div className="Login">
+            <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
+            <Link className="btn btn-link" to="/user/login">Login</Link> |
+            <Link className="btn btn-link" to="/">View All Expenses</Link> |
+            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
@@ -56,7 +48,7 @@ class LoginUser extends Component{
                       Login
                   </p>
     
-                  <form noValidate onSubmit={this.onSubmit}>
+                  <form noValidate onSubmit={onSubmit}>
                     <div className='form-group'>
                       <input
                         type='text'
@@ -89,7 +81,4 @@ class LoginUser extends Component{
             </div>
           </div>
         );
-      }
 }
-
-export default withRouter(LoginUser);

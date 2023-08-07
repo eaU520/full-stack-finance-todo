@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
+import { Link } from 'react-router-dom';
 // import { withRouter } from "react-router";
 //TODO: Clean up node_modules
 export default function CreateExpense() {
@@ -21,25 +22,11 @@ export default function CreateExpense() {
           return {...prev, ...value};
         });
       }
-
-      // onChange = e => {
-      //   this.setState({ [e.target.name]: e.target.value });
-      // };
     
      async function onSubmit(e) {
         e.preventDefault();
     
         const newExpense = {...form};
-
-        // const data = {
-        //     name: this.state.name,
-        //     amount: this.state.amount,
-        //     type: this.state.type,
-        //     description: this.state.description,
-        //     due_date: this.state.due_date,
-        //     urgency: this.state.urgency,
-        //     funded: this.state.funded
-        // };
     
         await fetch('http://localhost:5050/expense',{
           method: "POST",
@@ -68,6 +55,10 @@ export default function CreateExpense() {
     
         return (
           <div className="CreateExpense">
+            <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
+            <Link className="btn btn-link" to="/user/login">Login</Link> |
+            <Link className="btn btn-link" to="/">View All Expenses</Link> |
+            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">

@@ -1,7 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
@@ -60,7 +59,9 @@ export default function ExpenseList(){
       return (
         <>
         <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
-        <Link className="btn btn-link" to="/user/login">Login</Link> 
+        <Link className="btn btn-link" to="/user/login">Login</Link> |
+        <Link className="btn btn-link" to="/">View All Expenses</Link> |
+        <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
         <div>
           <h3 >Expenses List</h3>
           <table className="table table-striped" style={{ marginTop:20}}>

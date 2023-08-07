@@ -12,7 +12,7 @@ const App = () => {
      <Routes>
       {/* TODO: Feel, Bootstrap */}
       <Route path="/user/login" element={<LoginUser />}  exact/>
-      <Route path='/view_expenses' element={<ExpenseList />} exact/>
+      <Route path='/' element={<ExpenseList />} exact/>
       <Route path='/create_expense' element={<Create />} exact/>
       <Route path='/user/register' element={<RegisterUser />} exact/>
      </Routes>
