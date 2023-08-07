@@ -1,15 +1,17 @@
-const express = require('express');
+import express from "express";
+import db from "../db/conn.mjs";
+import {ObjectId} from "mongodb";
+
+// // Load User model
+// const User = require('../database/models/User');
+
 const userRouter = express.Router();
-
-// Load Expense model
-const User = require('../database/models/User');
-
-// Connection to the database
-const databaseObject = require("../database/db");
-const { ObjectId } = require('mongodb');
+// // Connection to the database
+// const databaseObject = require("../database/db");
+// const { ObjectId } = require('mongodb');
 
 // ID to Object
-const objectID = require("mongodb").ObjectId;
+// const objectID = require("mongodb").ObjectId;
 //TODO: encrypt and store password
 // @route POST /register
 // @description add a user
@@ -51,4 +53,4 @@ userRouter.route('/login').post(function (req, response){
   });
 });
 
-module.exports = userRouter;
+export default router;
