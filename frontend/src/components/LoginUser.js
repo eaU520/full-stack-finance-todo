@@ -28,7 +28,7 @@ export default function LoginUser(){
           .catch(err => {
             console.log("Error in Login!");
           });
-          navigate('/', {replace: true});
+          // navigate('/', {replace: true});
       };
     
         return (
@@ -36,7 +36,7 @@ export default function LoginUser(){
             <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
             <Link className="btn btn-link" to="/user/login">Login</Link> |
             <Link className="btn btn-link" to="/">View All Expenses</Link> |
-            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
+            <Link className="btn btn-link" to="/user/calendar">Calendar-In progress</Link> 
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">

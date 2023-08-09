@@ -53,4 +53,21 @@ userRouter.route('/login').post(function (req, response){
   });
 });
 
-export default router;
+// @route GET /calendar
+// @description add a user
+// @access Public
+userRouter.route('/calendar').get(function (req, response){
+  let connection = databaseObject.getDb();
+  let userLog = {
+    username : req.body.username,
+  };
+  connection.collection("calendar").findOne(userLog, function (err, res){
+    if(err){
+       throw err;
+    }
+    //TODO: check the username then check the password matches bcrypt
+    response.json(res);
+  });
+});
+
+export default userRouter;
