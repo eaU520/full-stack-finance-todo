@@ -4,6 +4,7 @@ import '../App.css';
 import axios from 'axios';
 import { withRouter } from "react-router";
 //TODO: Validation
+//TODO: Using facebook, Google, etc.
 class CreateUser extends Component{
     constructor() {
         super();

@@ -79,6 +79,7 @@ export default function LoginUser(){
                         className="btn btn-outline-warning btn-block mt-4"
                     />
                   </form>
+                  <Link className="btn btn-link" to="/user/register">Register</Link> 
               </div>
               </div>
             </div>
