@@ -1,37 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-import { withRouter } from "react-router";
 //TODO: Validation
 //TODO: Using facebook, Google, etc.
-class CreateUser extends Component{
-    constructor() {
-        super();
-        this.state = {
-          username: '',
-          password:'',
+export default function CreateUser (){
+    const [form, setForm] = useState({
+          username: "",
+          password:"",
           admin: false,
-          email: ''
-        };
-      }
+          email: ""
+    });
     
-      onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-      };
+    function updateForm(value){
+      return setForm((prev)=> {
+        return {...prev, ...value};
+      });
+    }
     
-      onSubmit = e => {
+      function onSubmit (e){
         e.preventDefault();
-    
-        const data = {
-            username: this.state.username,
-            password: this.state.password,
-            admin: this.state.admin,
-            email: this.state.email
-        };
+       
+        const data = { ...form};
     
         axios
-          .post('http://localhost:8082/api/expenses', data)
+          .post('http://localhost:5050/user/register', data)
           .then(res => {
             this.setState({
                 username: '',
@@ -39,7 +32,7 @@ class CreateUser extends Component{
                 admin: false,
                 email: ''
             })
-            this.props.history.push('/');//Adds to database FIXME: What is this error?
+            // this.props.history.push('/');//Adds to database FIXME: What is this error?
           })
           .catch(err => {
             console.log("Error in Registration!");
@@ -47,7 +40,6 @@ class CreateUser extends Component{
           // navigate('/', {replace: true});
       };
     
-      render() {
         return (
           <div className="Registration">
             <div className="container">
@@ -64,7 +56,7 @@ class CreateUser extends Component{
                       Create new user
                   </p>
     
-                  <form noValidate onSubmit={this.onSubmit}>
+                  <form noValidate onSubmit={onSubmit}>
                     <div className='form-group'>
                       <input
                         type='text'
@@ -72,7 +64,7 @@ class CreateUser extends Component{
                         name='username'
                         className='form-control'
                         value={this.state.name}
-                        onChange={this.onChange}
+                        onChange={(e) => updateForm({ username: e.target.value})}
                       />
                     </div>
                     <br />
@@ -84,7 +76,7 @@ class CreateUser extends Component{
                         name='password'
                         className='form-control'
                         value={this.state.password}
-                        onChange={this.onChange}
+                        onChange={(e) => updateForm({ password: e.target.value})}
                       />
                     </div>
     
@@ -94,7 +86,7 @@ class CreateUser extends Component{
                         placeholder='Password Again'
                         name='password_again'
                         className='form-control'
-                        onChange={this.onChange}//Don't need?
+                        onChange={(e) => updateForm({ password: e.target.value})}
                       />
                     </div>
 
@@ -105,7 +97,7 @@ class CreateUser extends Component{
                         name='email'
                         className='form-control'
                         value={this.state.email}
-                        onChange={this.onChange}
+                        onChange={(e) => updateForm({ email: e.target.value})}
                       />
                     </div>
     
@@ -120,7 +112,4 @@ class CreateUser extends Component{
             </div>
           </div>
         );
-      }
 }
-
-export default withRouter(CreateUser);

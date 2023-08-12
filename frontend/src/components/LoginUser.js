@@ -9,11 +9,12 @@ export default function LoginUser(){
       password: ""
     });
     
-        function updateLogin(value){
-          return setLogin((prev)=> {
-            return {...prev, ...value};
-          });
-        }
+    function updateLogin(value){
+      return setLogin((prev)=> {
+      return {...prev, ...value};
+    });
+  }
+    
       async function onSubmit(e) {
         e.preventDefault();
         axios
@@ -29,7 +30,7 @@ export default function LoginUser(){
             console.log("Error in Login!");
           });
           // navigate('/', {replace: true});
-      };
+      }
     
         return (
           <div className="Login">
@@ -85,4 +86,4 @@ export default function LoginUser(){
             </div>
           </div>
         );
-}
+    }
