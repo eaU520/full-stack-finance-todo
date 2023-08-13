@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import axios from 'axios';
 //TODO: Validation
 //TODO: Using facebook, Google, etc.
 export default function CreateUser (){
     const [form, setForm] = useState({
+          name: "",
           username: "",
           password:"",
           admin: false,
@@ -18,26 +18,27 @@ export default function CreateUser (){
       });
     }
     
-      function onSubmit (e){
+      async function onSubmit (e){
         e.preventDefault();
        
         const data = { ...form};
-    
-        axios
-          .post('http://localhost:5050/user/register', data)
-          .then(res => {
-            this.setState({
-                username: '',
-                password:'',
-                admin: false,
-                email: ''
-            })
-            // this.props.history.push('/');//Adds to database FIXME: What is this error?
+
+        await fetch('http://localhost:5050/user/register',{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+        .then(res => {
+            setForm({
+              name: '',
+              username: '',
+              password:'',
+              admin: false,
+              email: ''
           })
-          .catch(err => {
-            console.log("Error in Registration!");
-          });
-          // navigate('/', {replace: true});
+        })
       };
     
         return (
@@ -57,13 +58,25 @@ export default function CreateUser (){
                   </p>
     
                   <form noValidate onSubmit={onSubmit}>
+                  <div className='form-group'>
+                      <input
+                        type='text'
+                        placeholder='Name'
+                        name='name'
+                        className='form-control'
+                        value={form.name}
+                        onChange={(e) => updateForm({ name: e.target.value})}
+                      />
+                    </div>
+                    <br />
+
                     <div className='form-group'>
                       <input
                         type='text'
                         placeholder='Username'
                         name='username'
                         className='form-control'
-                        value={this.state.name}
+                        value={form.username}
                         onChange={(e) => updateForm({ username: e.target.value})}
                       />
                     </div>
@@ -75,7 +88,7 @@ export default function CreateUser (){
                         placeholder='Password'
                         name='password'
                         className='form-control'
-                        value={this.state.password}
+                        value={form.password}
                         onChange={(e) => updateForm({ password: e.target.value})}
                       />
                     </div>
@@ -86,7 +99,7 @@ export default function CreateUser (){
                         placeholder='Password Again'
                         name='password_again'
                         className='form-control'
-                        onChange={(e) => updateForm({ password: e.target.value})}
+                        // onChange={}
                       />
                     </div>
 
@@ -96,7 +109,7 @@ export default function CreateUser (){
                         placeholder='Email'
                         name='email'
                         className='form-control'
-                        value={this.state.email}
+                        value={form.email}
                         onChange={(e) => updateForm({ email: e.target.value})}
                       />
                     </div>

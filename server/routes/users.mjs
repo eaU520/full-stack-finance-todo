@@ -16,23 +16,19 @@ const userRouter = express.Router();
 // @route POST /register
 // @description add a user
 // @access Public
-userRouter.route('/register').post(function (req, response){
-    let connection = databaseObject.getDb();
-
-    let userAdd = {
-      username : req.body.username,
-      email: req.body.email, 
-      password: req.body.password,
-      name: req.body.name,
-      admin: false,
-    };
+userRouter.post("/register", async (req, response)=>{
+  let userAdd = {
+    username : req.body.username,
+    email: req.body.email, 
+    password: req.body.password,
+    name: req.body.name,
+    admin: false,
+  };
     //TODO: Check if user already exists
-    connection.collection("users").insertOne(userAdd, function (err, res){
-      if(err){
-         throw err;
-      }
-      response.json(res);
-    });
+  let collection = await db.collection("users");
+  console.log("Adding a new user");
+  let result = await collection.insertOne(userAdd);
+  response.send(result).status(204);
 });
 
 // @route POST /login

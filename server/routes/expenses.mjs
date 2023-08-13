@@ -27,7 +27,6 @@ router.get("/:id", async (req, res) => {
 
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
-  console.log("New expense");
   let newDocument = {
     name: req.body.name,
     urgency: req.body.urgency,
@@ -47,6 +46,7 @@ router.post("/", async (req, res) => {
 
 // This section will help you update an expense by id.
 router.patch("/:id", async (req, res) => {
+  console.log("Editting one expense");
   const query = { _id: new ObjectId(req.params.id) };
   const updates =  {
     $set: {
