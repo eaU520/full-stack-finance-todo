@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //TODO: Clean up node_modules
 export default function CreateExpense() {
   const [form, setForm] = useState({
-          name: "",
+          name: '',
           amount:0,
           type:'',
           description:'',

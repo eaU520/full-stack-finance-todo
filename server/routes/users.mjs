@@ -34,18 +34,17 @@ userRouter.post("/register", async (req, response)=>{
 // @route POST /login
 // @description add a user
 // @access Public
-userRouter.route('/login').post(function (req, response){
-  let connection = databaseObject.getDb();
+userRouter.post('/login', async (req, response) =>{
   let userLog = {
     username : req.body.username,
     password: req.body.password,
   };
-  connection.collection("users").findOne(userLog, function (err, res){
+  let collection = await db.collection("users").findOne(userLog, function (err, res){
     if(err){
        throw err;
     }
     //TODO: check the username then check the password matches bcrypt
-    response.json(res);
+    response.send(res);
   });
 });
 

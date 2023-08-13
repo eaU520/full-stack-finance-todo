@@ -5,8 +5,8 @@ import axios from 'axios';
 //TODO: Validation
 export default function LoginUser(){
     const [login, setLogin] = useState({
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     });
     
     function updateLogin(value){
@@ -51,10 +51,24 @@ export default function LoginUser(){
                   <p className="lead text-center">
                       Login
                   </p>
+                  {/* <div className="form-group">
+                      <label htmlFor="name">Name</label>
+                      <input
+                        type="text"
+                        placeholder="Name of the Expense"
+                        id="name"
+                        className="form-control"
+                        value={form.name}
+                        onChange={(e) => updateForm({ name: e.target.value})}
+                      />
+                    </div>
+                    <br /> */}
     {/* TODO: noValidate? */}
                   <form onSubmit={onSubmit}>
                     <div className='form-group'>
                       <input
+                      //  <label htmlFor="name">Name</label>TODO: label htmlFOr
+                      //TODO: Labels for accessibility
                         type='text'
                         placeholder='Username'
                         name='username'
