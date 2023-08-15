@@ -7,7 +7,7 @@ import users from "./routes/users.mjs"
 import MongoDBStore from "connect-mongodb-session"
 import mongo from 'mongoose';
 
-// require("dotenv").config();
+require("dotenv").config();
 
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -23,36 +23,35 @@ app.use("/user",users);
 // get driver connection
 // const dbconn = require("./database/db");
 
-// const { MongoDBStore } = require("connect-mongodb-session");
+mongo.Promise = global.Promise
+mongo.connect(process.env.mongoURI,{
+  useNewUrlParser: true,
+  useCreateIndex: true
+})
 
-// mongo.Promise = global.Promise
-// mongo.connect(process.env.mongoURI,{
-  // useNewUrlParser: true,
-// })
-
-// const mongoDBStore = new MongoDBStore({
-  // uri: process.env.mongoURI,
-  // collection: 'mySessions',
-// })
+const mongoDBStore = new MongoDBStore({
+  uri: process.env.mongoURI,
+  collection: 'mySessions',
+})
 
 // max session = sec*min*millisec*hours
 const MAX_SESSION_TIME = 60*60*1000*1; //1 hour
 
 //Creating session on server
-// app.use(
-//   session({
-//     secret:'a1b2c3d4e5co2k3hf',
-//     name: 'session-id',//key field for postman
-//     store: mongoDBStore,
-//     cookie: {
-//       maxAge: MAX_SESSION_TIME,
-//       sameSite: false,
-//       secure: false,
-//     },
-//     resave: true,
-//     saveUninitialized: false,
-//   })
-// )
+app.use(
+  session({
+    secret:'a1b2c3d4e5co2k3hf',//FIXME: Generate dynamically
+    name: 'session-id',//key field for postman
+    store: mongoDBStore,
+    cookie: {
+      maxAge: MAX_SESSION_TIME,
+      sameSite: false,
+      secure: false,
+    },
+    resave: true,
+    saveUninitialized: false,
+  })
+)
 
 app.listen(port, () => {
   // perform a database connection when server starts

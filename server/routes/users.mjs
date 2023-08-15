@@ -1,6 +1,7 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import {ObjectId} from "mongodb";
+import bcrypt from "bcryptjs";
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -24,6 +25,12 @@ userRouter.post("/register", async (req, response)=>{
     name: req.body.name,
     admin: false,
   };
+  bcrypt.getSalt(12, (err, salt) =>
+    bcrypt.hash(userAdd.password, salt,(err,hash) =>{
+      if(err) throw err;
+      userAdd.password = hash;
+    })
+  );
     //TODO: Check if user already exists
   let collection = await db.collection("users");
   console.log("Adding a new user");
@@ -46,6 +53,14 @@ userRouter.post('/login', async (req, response) =>{
     //FIXME: Encrypt password//hash in some way
     //TODO: check the username then check the password matches bcrypt
     response.send(res);
+  });
+});
+
+userRouter.delete('/logout', async (req, response) =>{
+  req.session.destroy((error)=>{
+    if(error) throw error;
+    response.clearCookie("session-id");
+    response.send("Logged out successfully");
   });
 });
 
