@@ -1,12 +1,15 @@
 import express from "express";
-// const session = require('express-session');
+import session from 'express-session';
 import cors  from "cors";
 import "./loadEnvironment.mjs";
 import expenses from "./routes/expenses.mjs"
 import users from "./routes/users.mjs"
+import MongoDBStore from "connect-mongodb-session"
+import mongo from 'mongoose';
+
 // require("dotenv").config();
 
-// const mongo = require('mongoose');
+
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
 const port = process.env.PORT || 5050;
@@ -32,8 +35,8 @@ app.use("/user",users);
   // collection: 'mySessions',
 // })
 
-//max session = sec*min*millisec*hours
-// const MAX_SESSION_TIME = 60*60*1000*1; //1 hour
+// max session = sec*min*millisec*hours
+const MAX_SESSION_TIME = 60*60*1000*1; //1 hour
 
 //Creating session on server
 // app.use(

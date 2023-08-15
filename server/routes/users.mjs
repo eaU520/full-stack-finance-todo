@@ -43,6 +43,7 @@ userRouter.post('/login', async (req, response) =>{
     if(err){
        throw err;
     }
+    //FIXME: Encrypt password//hash in some way
     //TODO: check the username then check the password matches bcrypt
     response.send(res);
   });
