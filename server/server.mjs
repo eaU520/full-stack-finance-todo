@@ -43,7 +43,7 @@ const mongoDBStore = new MongoDBStore({
 //Creating session on server
 app.use(
   session({
-    secret:'a1b2c3d4e5co2k3hf',//FIXME: Generate dynamically
+    secret: configDotenv.secretKey,//FIXME: Generate dynamically
     name: 'session-id',//key field for postman
     store: mongoDBStore,
     cookie: {
