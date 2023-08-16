@@ -1,5 +1,7 @@
 import express from "express";
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import cookie from 'cookie';
 import cors  from "cors";
 import "./loadEnvironment.mjs";
 import expenses from "./routes/expenses.mjs"
@@ -7,16 +9,17 @@ import users from "./routes/users.mjs"
 import MongoDBStore from "connect-mongodb-session"
 import mongo from 'mongoose';
 
-require("dotenv").config();
+import { configDotenv } from "dotenv";
 
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
-const port = process.env.PORT || 5050;
+const port = configDotenv.PORT || 5050;
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/expense",expenses);
 app.use("/user",users);
@@ -24,18 +27,18 @@ app.use("/user",users);
 // const dbconn = require("./database/db");
 
 mongo.Promise = global.Promise
-mongo.connect(process.env.mongoURI,{
+mongo.connect(configDotenv.mongoURI,{
   useNewUrlParser: true,
   useCreateIndex: true
 })
 
 const mongoDBStore = new MongoDBStore({
-  uri: process.env.mongoURI,
+  uri: configDotenv.mongoURI,
   collection: 'mySessions',
 })
 
 // max session = sec*min*millisec*hours
-const MAX_SESSION_TIME = 60*60*1000*1; //1 hour
+
 
 //Creating session on server
 app.use(
@@ -44,7 +47,7 @@ app.use(
     name: 'session-id',//key field for postman
     store: mongoDBStore,
     cookie: {
-      maxAge: MAX_SESSION_TIME,
+      maxAge: configDotenv.MAX_SESSION_TIME,
       sameSite: false,
       secure: false,
     },

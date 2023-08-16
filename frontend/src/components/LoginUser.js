@@ -4,9 +4,10 @@ import '../App.css';
 import axios from 'axios';
 //TODO: Validation
 export default function LoginUser(){
+    var session;
     const [login, setLogin] = useState({
-      username: '',
-      password: ''
+      username: session !== undefined ? session.username: '',
+      password: session !== undefined ? session.password: ''
     });
     
     function updateLogin(value){
@@ -24,10 +25,11 @@ export default function LoginUser(){
                 username: '',
                 password:''
             })
+            session = res;
             // this.props.history.push('/');//TODO: History, breadcrumbs?
           })
           .catch(err => {
-            console.log("Error in Login!");
+            console.log("Error in Login!", err);
           });
           // navigate('/', {replace: true});
       }
