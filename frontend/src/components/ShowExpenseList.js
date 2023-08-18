@@ -1,6 +1,21 @@
 import React, {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+
+//TODO: Session showing only that User's Expenses
+/*
+// Save data to sessionStorage
+sessionStorage.setItem("key", "value");
+
+// Get saved data from sessionStorage
+let data = sessionStorage.getItem("key");
+
+// Remove saved data from sessionStorage
+sessionStorage.removeItem("key");
+
+// Remove all saved data from sessionStorage
+sessionStorage.clear();
+*/
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>

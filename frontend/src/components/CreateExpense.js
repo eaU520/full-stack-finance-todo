@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import '../App.css';
 import { Link } from 'react-router-dom';
 //TODO: Clean up node_modules
+//TODO: Add username to the expense
+//TODO: Don't allow unless logged in
 export default function CreateExpense() {
   const [form, setForm] = useState({
           name: '',
