@@ -26,11 +26,13 @@ export default function LoginUser(){
                 password:''
             })
             session = res;
+            JSON.parse((localStorage.setItem("currentSession",session)));
             // this.props.history.push('/');//TODO: History, breadcrumbs?
           })
           .catch(err => {
             console.log("Error in Login!", err);
           });
+
           // navigate('/', {replace: true});
       }
     
