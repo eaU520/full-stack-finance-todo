@@ -14,7 +14,7 @@ import { configDotenv } from "dotenv";
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 //TODO:Remove commented lines
-const port = configDotenv.PORT || 5050;
+const port = process.env.PORT || 5050;
 const app = express();
 
 app.use(cors());
@@ -27,13 +27,13 @@ app.use("/user",users);
 // const dbconn = require("./database/db");
 
 mongo.Promise = global.Promise
-mongo.connect(configDotenv.mongoURI,{
+mongo.connect(process.env.mongoURI,{
   useNewUrlParser: true,
   useCreateIndex: true
 })
 
 const mongoDBStore = new MongoDBStore({
-  uri: configDotenv.mongoURI,
+  uri: process.env.mongoURI,
   collection: 'mySessions',
 })
 
@@ -43,11 +43,11 @@ const mongoDBStore = new MongoDBStore({
 //Creating session on server
 app.use(
   session({
-    secret: configDotenv.secretKey,//FIXME: Generate dynamically
+    secret: process.env.secretKey,//FIXME: Generate dynamically
     name: 'session-id',//key field for postman
     store: mongoDBStore,
     cookie: {
-      maxAge: configDotenv.MAX_SESSION_TIME,
+      maxAge: process.env.MAX_SESSION_TIME,
       sameSite: false,
       secure: false,
     },
