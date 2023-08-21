@@ -6,13 +6,15 @@ import cors  from "cors";
 import "./loadEnvironment.mjs";
 import expenses from "./routes/expenses.mjs"
 import users from "./routes/users.mjs"
-import MongoDBStore from "connect-mongodb-session"
+import {default as connection} from "connect-mongodb-session";
+
 import mongo from 'mongoose';
 
 import { configDotenv } from "dotenv";
+import ConnectMongoDBSession from "connect-mongodb-session";
 
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
+const MongoDBStore = connection(session);
 //TODO:Remove commented lines
 const port = process.env.PORT || 5050;
 const app = express();
