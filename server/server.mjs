@@ -30,8 +30,7 @@ app.use("/user",users);
 
 mongo.Promise = global.Promise
 mongo.connect(process.env.mongoURI,{
-  useNewUrlParser: true,
-  useCreateIndex: true
+  useNewUrlParser: true
 })
 
 const mongoDBStore = new MongoDBStore({
