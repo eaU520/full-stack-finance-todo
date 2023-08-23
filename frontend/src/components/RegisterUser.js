@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Navigation from './Navigation';
 import '../App.css';
 //TODO: Validation
 //TODO: Using facebook, Google, etc.
@@ -43,15 +43,11 @@ export default function CreateUser (){
     
         return (
           <div className="Registration">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 m-auto">
-                  <br />
+            <Navigation/>
+                  {/* <br />
                   <Link to="/" className="btn btn-outline-warning float-left">
                       Show Expense List
-                  </Link>
-                </div>
-                <div className="col-md-8 m-auto">
+                  </Link> */}
                   <h1 className="display-4 text-center">Add User</h1>
                   <p className="lead text-center">
                       Create new user
@@ -121,8 +117,6 @@ export default function CreateUser (){
                     />
                   </form>
               </div>
-              </div>
-            </div>
-          </div>
+
         );
 }

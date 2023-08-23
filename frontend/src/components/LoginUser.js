@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import Navigation from './Navigation';
 //TODO: Validation
 export default function LoginUser(){
     var session;
@@ -38,19 +38,7 @@ export default function LoginUser(){
     
         return (
           <div className="Login">
-            <Link className="btn btn-link" to="/expense/create_expense">Create an Expense</Link> |
-            <Link className="btn btn-link" to="/user/login">Login</Link> |
-            <Link className="btn btn-link" to="/">View All Expenses</Link> |
-            <Link className="btn btn-link" to="/user/calendar">Calendar-In progress</Link> 
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 m-auto">
-                  <br />
-                  <Link to="/" className="btn btn-outline-warning float-left">
-                      Homepage
-                  </Link>
-                </div>
-                <div className="col-md-8 m-auto">
+            <Navigation/> 
                   <h1 className="display-4 text-center">Account Access</h1>
                   <p className="lead text-center">
                       Login
@@ -98,10 +86,7 @@ export default function LoginUser(){
                         className="btn btn-outline-warning btn-block mt-4"
                     />
                   </form>
-                  <Link className="btn btn-link" to="/user/register">Register</Link> 
               </div>
-              </div>
-            </div>
-          </div>
+
         );
     }

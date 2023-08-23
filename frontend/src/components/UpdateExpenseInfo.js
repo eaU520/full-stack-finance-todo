@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import Navigation from './Navigation';
 
 const UpdateExpenseInfo = () => {
   const [form, setForm] = useState({
@@ -72,27 +72,11 @@ const UpdateExpenseInfo = () => {
   
       return (
         <div className="UpdateExpenseInfo">
-          <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
-            <Link className="btn btn-link" to="/user/login">Login</Link> |
-            <Link className="btn btn-link" to="/">View All Expenses</Link> |
-            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 m-auto">
-                <br />
-                <Link to="/" className="btn btn-outline-warning float-left">
-                    Show Expense List
-                </Link>
-              </div>
-              <div className="col-md-8 m-auto">
+          <Navigation/>
                 <h1 className="display-4 text-center">Edit Expense</h1>
                 <p className="lead text-center">
                     Update Expense's Info
                 </p>
-              </div>
-            </div>
-  
-            <div className="col-md-8 m-auto">
             <form noValidate onSubmit={this.onSubmit}>
               <div className='form-group'>
                 <label htmlFor="name">Name</label>
@@ -179,8 +163,5 @@ const UpdateExpenseInfo = () => {
               <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Book</button>
               </form>
             </div>
-  
-          </div>
-        </div>
       );
     }

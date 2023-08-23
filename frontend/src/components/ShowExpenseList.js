@@ -1,6 +1,7 @@
 import React, {  useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
+import Navigation from './Navigation';
+import { Link } from 'react-router-dom';
 
 //TODO: Session showing only that User's Expenses
 /*
@@ -72,13 +73,9 @@ export default function ExpenseList(){
     });
   }
       return (
-        <>
-        <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
-        <Link className="btn btn-link" to="/user/login">Login</Link> |
-        <Link className="btn btn-link" to="/user/logout">Logout</Link> |
-        <Link className="btn btn-link" to="/">View All Expenses</Link> |
-        <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
+        
         <div>
+          <Navigation/>
           <h3 >Expenses List</h3>
           <table className="table table-striped" style={{ marginTop:20}}>
             <thead>
@@ -91,6 +88,5 @@ export default function ExpenseList(){
             <tbody>{expenseList()}</tbody>
             </table>
             </div>
-            </>
       );
     }

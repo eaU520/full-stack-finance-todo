@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
-import { Link } from 'react-router-dom';
+import Navigation from './Navigation';
 //TODO: Clean up node_modules
 //TODO: Add username to the expense
 //TODO: Don't allow unless logged in
@@ -55,11 +55,9 @@ export default function CreateExpense() {
       }
     
         return (
+
           <div className="CreateExpense">
-            <Link className="btn btn-link" to="expense/create_expense">Create an Expense</Link> |
-            <Link className="btn btn-link" to="/user/login">Login</Link> |
-            <Link className="btn btn-link" to="/">View All Expenses</Link> |
-            <Link className="btn btn-link" to="/user/resgister">Calendar-In progress</Link> 
+            <Navigation/>
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
