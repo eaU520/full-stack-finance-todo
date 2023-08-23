@@ -18,7 +18,7 @@ const App = () => {
       {/* TODO: Feel, Bootstrap */}
       <Route path="/user/login" element={<LoginUser />}/>
       <Route path='/' element={<ExpenseList />} onEnter={requireAuth}/>
-      <Route path='/create_expense' element={<Create />} onEnter={requireAuth}/>
+      <Route path='/expense/create_expense' element={<Create />} onEnter={requireAuth}/>
       <Route path='/user/register' element={<RegisterUser />} />
      </Routes>
    </div>
