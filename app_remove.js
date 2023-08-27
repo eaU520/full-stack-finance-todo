@@ -18,7 +18,7 @@ const expensesAPI = import("./server/routes/expenses.mjs");
 // // app.use(express.json({extended: false}));
 app.use(express.json());
 
-app.get('/', (req, res) => res.send(''));//TODO: Second call on start up?
+app.get('/', (req, res) => res.send(''));
 
 app.use("/expense", expensesAPI);//all /expense/details
 //TODO: ERROR here TypeError: Router.use() requires a middleware function but got a Promise
