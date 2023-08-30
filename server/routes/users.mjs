@@ -89,4 +89,8 @@ userRouter.route('/calendar').get(function (req, response){
   });
 });
 
+userRouter.post('/user/forgot', async (req, response) =>{
+  response.send("Forgot password, put in username to get temporary password");
+});
+
 export default userRouter;
