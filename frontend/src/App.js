@@ -4,6 +4,7 @@ import ExpenseList from "./components/ShowExpenseList.js";
 import LoginUser from "./components/LoginUser";
 import RegisterUser from "./components/RegisterUser";
 import Create from "./components/CreateExpense.js";
+import ForgotPassword from "./components/ForgotPassword.js";
 //TODO: Dark, contrast, light themes
 const requireAuth = (nextState, replace) =>{
   if(!this.authenticated()){
@@ -20,6 +21,7 @@ const App = () => {
       <Route path='/' element={<ExpenseList />} onEnter={requireAuth}/>
       <Route path='/expense/create_expense' element={<Create />} onEnter={requireAuth}/>
       <Route path='/user/register' element={<RegisterUser />} />
+      <Route path='/user/forgot' element={<ForgotPassword />} />
      </Routes>
    </div>
  );
