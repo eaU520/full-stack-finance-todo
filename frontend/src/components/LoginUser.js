@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import Navigation from './Navigation';
+import {Link} from 'react-router-dom';
+
 //TODO: Validation
 export default function LoginUser(){
     var session;
@@ -81,6 +83,8 @@ export default function LoginUser(){
                         onChange={(e) => updateLogin({password: e.target.password})}
                       />
                     </div>
+                    <Link to="/user/register">Register</Link><br/>
+                    <Link to="/user/forgot">Forgot Password</Link>
                     <input
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
