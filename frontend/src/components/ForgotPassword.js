@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import Navigation from './Navigation';
-import {Link} from 'react-router-dom';
 
 //TODO: Validation
 export default function ForgotPassword(){
     const [user, setUser] = useState({
-      username: session !== undefined ? session.username: ''
+      username:  ''
     });
     
     function updateUser(value){
@@ -50,7 +49,7 @@ export default function ForgotPassword(){
                         placeholder='Username'
                         name='username'
                         className='form-control'
-                        value={login.username}
+                        value={user.username}
                         onChange={(e) => updateUser({ username: e.target.username})}
                       />
                     </div>
