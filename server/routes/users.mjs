@@ -7,6 +7,7 @@ import {body} from 'express-validator';
 // const User = require('../database/models/User');
 
 const userRouter = express.Router();
+const saltSize = 12;
 // // Connection to the database
 // const databaseObject = require("../database/db");
 // const { ObjectId } = require('mongodb');
@@ -34,13 +35,14 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-
-  bcrypt.getSalt(12, (err, salt) =>
+  console.log(userAdd);
+  bcrypt.getSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
       userAdd.password = hash;
+      console.log("Hashed user password");
     })
-  );
+  });
     //TODO: Check if user already exists
   const collection = await db.collection("users");
   console.log("Attempting to add a new user");

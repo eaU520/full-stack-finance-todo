@@ -11,8 +11,5 @@ try{
 }catch(e){
   console.error("Could not connect: ",e);
 }
-console.log(`Connection: ${conn}`);
 let db = conn.db("test");
 export default db;
-
-//_db = db.db("test");//TODO: database or collection?
