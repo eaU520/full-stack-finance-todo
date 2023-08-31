@@ -1,7 +1,6 @@
 import express from "express";
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import cookie from 'cookie';
 import cors  from "cors";
 import "./loadEnvironment.mjs";
 import expenses from "./routes/expenses.mjs"
@@ -11,8 +10,6 @@ import {default as connection} from "connect-mongodb-session";
 import mongo from 'mongoose';
 
 import { configDotenv } from "dotenv";
-import ConnectMongoDBSession from "connect-mongodb-session";
-
 
 const MongoDBStore = connection(session);
 //TODO:Remove commented lines
