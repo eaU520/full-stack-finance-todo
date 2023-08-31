@@ -1,8 +1,7 @@
 import express from "express";
 import db from "../db/conn.mjs";
-import {ObjectId} from "mongodb";
 import bcrypt from "bcryptjs";
-import {body, validate} from 'express-validator';
+import {body} from 'express-validator';
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -19,19 +18,22 @@ const userRouter = express.Router();
 // @description add a user
 // @access Public
 userRouter.post("/register", 
-body('email').isEmail().normalizeEmail(),
-body('password').isLength({
-  min: 8,
-  max: 16
-}),async (req, response)=>{
-  let userAdd = {
-    username : req.body.username,
-    email: req.body.email, 
-    password: req.body.password,
-    name: req.body.name,
-    admin: false,
-  };
-  
+  body('email').isEmail().normalizeEmail(),
+  body('password').isStrongPassword({
+    minLength: 8,
+    maxLength: 16,
+    minUppercase: 1,
+    minNumbers: 1
+    //TODO: Special Characters?
+  }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter and at least one number"),
+  body('password'),async (req, response)=>{
+    let userAdd = {
+      username : req.body.username,
+      email: req.body.email, 
+      password: req.body.password,
+      name: req.body.name,
+      admin: false,
+    };
 
   bcrypt.getSalt(12, (err, salt) =>
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
@@ -40,10 +42,16 @@ body('password').isLength({
     })
   );
     //TODO: Check if user already exists
-  let collection = await db.collection("users");
-  console.log("Adding a new user");
-  let result = await collection.insertOne(userAdd);
-  response.send(result).status(204);
+  const collection = await db.collection("users");
+  console.log("Attempting to add a new user");
+  const exists = await collection.find({username: username, email: email});
+  if (exists.isLength() <= 0){
+    const result = await collection.insertOne(userAdd);
+    response.send(result).status(204);
+  }
+  else{
+    response.send("Username and email already in use");
+  }
 });
 
 // @route POST /login
