@@ -4,7 +4,6 @@ import axios from 'axios';
 import Navigation from './Navigation';
 import {Link} from 'react-router-dom';
 
-//TODO: Validation
 export default function LoginUser(){
     var session;
     const [login, setLogin] = useState({
@@ -45,19 +44,7 @@ export default function LoginUser(){
                   <p className="lead text-center">
                       Login
                   </p>
-                  {/* <div className="form-group">
-                      <label htmlFor="name">Name</label>
-                      <input
-                        type="text"
-                        placeholder="Name of the Expense"
-                        id="name"
-                        className="form-control"
-                        value={form.name}
-                        onChange={(e) => updateForm({ name: e.target.value})}
-                      />
-                    </div>
-                    <br /> */}
-    {/* TODO: noValidate? */}
+
                   <form onSubmit={onSubmit}>
                     <div className='form-group'>
                       <input
