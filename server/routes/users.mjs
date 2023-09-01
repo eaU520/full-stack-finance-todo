@@ -35,19 +35,18 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-  console.log(userAdd);
-  bcrypt.getSalt(saltSize, function (err, salt){
+  bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
       userAdd.password = hash;
-      console.log("Hashed user password");
     })
   });
     //TODO: Check if user already exists
   const collection = await db.collection("users");
   console.log("Attempting to add a new user");
-  const exists = await collection.find({username: username, email: email});
-  if (exists.isLength() <= 0){
+  const exists = await collection.find({username: userAdd.username, email: userAdd.email});
+  console.log("Does this user exist? ", exists);
+  if (exists.length <= 0){
     const result = await collection.insertOne(userAdd);
     response.send(result).status(204);
   }
