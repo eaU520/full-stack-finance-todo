@@ -63,12 +63,16 @@ userRouter.post('/login', async (req, response) =>{
     username : req.body.username,
     password: req.body.password,
   };
+  bcrypt.genSalt(saltSize, function (err, salt){
+    bcrypt.hash(userLog.password, salt,(err,hash) =>{
+      if(err) throw err;
+      userLog.password = hash;
+    })
+  });
   let collection = await db.collection("users").findOne(userLog, function (err, res){
     if(err){
        throw err;
     }
-    //FIXME: Encrypt password//hash in some way
-    //TODO: check the username then check the password matches bcrypt
     response.send(res);
   });
 });
