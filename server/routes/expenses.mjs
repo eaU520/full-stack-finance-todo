@@ -10,7 +10,7 @@ const router = express.Router();
 // This section will help you get a list of all the expenses.
 router.get("/", async (req, res) => {
   let collection = await db.collection("expenses");
-  let results = await collection.find({}).toArray();
+  let results = await collection.find({user:req.username}).toArray();
   if (!results) res.send("No expenses found").status(404);
   else res.send(results).status(200);
 });

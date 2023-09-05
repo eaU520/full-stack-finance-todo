@@ -13,7 +13,8 @@ export default function CreateExpense() {
           description:'',
           dueDate:'',
           urgency:'',
-          funded:false
+          funded:false,
+          username: sessionStorage.getItem("username")
       });
 
       const navigate = useNavigate();
