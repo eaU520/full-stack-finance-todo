@@ -34,8 +34,8 @@ router.post("/", async (req, res) => {
     description: req.body.description,
     dueDate: req.body.dueDate,
     type: req.body.type,
-    funded: req.body.funded
-    // position: req.body.position,
+    funded: req.body.funded,
+    username: req.body.username
     // level: req.body.level,
   };
   let collection = await db.collection("expenses");
