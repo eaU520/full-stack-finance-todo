@@ -109,9 +109,10 @@ export default function CreateUser (){
                     <div className='form-group'>
                       <input
                         type='password'
-                        placeholder='Password Again'
+                        placeholder='Type your password Again'
                         name='passwordAgain'
                         className='form-control'
+                        value={form.passwordAgain}
                         onChange={(e) => updateForm({ passwordAgain: e.target.value})}
                       />
                     </div>
