@@ -44,14 +44,14 @@ userRouter.post("/register",
     //TODO: Check if user already exists
   const collection = await db.collection("users");
   console.log("Attempting to add a new user");
-  const exists = await collection.find({username: userAdd.username, email: userAdd.email});
+  const exists = collection.find({username: userAdd.username, email: userAdd.email});//FIXME: ASYNC await
   console.log("Does this user exist? ", exists);
   if (exists.length <= 0){
     const result = await collection.insertOne(userAdd);
     response.send(result).status(204);
   }
   else{
-    response.send("Username and email already in use");
+    response.send("Username or email already in use");
   }
 });
 
