@@ -48,9 +48,11 @@ userRouter.post("/register",
   console.log("Does this user exist? ", exists.length);
   if (exists.length <= 0){
     const result = await collection.insertOne(userAdd);
+    console.log("Added person", result, userAdd);
     response.send(result).status(204);
   }
   else{
+    console.log(userAdd);
     response.send("Username or email already in use");
   }
 });
