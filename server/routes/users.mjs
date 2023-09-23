@@ -45,8 +45,8 @@ userRouter.post("/register",
   const collection = await db.collection("users");
   console.log("Attempting to add a new user");
   const exists = collection.find({username: userAdd.username, email: userAdd.email});//FIXME: ASYNC await
-  console.log("Does this user exist? ", exists.length);
-  if (exists.length <= 0){
+  console.log("Does this user exist? ", exists._eventsCount);
+  if (exists._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
     console.log("Added person", result, userAdd);
     response.send(result).status(204);
