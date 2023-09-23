@@ -43,15 +43,15 @@ userRouter.post("/register",
   });
     //TODO: Check if user already exists
   const collection = await db.collection("users");
-  console.log("Attempting to add a new user", userAdd.password);//TODO: CHeck hash
+  // console.log("Attempting to add a new user", userAdd.password);//TODO: CHeck hash
   const exists = collection.find({username: userAdd.username, email: userAdd.email});//FIXME: ASYNC await
   if (exists._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
-    console.log("Added person", result, userAdd);
+    // console.log("Added person", result, userAdd);
     response.send(result).status(204);
   }
   else{
-    console.log(userAdd);
+    // console.log(userAdd);
     response.send("Username or email already in use");
   }
 });
