@@ -19,8 +19,8 @@ const saltSize = 12;
 // @description add a user
 // @access Public
 userRouter.post("/register", 
-  body('email').isEmail().normalizeEmail(),
-  body('password').isStrongPassword({
+  body('email').isEmail().normalizeEmail(),//TODO: What does normalize do?
+  body('password').isStrongPassword({//FIXME: Check for valid password
     minLength: 8,
     maxLength: 16,
     minUppercase: 1,
@@ -43,9 +43,8 @@ userRouter.post("/register",
   });
     //TODO: Check if user already exists
   const collection = await db.collection("users");
-  console.log("Attempting to add a new user");
+  console.log("Attempting to add a new user", userAdd.password);//TODO: CHeck hash
   const exists = collection.find({username: userAdd.username, email: userAdd.email});//FIXME: ASYNC await
-  console.log("Does this user exist? ", exists._eventsCount);
   if (exists._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
     console.log("Added person", result, userAdd);

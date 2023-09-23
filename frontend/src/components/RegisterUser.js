@@ -15,6 +15,7 @@ export default function CreateUser (){
     
     function updateForm(value){
       return setForm((prev)=> {
+        console.log(value.password, value.passwordAgain);
         if(value.passwordAgain !== value.password){
           <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
