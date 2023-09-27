@@ -45,8 +45,8 @@ userRouter.post("/register",
   });
   const collection = await db.collection("users");
   console.log("Attempting to add a new user:, hashed?", userAdd.password);//TODO: Check hash
-  const existsEmail = collection.find({email: userAdd.email});//FIXME: ASYNC await
-  const existsUsername = collection.find({username: userAdd.username});
+  const existsEmail = await collection.find({email: userAdd.email});//FIXME: ASYNC await
+  const existsUsername = await collection.find({username: userAdd.username});
 
   if (existsEmail._eventsCount === 0  && existsUsername._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
