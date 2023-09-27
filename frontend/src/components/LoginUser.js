@@ -55,6 +55,7 @@ export default function LoginUser(){
                         name='username'
                         className='form-control'
                         value={login.username}
+                        autoComplete="username"
                         onChange={(e) => updateLogin({ username: e.target.username})}
                       />
                     </div>
