@@ -79,6 +79,7 @@ export default function CreateUser (){
                         name='name'
                         className='form-control'
                         value={form.name}
+                        autoComplete="name"
                         onChange={(e) => updateForm({ name: e.target.value})}
                       />
                     </div>
@@ -91,6 +92,7 @@ export default function CreateUser (){
                         name='username'
                         className='form-control'
                         value={form.username}
+                        autoComplete="off"
                         onChange={(e) => updateForm({ username: e.target.value})}
                       />
                     </div>
@@ -125,6 +127,7 @@ export default function CreateUser (){
                         name='email'
                         className='form-control'
                         value={form.email}
+                        autoComplete="email"
                         onChange={(e) => updateForm({ email: e.target.value})}
                       />
                     </div>
