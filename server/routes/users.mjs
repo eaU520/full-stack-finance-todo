@@ -40,21 +40,22 @@ userRouter.post("/register",
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
       userAdd.password = hash;
-      console.log("Hah: ", hash)
+      console.log("Hash: ", hash)
     })
   });
   const collection = await db.collection("users");
-  console.log("Attempting to add a new user:, hashed?", userAdd.password);//TODO: Check hash
-  const existsEmail = await collection.find({email: userAdd.email});//FIXME: ASYNC await
+  const existsEmail = await collection.find({email: {$in: userAdd.email}});
+  console.log(existsEmail, "<-Parse");
   const existsUsername = await collection.find({username: userAdd.username});
-
+  console.log("Email: ",existsEmail._eventsCount === 0);
+  console.log("Username: ", existsUsername._eventsCount === 0);
   if (existsEmail._eventsCount === 0  && existsUsername._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
     // console.log("Added person", result, userAdd);
     response.send(result).status(204);
   }
   else{
-    // console.log(userAdd);
+    console.log("Not added: ",userAdd);
     response.send("Username and/or email already in use");
   }
 });
