@@ -44,18 +44,16 @@ userRouter.post("/register",
     })
   });
   const collection = await db.collection("users");
-  const existsEmail = await collection.find({email: {$in: userAdd.email}});
-  console.log(existsEmail, "<-Parse");
-  const existsUsername = await collection.find({username: userAdd.username});
-  console.log("Email: ",existsEmail._eventsCount === 0);
-  console.log("Username: ", existsUsername._eventsCount === 0);
+  const existsEmail = await collection.find({email:  userAdd.email}).toArray();
+  const existsUsername = await collection.find({username: userAdd.username}).toArray();
+  console.log("Email: ",existsEmail.length === 0);
+  console.log("Username: ", existsUsername.length === 0);
   if (existsEmail._eventsCount === 0  && existsUsername._eventsCount === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
     // console.log("Added person", result, userAdd);
     response.send(result).status(204);
   }
   else{
-    console.log("Not added: ",userAdd);
     response.send("Username and/or email already in use");
   }
 });
