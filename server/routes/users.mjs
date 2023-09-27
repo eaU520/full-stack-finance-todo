@@ -40,11 +40,11 @@ userRouter.post("/register",
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
       userAdd.password = hash;
+      console.log("Hah: ", hash)
     })
   });
-    //TODO: Check if user already exists
   const collection = await db.collection("users");
-  // console.log("Attempting to add a new user", userAdd.password);//TODO: Check hash
+  console.log("Attempting to add a new user:, hashed?", userAdd.password);//TODO: Check hash
   const existsEmail = collection.find({email: userAdd.email});//FIXME: ASYNC await
   const existsUsername = collection.find({username: userAdd.username});
 
