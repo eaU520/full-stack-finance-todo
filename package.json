@@ -47,6 +47,7 @@
     "validation": "^0.0.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^2.0.19"
   }
 }
