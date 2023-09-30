@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "app": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,10 @@
   },
   "homepage": "https://github.com/eaU520/full-stack-finance-todo#readme",
   "dependencies": {
+    "@babel/cli": "7.23.0",
+    "@babel/core": "7.23.0",
+    "@babel/preset-env": "7.22.20",
+    "@babel/preset-react": "7.22.15",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -47,6 +51,8 @@
     "validation": "^0.0.1"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.7",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "nodemon": "^2.0.19"
   }

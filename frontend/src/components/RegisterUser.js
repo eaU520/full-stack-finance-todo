@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navigation from './Navigation';
 
 import '../App.css';
@@ -143,3 +143,4 @@ export default function CreateUser (){
 
         );
 }
+module.exports = CreateUser;

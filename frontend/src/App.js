@@ -1,4 +1,3 @@
-import React from "react";
 import {Route, Routes} from "react-router-dom";
 import ExpenseList from "./components/ShowExpenseList.js";
 import LoginUser from "./components/LoginUser";
@@ -6,7 +5,7 @@ import RegisterUser from "./components/RegisterUser";
 import Create from "./components/CreateExpense.js";
 import ForgotPassword from "./components/ForgotPassword.js";
 //TODO: Dark, contrast, light themes
-const requireAuth = (nextState, replace) =>{
+const requireAuth = (_, replace) =>{
   if(!this.authenticated()){
     replace("/user/login");
   }
