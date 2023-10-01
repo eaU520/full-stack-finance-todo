@@ -36,7 +36,7 @@ const Expense = (props) => (
   </tr>
 );
 const ExpenseList = () => {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(0);
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expense/`,{
@@ -63,7 +63,7 @@ const ExpenseList = () => {
     setExpenses(newExpenses);
   }
   function expenseList(){
-    return expenses.map((expense) => {
+    return Array.from(expenses).map((expense) => {
       return (
         <Expense
           expense={expense}

@@ -23,7 +23,7 @@ module.exports = {
     resolve: {
       alias: {
         config$: './configs/app-config.js',
-        react: './vendor/react-master',
+        react: path.resolve('node_modules/react'),
       },
       extensions: ['.js', '.jsx'],
       modules: [
