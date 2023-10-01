@@ -1,3 +1,4 @@
+import React from "react";
 import {  useEffect, useState } from 'react';
 import '../App.css';
 import Navigation from './Navigation';
@@ -34,7 +35,7 @@ const Expense = (props) => (
     </td>
   </tr>
 );
-export default function ExpenseList(){
+const ExpenseList = () => {
   const [expenses, setExpenses] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
@@ -90,3 +91,4 @@ export default function ExpenseList(){
             </div>
       );
     }
+  export default ExpenseList;
