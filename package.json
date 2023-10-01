@@ -27,6 +27,7 @@
     "@babel/core": "7.23.0",
     "@babel/preset-env": "7.22.20",
     "@babel/preset-react": "7.22.15",
+    "@babel/preset-transform-react-jsx": "^7.22.15",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -51,6 +52,7 @@
     "validation": "^0.0.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@shelf/jest-mongodb": "^4.1.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
