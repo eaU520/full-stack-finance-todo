@@ -2,9 +2,9 @@
     "name": "full-stack-finance-todo",
     "version": "0.1.0",
     "private": true,
-    "dependencies": {
-        "react": "^16.5.2",
-        "react-dom": "^16.5.2"
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "devDependencies": {
         "react-scripts": "^1.0.7",

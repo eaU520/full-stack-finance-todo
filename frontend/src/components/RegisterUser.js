@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 
 import '../App.css';
 //TODO: Using facebook, Google, etc.
-export default function CreateUser (props){
+const CreateUser = () => {
     const [form, setForm] = useState({
           name: "",
           username: "",
@@ -144,3 +144,4 @@ export default function CreateUser (props){
 
         );
 }
+export default CreateUser; 

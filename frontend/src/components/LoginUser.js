@@ -5,11 +5,12 @@ import axios from 'axios';
 import Navigation from './Navigation';
 import {Link} from 'react-router-dom';
 
-export default function LoginUser(){
-    var session;
+const LoginUser = (props) => {
+    // var session;
     const [login, setLogin] = useState({
-      username: session !== undefined ? session.username: '',
-      password: session !== undefined ? session.password: ''
+      // username: props.session !== undefined ? props.session.username: ''
+      //TODO: sessions
+      // password: session !== undefined ? session.password: '' Don't use this
     });
     
     function updateLogin(value){
@@ -27,8 +28,8 @@ export default function LoginUser(){
                 username: '',
                 password:''
             })
-            session = res;
-            JSON.parse((localStorage.setItem("currentSession",session)));
+            // props.session = res;
+            // JSON.parse((localStorage.setItem("currentSession",props.session)));
             // this.props.history.push('/');//TODO: History, breadcrumbs?
           })
           .catch(err => {
@@ -83,3 +84,4 @@ export default function LoginUser(){
 
         );
     }
+export default LoginUser;
