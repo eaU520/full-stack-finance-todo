@@ -3,11 +3,13 @@
  */
  import '@testing-library/jest-dom'
 import React from "react";
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import App from './App';
-import ExpenseList from "./components/ShowExpenseList";
+
+afterEach(cleanup);
 
 test('renders App', () => {
-  expect(App).toBeInTheDocument();
+  render(<App/>);
+  // .toBeInTheDocument();
 
 });

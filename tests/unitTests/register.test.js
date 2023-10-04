@@ -1,8 +1,10 @@
+const { render } = require("@testing-library/react");
 const registerComponent = require("../../frontend/src/components/RegisterUser");
 test("Register Component renders", () =>{
     expect(registerComponent);
 });
 describe("Attempting to create new users", () =>{
+    render(registerComponent);
     test("New user", async () =>{
         const user ={
             name: "Test Name",
