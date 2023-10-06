@@ -4,7 +4,7 @@ test("Register Component renders", () =>{
     expect(registerComponent);
 });
 describe("Attempting to create new users", () =>{
-    render(registerComponent);
+    render(<registerComponent/>);
     test("New user", async () =>{
         const user ={
             name: "Test Name",
