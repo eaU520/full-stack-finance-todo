@@ -1,20 +1,7 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import '../App.css';
 export default function Navigation(){
-    // const [navigation, setNavigation] = useState({
-    //   currentPage: ''
-    // });
-    
-//     function updateNavigation(value){
-//       return setNavigation((prev)=> {
-//       return {...prev, ...value};
-//     });
-//   }
-
-          // navigate('/', {replace: true});
-    
-    
         return (
           <div className="Navigation">
             <Link className="btn btn-link" to="/expense/create_expense">Create an Expense</Link> |

@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 
 import '../App.css';
 //TODO: Using facebook, Google, etc.
-const CreateUser = () => {
+const CreateUser = (props) => {
     const [form, setForm] = useState({
           name: "",
           username: "",
