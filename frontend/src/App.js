@@ -6,7 +6,7 @@ import RegisterUser from "./components/RegisterUser.js";
 import Create from "./components/CreateExpense.js";
 import ForgotPassword from "./components/ForgotPassword.js";
 //TODO: Dark, contrast, light themes
-const requireAuth = (_, replace) =>{
+const requireAuth = (nextState, replace) =>{
   console.log(this.authenticated, this);
   if(!this.authenticated()){
     replace("/user/login");
@@ -19,8 +19,8 @@ const App = () => {
      <Routes>
       {/* TODO: Feel, Bootstrap */}
       <Route path="/user/login" element={<LoginUser />}/>
-      <Route path='/' element={<ExpenseList />} onEnter={requireAuth}/>
-      <Route path='/expense/create_expense' element={<Create />} onEnter={requireAuth}/>
+      <Route path='/' element={<ExpenseList />} onEnter={this.requireAuth}/>
+      <Route path='/expense/create_expense' element={<Create />} onEnter={this.requireAuth}/>
       <Route path='/user/register' element={<RegisterUser />} />
       <Route path='/user/forgot' element={<ForgotPassword />} />
      </Routes>
