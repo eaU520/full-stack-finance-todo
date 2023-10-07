@@ -35,7 +35,17 @@ userRouter.post("/register",
     pointsForContainingUpper: 5,
     pointsForContainingLower: 5
   }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter, at least one number"),
-  body('password'),async (req, response)=>{
+  body('name').trim()
+    .isLength({min: 2}).withMessage("Name must be at least two chracters long")
+    .isAlpha().withMessage("Name must only be alphabet letters"),
+  body('passwordAgain').trim().custom((value, {req}) =>{
+    if(value !== req.body.password){
+      throw new Error('Password not the same as the confirm password');
+    }
+    return true;
+  }),
+  //TODO: Internationalization and non ASCII
+  async (req, response)=>{
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
@@ -43,14 +53,10 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-  body('name').trim()
-    .isLength({min: 2}).withMessage("Name must be at least two chracters long")
-    .isAlpha().withMessage("Name must only be alphabet letters")
-  //TODO: Internationalization and non ASCII
+
   bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
-      if(body('password') !== body('passwordAgain')) throw err;
       userAdd.password = hash;
     })
   });
