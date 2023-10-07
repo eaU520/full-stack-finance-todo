@@ -52,7 +52,6 @@ userRouter.post("/register",
       if(err) throw err;
       if(body('password') !== body('passwordAgain')) throw err;
       userAdd.password = hash;
-      console.log("Hash: ", hash)
     })
   });
   const collection = await db.collection("users");
@@ -87,7 +86,10 @@ userRouter.post('/login', async (req, response) =>{
        throw err;
     }
     response.send(res);
+    console.log(res);//Expect what?
+    //TODO: Create session
   });
+  const userLoggedIn = collection.toArray()[0];
 });
 
 userRouter.delete('/logout', async (req, response) =>{
