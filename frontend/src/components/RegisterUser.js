@@ -56,7 +56,7 @@ const CreateUser = (props) => {
               admin: false,
               email: ''
           })
-          console.log(res);//TODO: Make it an error on the form
+          console.log(res);//TODO: Make not duplicate password an error on the form
         })
       };
     

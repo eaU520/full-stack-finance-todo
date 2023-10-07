@@ -106,14 +106,6 @@ export default router;
 //   );
 // });
 
-// // @route GET /
-// // @description Get homepage by id
-// // @access Public
-// //TODO: Fix homepage with routes to render React component
-// // expensesRouter.post('/', (req, res) => {
-// //   res.send("");//TODO: Fix Homepage rendering
-// // });
-
 // // @route GET /expenses/:id
 // // @description Get single expense by id
 // // @access Public
