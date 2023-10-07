@@ -1,7 +1,8 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
-import {body} from 'express-validator';
+import {body, validationResult} from 'express-validator';
+import { BSONSymbol } from "mongodb";
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -19,14 +20,21 @@ const saltSize = 12;
 // @description add a user
 // @access Public
 userRouter.post("/register", 
-  body('email').isEmail().normalizeEmail(),//TODO: What does normalize do?
-  body('password').isStrongPassword({//FIXME: Check for valid password
+  body('email').trim().isEmail()
+  .normalizeEmail().isLength({min: 10}).withMessage("Email is too short"),
+  body('password').isStrongPassword({
     minLength: 8,
     maxLength: 16,
     minUppercase: 1,
-    minNumbers: 1
-    //TODO: Special Characters?
-  }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter and at least one number"),
+    minNumbers: 1,
+    minSymbols: 1,
+    returnScore: false,
+    pointsPerUnique: 1,
+    pointsPerRepeat: .5,
+    pointsForContainingNumber: 5,
+    pointsForContainingUpper: 5,
+    pointsForContainingLower: 5
+  }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter, at least one number"),
   body('password'),async (req, response)=>{
     let userAdd = {
       username : req.body.username,
@@ -35,10 +43,14 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-
+  body('name').trim()
+    .isLength({min: 2}).withMessage("Name must be at least two chracters long")
+    .isAlpha().withMessage("Name must only be alphabet letters")
+  //TODO: Internationalization and non ASCII
   bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
+      if(body('password') !== body('passwordAgain')) throw err;
       userAdd.password = hash;
       console.log("Hash: ", hash)
     })
