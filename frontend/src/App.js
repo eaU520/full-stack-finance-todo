@@ -8,11 +8,10 @@ import ForgotPassword from "./components/ForgotPassword.js";
 import Navigation from './components/Navigation.js';
 //TODO: Dark, contrast, light themes
 const requireAuth = () =>{
-  console.log(this.authenticated, this);
-  if(!this.authenticated()){
+  const authenticated = true;
+  console.log(authenticated, this);
+  if(!authenticated){
     return <Navigate to="/user/login" />;
-  }else{
-    return;
   }
 }
 
@@ -23,8 +22,8 @@ const App = () => {
       <Navigation/>
       {/* TODO: Feel, Bootstrap */}
       <Route path="/user/login" element={<LoginUser />}/>
-      <Route path='/' element={<ExpenseList />} render={this.requireAuth()}/>
-      <Route path='/expense/create_expense' element={<Create />} render={this.requireAuth()}/>
+      <Route path='/' element={<ExpenseList />} render={requireAuth()}/>
+      <Route path='/expense/create_expense' element={<Create />} render={requireAuth()}/>
       <Route path='/user/register' element={<RegisterUser />} />
       <Route path='/user/forgot' element={<ForgotPassword />} />
       </Routes>
