@@ -36,6 +36,7 @@ const Expense = (props) => (
   </tr>
 );
 const ExpenseList = () => {
+  
   const [expenses, setExpenses] = useState(0);
     useEffect(() =>{
       async function getExpenses(){
