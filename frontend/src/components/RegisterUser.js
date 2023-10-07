@@ -15,8 +15,6 @@ const CreateUser = (props) => {
     
     function updateForm(value){
       return setForm((prev)=> {
-        console.log(`The previous password was: ${prev.password}`);
-        console.log(`The current information is: ${value.password}`);
         if(value.password !== value.passwordAgain){
           console.log("Error");
         }
@@ -45,7 +43,6 @@ const CreateUser = (props) => {
               admin: false,
               email: ''
           })
-          console.log(res);//TODO: Make not duplicate password an error on the form
         })
       };
     
@@ -61,8 +58,8 @@ const CreateUser = (props) => {
                       Create new user
                   </p>
     
-                  <form noValidate onSubmit={onSubmit}>
-                  <div className='form-group'>
+                  <form onSubmit={onSubmit}>
+                  <div className='form-group has-validation'>
                       <input
                         type='text'
                         placeholder='Name'
@@ -71,11 +68,15 @@ const CreateUser = (props) => {
                         value={form.name}
                         autoComplete="name"
                         onChange={(e) => updateForm({ name: e.target.value})}
+                        required
                       />
+                      <div className="invalid-feedback">
+                        Please provide a name.
+                      </div>
                     </div>
                     <br />
 
-                    <div className='form-group'>
+                    <div className='form-group has-validation'>
                       <input
                         type='text'
                         placeholder='Username'
@@ -84,11 +85,12 @@ const CreateUser = (props) => {
                         value={form.username}
                         autoComplete="off"
                         onChange={(e) => updateForm({ username: e.target.value})}
+                        required
                       />
                     </div>
                     <br />
     
-                    <div className='form-group'>
+                    <div className='form-group has-validation'>
                       <input
                         type='password'
                         placeholder='Password'
@@ -96,10 +98,11 @@ const CreateUser = (props) => {
                         className='form-control'
                         value={form.password}
                         onChange={(e) => updateForm({ password: e.target.value})}
+                        required
                       />
                     </div>
     
-                    <div className='form-group'>
+                    <div className='form-group has-validation'>
                       <input
                         type='password'
                         placeholder='Type your password Again'
@@ -107,10 +110,11 @@ const CreateUser = (props) => {
                         className='form-control'
                         value={form.passwordAgain}
                         onChange={(e) => updateForm({ passwordAgain: e.target.value})}
+                        required
                       />
                     </div>
 
-                    <div className='form-group'>
+                    <div className='form-group has-validation'>
                       <input
                         type='email'
                         placeholder='Email'
@@ -119,6 +123,7 @@ const CreateUser = (props) => {
                         value={form.email}
                         autoComplete="email"
                         onChange={(e) => updateForm({ email: e.target.value})}
+                        required
                       />
                     </div>
     
