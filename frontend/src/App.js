@@ -13,11 +13,11 @@ const App = () => {
   //  <BrowserRouter>
       <Routes>
       {/* TODO: Feel, Bootstrap */}
-      <Route path="/user/login" element={<LoginUser />}/>
+      <Route path="/users/login" element={<LoginUser />}/>
       <Route path="/" element={<PrivateRoute Component={ExpenseList}/>} />
-      <Route path='/expense/create_expense' element={<PrivateRoute Component={CreateExpense}/>} />
-      <Route path='/user/register' element={<RegisterUser />} />
-      <Route path='/user/forgot' element={<ForgotPassword />} />
+      <Route path='/expenses/create_expense' element={<PrivateRoute Component={CreateExpense}/>} />
+      <Route path='/users/register' element={<RegisterUser />} />
+      <Route path='/users/forgot' element={<ForgotPassword />} />
       </Routes>
   //  </BrowserRouter>
  );

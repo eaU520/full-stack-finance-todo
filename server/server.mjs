@@ -20,8 +20,8 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/expense",expenses);
-app.use("/user",users);
+app.use("/expenses",expenses);
+app.use("/users",users);
 // get driver connection
 // const dbconn = require("./database/db");
 
