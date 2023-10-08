@@ -10,13 +10,14 @@ const CreateUser = (props) => {
           password:"",
           passwordAgain:"",
           admin: false,
-          email: ""
+          email: "",
+          error: "",
     });
     
     function updateForm(value){
       return setForm((prev)=> {
         if(value.password !== value.passwordAgain){
-          console.log("Error");
+          //TODO: Add toast/error in Bootstrap
         }
         return {...prev, ...value};
       });
@@ -27,24 +28,29 @@ const CreateUser = (props) => {
        
         const data = { ...form};
 
-        await fetch('http://localhost:5050/user/register',{
+        await fetch('http://localhost:5050/users/register',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         })
-        .then(res => {
+        .then(
+          res => {
             setForm({
               name: '',
               username: '',
               password:'',
               passwordAgain: '',
               admin: false,
-              email: ''
+              email: '',
+              error: "Success!" || res
           })
-        })
-      };
+        }, 
+        err =>{
+          form.error = err;
+        });
+      }
     
         return (
           <div className="Registration">
@@ -57,8 +63,8 @@ const CreateUser = (props) => {
                   <p className="lead text-center">
                       Create new user
                   </p>
-    
-                  <form onSubmit={onSubmit}>
+                  
+                  <form noValidate onSubmit={onSubmit}>
                   <div className='form-group has-validation'>
                       <input
                         type='text'
@@ -132,6 +138,7 @@ const CreateUser = (props) => {
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
                     />
+                    <h3 className="display-4 text-center">{form.error}</h3>
                   </form>
               </div>
 
