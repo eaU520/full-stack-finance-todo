@@ -1,8 +1,7 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
-import {body, validationResult} from 'express-validator';
-import { BSONSymbol } from "mongodb";
+import {body} from 'express-validator';
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -46,6 +45,7 @@ userRouter.post("/register",
   }),
   //TODO: Internationalization and non ASCII
   async (req, response)=>{
+    console.log(body)
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
@@ -63,7 +63,6 @@ userRouter.post("/register",
   const collection = await db.collection("users");
   const existsEmail = await collection.find({email:  userAdd.email}).toArray();
   const existsUsername = await collection.find({username: userAdd.username}).toArray();
-  console.log(userAdd, "Check inserting data");
   if (existsEmail.length === 0  && existsUsername.length === 0){//TODO: Hash password
     const result = await collection.insertOne(userAdd);
     response.send(result).status(204);
