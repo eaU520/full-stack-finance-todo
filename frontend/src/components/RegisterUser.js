@@ -37,18 +37,19 @@ const CreateUser = (props) => {
         })
         .then(
           res => {
-            setForm({
-              name: '',
-              username: '',
-              password:'',
-              passwordAgain: '',
-              admin: false,
-              email: '',
-              error: "Success!" || res
-          })
-        }, 
-        err =>{
-          form.error = err;
+            if(res.ok === false || res.status === 409){
+              setForm({error: res.text}); 
+            }else{
+              setForm({
+                name: '',
+                username: '',
+                password:'',
+                passwordAgain: '',
+                admin: false,
+                email: '',
+                error: "Success!" || res.text
+              })
+            }
         });
       }
     
@@ -71,7 +72,8 @@ const CreateUser = (props) => {
                         placeholder='Name'
                         name='name'
                         className='form-control'
-                        value={form.name}
+                        defaultValue={form.name}
+                        // value={form.name}
                         autoComplete="name"
                         onChange={(e) => updateForm({ name: e.target.value})}
                         required
@@ -88,7 +90,8 @@ const CreateUser = (props) => {
                         placeholder='Username'
                         name='username'
                         className='form-control'
-                        value={form.username}
+                        defaultValue={form.username}
+                        // value={form.username}
                         autoComplete="off"
                         onChange={(e) => updateForm({ username: e.target.value})}
                         required
@@ -102,7 +105,8 @@ const CreateUser = (props) => {
                         placeholder='Password'
                         name='password'
                         className='form-control'
-                        value={form.password}
+                        defaultValue={form.password}
+                        // value={form.password}
                         onChange={(e) => updateForm({ password: e.target.value})}
                         required
                       />
@@ -114,7 +118,8 @@ const CreateUser = (props) => {
                         placeholder='Type your password Again'
                         name='passwordAgain'
                         className='form-control'
-                        value={form.passwordAgain}
+                        defaultValue={form.passwordAgain}
+                        // value={form.passwordAgain}
                         onChange={(e) => updateForm({ passwordAgain: e.target.value})}
                         required
                       />
@@ -126,7 +131,8 @@ const CreateUser = (props) => {
                         placeholder='Email'
                         name='email'
                         className='form-control'
-                        value={form.email}
+                        defaultValue={form.email}
+                        // value={form.email}
                         autoComplete="email"
                         onChange={(e) => updateForm({ email: e.target.value})}
                         required
@@ -138,8 +144,9 @@ const CreateUser = (props) => {
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
                     />
-                    <h3 className="display-4 text-center">{form.error}</h3>
                   </form>
+                  <span>{form.error}</span>
+                  {/* //TODO:Accessibility in form */}
               </div>
 
         );
