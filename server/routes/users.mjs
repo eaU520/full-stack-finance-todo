@@ -52,7 +52,6 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-
   bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) throw err;
