@@ -1,7 +1,7 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
-import {body} from 'express-validator';
+import {body, validationResult} from 'express-validator';
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -19,8 +19,8 @@ const saltSize = 12;
 // @description add a user
 // @access Public
 userRouter.post("/register", 
-  body('email').trim().isEmail()
-  .normalizeEmail().isLength({min: 10}).withMessage("Email is too short"),
+  body("email", "Must be a valid email format").trim().isEmail(),
+  body("email", "Your email is too short").normalizeEmail().isLength({min: 10}),
   // body('password').isStrongPassword({
   //   minLength: 8,
   //   maxLength: 16,
@@ -44,7 +44,11 @@ userRouter.post("/register",
   //   return true;
   // }),
   //TODO: Internationalization and non ASCII
-  async (req, response)=>{
+  (req, response)=>{
+    const validationErrors = validationResult(req);
+    if(!validationErrors.isEmpty()){
+      return response.status(400).json({errors:validationErrors.array()});
+    }
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
@@ -54,18 +58,22 @@ userRouter.post("/register",
     };
   bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
-      if(err) throw err;
+      if(err) {
+        console.log(`The error is : ${err}`);
+        throw err;
+      }
       userAdd.password = hash;
     })
   });
-  const collection = await db.collection("users");
-  const existsEmail = await collection.find({email:  userAdd.email}).toArray();
-  const existsUsername = await collection.find({username: userAdd.username}).toArray();
+  const collection = db.collection("users");
+  const existsEmail = collection.find({email:  userAdd.email}).toArray();
+  const existsUsername = collection.find({username: userAdd.username}).toArray();
   if (existsEmail.length === 0  && existsUsername.length === 0){//TODO: Hash password
-    const result = await collection.insertOne(userAdd);
+    const result = collection.insertOne(userAdd);
     response.status(201).send(result);//201 Created
   }
   else{
+    console.log(userAdd, existsEmail.length === 0  && existsUsername.length === 0);
     response.status(409).send("Username and/or email already in use");//409 Conflict
   }
 });
