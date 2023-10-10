@@ -144,7 +144,7 @@ const CreateUser = (props) => {
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
                     />
-                    <span>{form.error}</span>
+                    {/*TODO: Check and update the page on error or success <span>{form.error}</span> */}
                   </form>
                   
                   {/* //TODO:Accessibility in form */}
