@@ -34,20 +34,19 @@ userRouter.post("/register",
   //   pointsForContainingUpper: 5,
   //   pointsForContainingLower: 5
   // }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter, at least one number"),
-  // body('name').trim()
-  //   .isLength({min: 2}).withMessage("Name must be at least two chracters long")
-  //   .isAlpha().withMessage("Name must only be alphabet letters"),
-  // body('passwordAgain').trim().custom((value, {req}) =>{
-  //   if(value !== req.body.password){
-  //     throw new Error('Password not the same as the confirm password');
-  //   }
-  //   return true;
-  // }),
+  body("name", "Name must be at least two chracters long").trim().isLength({min: 2}),
+  body("name", "Name must only be contain letters").isAlpha(),
+  body("passwordAgain", "Password not the same as the confirm password").trim().custom((value, {req}) =>{
+    if(value !== req.body.password){
+      throw new Error('Password not the same as the confirm password');
+    }
+    return true;
+  }),
   //TODO: Internationalization and non ASCII
   (req, response)=>{
     const validationErrors = validationResult(req);
     if(!validationErrors.isEmpty()){
-      return response.status(400).json({errors:validationErrors.array()});
+      return response.status(400).send(validationErrors.array().map((x)=>x["msg"]));
     }
     let userAdd = {
       username : req.body.username,
