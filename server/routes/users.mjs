@@ -20,20 +20,11 @@ const saltSize = 12;
 // @access Public
 userRouter.post("/register", 
   body("email", "Must be a valid email format").trim().isEmail(),
-  body("email", "Your email is too short").normalizeEmail().isLength({min: 10}),
-  // body('password').isStrongPassword({
-  //   minLength: 8,
-  //   maxLength: 16,
-  //   minUppercase: 1,
-  //   minNumbers: 1,
-  //   minSymbols: 1,
-  //   returnScore: false,
-  //   pointsPerUnique: 1,
-  //   pointsPerRepeat: .5,
-  //   pointsForContainingNumber: 5,
-  //   pointsForContainingUpper: 5,
-  //   pointsForContainingLower: 5
-  // }).withMessage("Password must be 8-16 characters and contain at least one uppercase letter, at least one number"),
+  // body("email", "Your email is too short").isLength({min: 5}),normalizeEmail()?
+  body("password","Password must be 8-16 characters").isLength({min:8, max: 16}),
+  body("password","Password must contain at least one uppercase letter").matches("[A-Z]"),
+  body("password","Password must contain at least one number").matches("[0-9]"),
+  //TODO: minSymbols: 1,
   body("name", "Name must be at least two chracters long").trim().isLength({min: 2}),
   body("name", "Name must only be contain letters").isAlpha(),
   body("passwordAgain", "Password not the same as the confirm password").trim().custom((value, {req}) =>{
