@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
 import '../App.css';
-import axios from 'axios';
 import Navigation from './Navigation';
 import {Link} from 'react-router-dom';
 
@@ -11,6 +10,8 @@ const LoginUser = (props) => {
       // username: props.session !== undefined ? props.session.username: ''
       //TODO: sessions
       // password: session !== undefined ? session.password: '' Don't use this
+      username: "",
+      password: ""
     });
     
     function updateLogin(value){
@@ -21,8 +22,15 @@ const LoginUser = (props) => {
     
       async function onSubmit(e) {
         e.preventDefault();
-        axios
-          .post('http://localhost:5050/user/login', login)
+        const data = { ...login};
+        console.log(`DATA: ${data}`);
+        await fetch('http://localhost:5050/users/login',{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
           .then(res => {
             this.setState({
                 username: '',
@@ -56,9 +64,10 @@ const LoginUser = (props) => {
                         placeholder='Username'
                         name='username'
                         className='form-control'
-                        value={login.username}
+                        defaultValue={login.username}
                         autoComplete="username"
-                        onChange={(e) => updateLogin({ username: e.target.username})}
+                        onChange={(e) => updateLogin({ username: e.target.value})}
+                        required
                       />
                     </div>
                     <br />
@@ -69,12 +78,13 @@ const LoginUser = (props) => {
                         placeholder='Password'
                         name='password'
                         className='form-control'
-                        value={login.password}
-                        onChange={(e) => updateLogin({password: e.target.password})}
+                        defaultValue={login.password}
+                        onChange={(e) => updateLogin({password: e.target.value})}
+                        required
                       />
                     </div>
-                    <Link to="/user/register">Register</Link><br/>
-                    <Link to="/user/forgot">Forgot Password</Link>
+                    <Link to="/users/register">Register</Link><br/>
+                    <Link to="/users/forgot">Forgot Password</Link>
                     <input
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
