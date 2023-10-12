@@ -85,11 +85,17 @@ userRouter.post('/login', async (req, response) =>{
     if(err){
        throw err;
     }
-    response.send(res);
+    
     console.log(res);//Expect what?
     //TODO: Create session
   });
-  const userLoggedIn = collection.toArray()[0];//FIXME: Session?
+  if(collection.length == 1){
+    const userLoggedIn = collection.toArray()[0];//FIXME: Session?
+    response.status().send(res);
+  }
+  else{
+    response.status().send("Incorrect credentials");
+  }
 });
 
 userRouter.delete('/logout', async (req, response) =>{
