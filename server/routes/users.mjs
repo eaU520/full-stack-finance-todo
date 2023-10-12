@@ -49,7 +49,7 @@ userRouter.post("/register",
   bcrypt.genSalt(saltSize, function (err, salt){
     bcrypt.hash(userAdd.password, salt,(err,hash) =>{
       if(err) {
-        console.log(`The error is : ${err}`);
+        console.log(`The error with the hash is : ${err}`);
         throw err;
       }
       userAdd.password = hash;
@@ -63,7 +63,6 @@ userRouter.post("/register",
     response.status(201).send(result);//201 Created
   }
   else{
-    console.log(userAdd, existsEmail.length === 0  && existsUsername.length === 0);
     response.status(409).send("Username and/or email already in use");//409 Conflict
   }
 });
