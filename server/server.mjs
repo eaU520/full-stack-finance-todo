@@ -9,7 +9,6 @@ import {default as connection} from "connect-mongodb-session";
 
 import mongo from 'mongoose';
 
-import { configDotenv } from "dotenv";
 
 const MongoDBStore = connection(session);
 //TODO:Remove commented lines
@@ -38,21 +37,22 @@ const mongoDBStore = new MongoDBStore({
 // max session = sec*min*millisec*hours
 
 
-//Creating session on server
-app.use(
-  session({
-    secret: process.env.secretKey,//FIXME: Generate dynamically
-    name: 'session-id',//key field for postman
-    store: mongoDBStore,
-    cookie: {
-      maxAge: process.env.MAX_SESSION_TIME,
-      sameSite: false,
-      secure: false,
-    },
-    resave: true,
-    saveUninitialized: false,
-  })
-)
+//TODO: Creating session on server
+// app.use(
+  //TODO: LOgin creates session
+  // session({
+  //   secret: process.env.secretKey,//FIXME: Generate dynamically
+  //   name: 'session-id',//key field for postman
+  //   store: mongoDBStore,
+  //   cookie: {
+  //     maxAge: process.env.MAX_SESSION_TIME,
+  //     sameSite: false,
+  //     secure: false,
+  //   },
+  //   resave: true,
+  //   saveUninitialized: false,
+  // })
+// )
 
 app.listen(port, () => {
   // perform a database connection when server starts
