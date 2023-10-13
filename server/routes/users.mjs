@@ -91,10 +91,10 @@ userRouter.post('/login', async (req, response) =>{
   });
   if(collection.length == 1){
     const userLoggedIn = collection.toArray()[0];//FIXME: Session?
-    response.status().send(res);
+    response.status(200).send(res);
   }
   else{
-    response.status().send("Incorrect credentials");
+    response.status(400).send("Incorrect credentials");
   }
 });
 
