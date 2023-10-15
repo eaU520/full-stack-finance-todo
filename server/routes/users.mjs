@@ -85,13 +85,12 @@ userRouter.post('/login', async (req, response) =>{
     if(err){
        throw err;
     }
-    
-    console.log(res);//Expect what?
-    //TODO: Create session
+
   });
-  if(collection){
-    const userLoggedIn = collection.toArray()[0];//FIXME: Session?
-    response.status(200).send(res);
+  if(collection !== null){
+    //TODO: Create session
+    const username = collection.name;
+    response.status(200).send(`Successfully logged in ${username}`);
   }
   else{
     response.status(400).send("Incorrect credentials");
