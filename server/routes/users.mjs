@@ -89,7 +89,7 @@ userRouter.post('/login', async (req, response) =>{
     console.log(res);//Expect what?
     //TODO: Create session
   });
-  if(collection.length == 1){
+  if(collection){
     const userLoggedIn = collection.toArray()[0];//FIXME: Session?
     response.status(200).send(res);
   }

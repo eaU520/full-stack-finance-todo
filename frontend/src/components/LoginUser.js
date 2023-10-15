@@ -32,7 +32,7 @@ const LoginUser = (props) => {
           body: JSON.stringify(data),
         })
           .then(res => {
-            this.setState({
+            setLogin({
                 username: '',
                 password:''
             })
