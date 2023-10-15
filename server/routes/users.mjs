@@ -89,6 +89,7 @@ userRouter.post('/login', async (req, response) =>{
   });
   if(collection !== null){
     //TODO: Create session
+    //response.setCookie("session-id");
     const username = collection.name;
     response.status(200).send(`Successfully logged in ${username}`);
   }
