@@ -33,8 +33,12 @@ const mongoDBStore = new MongoDBStore({
   uri: process.env.mongoURI,
   collection: 'mySessions',
 })
-
-// max session = sec*min*millisec*hours
+const sec = 1000;
+const min = 10;
+const millisec = 1;
+const hours = 1;
+// const maxSession = sec*min*millisec*hours;
+const maxSession = sec*min;
 
 
 //TODO: Creating session on server
