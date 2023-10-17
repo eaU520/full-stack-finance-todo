@@ -41,22 +41,21 @@ const hours = 1;
 const maxSession = sec*min;
 
 
-//TODO: Creating session on server
-// app.use(
-  //TODO: LOgin creates session
-  // session({
-  //   secret: process.env.secretKey,//FIXME: Generate dynamically
-  //   name: 'session-id',//key field for postman
-  //   store: mongoDBStore,
-  //   cookie: {
-  //     maxAge: process.env.MAX_SESSION_TIME,
-  //     sameSite: false,
-  //     secure: false,
-  //   },
-  //   resave: true,
-  //   saveUninitialized: false,
-  // })
-// )
+app.use(
+  //TODO: Login creates session
+  session({
+    secret: process.env.secretKey,//FIXME: Generate dynamically
+    name: 'session-id',//key field for postman
+    store: mongoDBStore,
+    cookie: {
+      maxAge: process.env.MAX_SESSION_TIME,
+      sameSite: false,
+      secure: false,
+    },
+    resave: true,
+    saveUninitialized: false,
+  })
+)
 
 app.listen(port, () => {
   // perform a database connection when server starts

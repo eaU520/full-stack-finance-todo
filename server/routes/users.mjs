@@ -2,6 +2,7 @@ import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
 import {body, validationResult} from 'express-validator';
+import User from "../../server/db/models/User"
 
 // // Load User model
 // const User = require('../database/models/User');
@@ -75,33 +76,26 @@ userRouter.post('/login', async (req, response) =>{
     username : req.body.username,
     password: req.body.password,
   };
-  bcrypt.genSalt(saltSize, function (err, salt){
-    bcrypt.hash(userLog.password, salt,(err,hash) =>{
-      if(err) throw err;
-      userLog.password = hash;
-    })
-  });
-  let collection = await db.collection("users").findOne(userLog, function (err, res){
-    if(err){
-       throw err;
-    }
-
-  });
-  if(collection !== null){
-    //TODO: Create session
-    //response.setCookie("session-id");
-    const username = collection.name;
-    response.status(200).send(`Successfully logged in ${username}`);
+  if(!userLog.username || !userLog.password){
+    response.status(400).send("Please enter all fields");
   }
-  else{
-    response.status(400).send("Incorrect credentials");
-  }
+  User.findOne(userLog.username).then((user) => {
+    if(!user) return response.status(400).send("User does not exist");
+    bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
+      if(!isMatch) return response.status(40).send("Invalid crednetials");
+      const userSession = {id:user.id, name: user.name, email: user.email};
+      req.session.user = userSession;
+      window.sessionStorage.setItem("session-id", true);
+      response.status(200).send(`Successfully logged in ${userLog.username}`);
+    });
+  });
 });
 
 userRouter.delete('/logout', async (req, response) =>{
   req.session.destroy((error)=>{
     if(error) throw error;
     response.clearCookie("session-id");
+    window.sessionStorage.setItem("session-id", false);
     response.send("Logged out successfully");
   });
 });
