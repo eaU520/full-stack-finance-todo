@@ -2,8 +2,8 @@ import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
 import {body, validationResult} from 'express-validator';
-import User from "../../server/db/models/User"
-
+import User from "../../server/db/models/User.js"
+// /Users/ebonyarliciacalloway/Documents/full-stack-finance-todo/server/db/models/User.js
 // // Load User model
 // const User = require('../database/models/User');
 
@@ -86,6 +86,7 @@ userRouter.post('/login', async (req, response) =>{
       const userSession = {id:user.id, name: user.name, email: user.email};
       req.session.user = userSession;
       window.sessionStorage.setItem("session-id", true);
+      response.cookie = "session=true";
       response.status(200).send(`Successfully logged in ${userLog.username}`);
     });
   });
@@ -95,6 +96,8 @@ userRouter.delete('/logout', async (req, response) =>{
   req.session.destroy((error)=>{
     if(error) throw error;
     response.clearCookie("session-id");
+    req.session.user = null;
+    response.cookie = "session=false";
     window.sessionStorage.setItem("session-id", false);
     response.send("Logged out successfully");
   });

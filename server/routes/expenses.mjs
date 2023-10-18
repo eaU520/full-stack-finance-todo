@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
     if (!results) res.send("No expenses found").status(404);
     else res.status(200).send(results);
   }else{
+    console.log(`Is there a session ${req.body.session}`);
     res.status(401).send("You have to be logged in to view expenses");
   }
 });
