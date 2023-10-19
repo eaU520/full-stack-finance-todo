@@ -79,16 +79,16 @@ userRouter.post('/login', async (req, response) =>{
   if(!userLog.username || !userLog.password){
     response.status(400).send("Please enter all fields");
   }
-  User.findOne(userLog.username).then((user) => {
-    if(!user) return response.status(400).send("User does not exist");
-    bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
-      if(!isMatch) return response.status(40).send("Invalid crednetials");
-      const userSession = {id:user.id, name: user.name, email: user.email};
-      req.session.user = userSession;
-      window.sessionStorage.setItem("session-id", true);
-      response.cookie = "session=true";
-      response.status(200).send(`Successfully logged in ${userLog.username}`);
-    });
+  const collection = db.collection("users");
+  const user = collection.find({username: userLog.username});
+  if(!user) return response.status(400).send("User does not exist");
+  bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
+    if(!isMatch) return response.status(40).send("Invalid crednetials");
+    const userSession = {id:user.id, name: user.name, email: user.email};
+    req.session.user = userSession;
+    window.sessionStorage.setItem("session-id", true);
+    response.cookie = "session=true";
+    response.status(200).send(`Successfully logged in ${userLog.username}`);
   });
 });
 
