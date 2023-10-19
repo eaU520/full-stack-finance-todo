@@ -2,7 +2,6 @@ import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
 import {body, validationResult} from 'express-validator';
-import User from "../../server/db/models/User.js"
 // /Users/ebonyarliciacalloway/Documents/full-stack-finance-todo/server/db/models/User.js
 // // Load User model
 // const User = require('../database/models/User');
@@ -48,13 +47,13 @@ userRouter.post("/register",
       admin: false,
     };
   bcrypt.genSalt(saltSize, function (err, salt){
-    bcrypt.hash(userAdd.password, salt,(err,hash) =>{
+    bcrypt.hash(userAdd.password, salt, function(err,hash){
       if(err) {
         console.log(`The error with the hash is : ${err}`);
         throw err;
       }
       userAdd.password = hash;
-    })
+    });
   });
   const collection = db.collection("users");
   const existsEmail = collection.find({email:  userAdd.email}).toArray();
@@ -82,7 +81,7 @@ userRouter.post('/login', async (req, response) =>{
   const collection = db.collection("users");
   const user = collection.find({username: userLog.username});
   if(!user) return response.status(400).send("User does not exist");
-  bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
+  bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
     if(!isMatch) return response.status(40).send("Invalid crednetials");
     const userSession = {id:user.id, name: user.name, email: user.email};
     req.session.user = userSession;
