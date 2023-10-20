@@ -22,7 +22,9 @@ const LoginUser = (props) => {
     
       async function onSubmit(e) {
         e.preventDefault();
+
         const data = { ...login};
+        
         await fetch('http://localhost:5050/users/login',{
           method: "POST",
           headers: {
