@@ -80,7 +80,7 @@ userRouter.post('/login', async (req, response) =>{
   }
   const collection = db.collection("users");
   const user = collection.find({username: userLog.username});
-  // console.log("The username is:", user.username);
+  user.forEach(console.log);
   if(user !== undefined) return response.status(400).send("User does not exist");
   // console.log(`The user password is: ${user.password}, ${user.username} `);
   bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
