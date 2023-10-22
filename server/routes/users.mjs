@@ -79,12 +79,12 @@ userRouter.post('/login', async (req, response) =>{
     response.status(400).send("Please enter all fields");
   }
   const collection = db.collection("users");
-  const user = collection.find({username: userLog.username});
-  user.forEach(console.log);
-  if(user !== undefined) return response.status(400).send("User does not exist");
+  const user = await collection.findOne({username: userLog.username});
+  // user.forEach(console.log);
+  if(user.username === undefined) return response.status(400).send("User does not exist");
   // console.log(`The user password is: ${user.password}, ${user.username} `);
   bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
-    if(!isMatch) return response.status(40).send("Invalid crednetials");
+    if(!isMatch) return response.status(404).send("Invalid crednetials");
     const userSession = {id:user.id, name: user.name, email: user.email};
     req.session.user = userSession;
     window.sessionStorage.setItem("session-id", true);
