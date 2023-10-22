@@ -38,7 +38,7 @@ const CreateUser = (props) => {
         .then(
           res => {
             if(res.ok === false && res.status === 409){
-              console.log(`The status code is ${res.status}`)
+              console.log(`The status code is, 409?, :  ${res.status}`)
               // setForm({error: res.text}); 
             }else if(res.ok === false && res.status === 400){
               // setForm({error: res.text}); //TODO: Map the msg field for each and put somewhere
