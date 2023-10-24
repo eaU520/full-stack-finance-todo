@@ -21,7 +21,7 @@ const saltSize = 12;
 userRouter.post("/register", 
   body("email", "Must be a valid email format").trim().isEmail(),
   // body("email", "Your email is too short").isLength({min: 5}),normalizeEmail()?
-  body("password","Password must be 8-16 characters").isLength({min:8, max: 16}),
+  body("password","Password must be 8-16 characters").isLength({min:8, max: 16}),//TODO: No maximum or much higher
   body("password","Password must contain at least one uppercase letter").matches("[A-Z]"),
   body("password","Password must contain at least one number").matches("[0-9]"),
   //TODO: minSymbols: 1,
@@ -42,7 +42,7 @@ userRouter.post("/register",
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
-      password: req.body.password,
+      // password: req.body.password,
       name: req.body.name,
       admin: false,
     };
@@ -56,8 +56,9 @@ userRouter.post("/register",
     });
   });
   const collection = db.collection("users");
-  const existsEmail = collection.find({email:  userAdd.email}).toArray();
-  const existsUsername = collection.find({username: userAdd.username}).toArray();
+  const existsEmail = await collection.findOne({email:  userAdd.email});
+  const existsUsername = await collection.findOne({username: userAdd.username});
+  console.log("The user being added: ", userAdd);
   if (existsEmail.length === 0  && existsUsername.length === 0){//TODO: Hash password
     const result = collection.insertOne(userAdd);
     response.status(201).send(result);//201 Created
