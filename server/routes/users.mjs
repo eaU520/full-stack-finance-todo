@@ -56,8 +56,8 @@ userRouter.post("/register",
     });
   });
   const collection = db.collection("users");
-  const existsEmail = await collection.findOne({email:  userAdd.email});
-  const existsUsername = await collection.findOne({username: userAdd.username});
+  const existsEmail = collection.findOne({email:  userAdd.email});
+  const existsUsername = collection.findOne({username: userAdd.username});
   console.log("The user being added: ", userAdd);
   if (existsEmail.length === 0  && existsUsername.length === 0){//TODO: Hash password
     const result = collection.insertOne(userAdd);
