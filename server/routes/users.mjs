@@ -52,9 +52,10 @@ userRouter.post("/register",
         console.log(`The error with the hash is : ${err}`);
         throw err;
       }
-      userAdd.password = hash;
+      userAdd["password"] = hash;
     });
   });
+  console.log("The user being added: ",userAdd);
   const collection = db.collection("users");
   const existsEmail = collection.findOne({email:  userAdd.email});
   const existsUsername = collection.findOne({username: userAdd.username});
