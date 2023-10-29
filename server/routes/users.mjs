@@ -53,20 +53,19 @@ userRouter.post("/register",
         throw err;
       }
       userAdd["password"] = hash;
+      const collection = db.collection("users");
+      const existsEmail = collection.findOne({email:  userAdd.email});
+      const existsUsername = collection.findOne({username: userAdd.username});
+      if (existsEmail !== null  && existsUsername.length === 0){
+        const result = collection.insertOne(userAdd);
+        response.status(201).send(result);//201 Created
+      }
+      else{
+        response.status(409).send("Username and/or email already in use");//409 Conflict
+      }
     });
   });
   console.log("The user being added: ",userAdd);
-  const collection = db.collection("users");
-  const existsEmail = collection.findOne({email:  userAdd.email});
-  const existsUsername = collection.findOne({username: userAdd.username});
-  console.log("The user being added: ", userAdd);
-  if (existsEmail.length === 0  && existsUsername.length === 0){//TODO: Hash password
-    const result = collection.insertOne(userAdd);
-    response.status(201).send(result);//201 Created
-  }
-  else{
-    response.status(409).send("Username and/or email already in use");//409 Conflict
-  }
 });
 
 // @route POST /login
