@@ -39,10 +39,11 @@ userRouter.post("/register",
     if(!validationErrors.isEmpty()){
       return response.status(400).send(validationErrors.array().map((x)=>x["msg"]));
     }
+    let userHash = "";
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
-      // password: req.body.password,
+      password: req.body.password,
       name: req.body.name,
       admin: false,
     };
@@ -51,10 +52,11 @@ userRouter.post("/register",
       return bcrypt.hash(userAdd.password, salt)
     })
     .then(hash=> {
-      userAdd["password"] = hash;
+      userHash = hash;
+      console.log(`The hash is: ${userHash}`);
     })
     .catch(err => console.error(err.message));
-      
+    userAdd["password"] = userHash;
     const collection = db.collection("users");
     const existsEmail = collection.findOne({email:  userAdd.email});
     const existsUsername = collection.findOne({username: userAdd.username});
