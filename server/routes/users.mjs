@@ -46,26 +46,26 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-  bcrypt.genSalt(saltSize, function (err, salt){
-    bcrypt.hash(userAdd.password, salt, function(err,hash){
-      if(err) {
-        console.log(`The error with the hash is : ${err}`);
-        throw err;
-      }
+  bcrypt.genSalt(saltSize)
+    .then(salt => {
+      return bcrypt.hash(userAdd.password, salt)
+    })
+    .then(hash=> {
       userAdd["password"] = hash;
-      const collection = db.collection("users");
-      const existsEmail = collection.findOne({email:  userAdd.email});
-      const existsUsername = collection.findOne({username: userAdd.username});
-      if (existsEmail !== null  && existsUsername.length === 0){
-        const result = collection.insertOne(userAdd);
-        response.status(201).send(result);//201 Created
-      }
-      else{
-        response.status(409).send("Username and/or email already in use");//409 Conflict
-      }
-    });
-  });
-  console.log("The user being added: ",userAdd);
+    })
+    .catch(err => console.error(err.message));
+      
+    const collection = db.collection("users");
+    const existsEmail = collection.findOne({email:  userAdd.email});
+    const existsUsername = collection.findOne({username: userAdd.username});
+    if (existsEmail !== null  && existsUsername.length === 0){
+      const result = collection.insertOne(userAdd);
+      response.status(201).send(result);//201 Created
+    }
+    else{
+      response.status(409).send("Username and/or email already in use");//409 Conflict
+    }
+    console.log("The user being added: ",userAdd);
 });
 
 // @route POST /login
