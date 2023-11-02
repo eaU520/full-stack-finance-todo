@@ -1,4 +1,3 @@
-//TODO: Search expenses
 //TODO: Sort by date, amount, name
 //TODO: Pagination of expenses
 //TODO: CRUD
