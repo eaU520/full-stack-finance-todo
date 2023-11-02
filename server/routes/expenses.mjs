@@ -30,6 +30,16 @@ router.get("/:id", async (req, res) => {
   else res.status(200).send(result);
 });
 
+// This section will help you get expenses by search
+router.get("/search?=term", async (req, res) => {
+  let collection = await db.collection("expenses");
+  let query = {name: new ObjectId(req.params.term)};
+  let result = await collection.find(query);
+
+  if (!result) res.send("Not found").status(404);
+  else res.status(200).send(result.toArray());
+});
+
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
   let newDocument = {
