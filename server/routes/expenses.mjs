@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 // This section will help you get expenses by search
 router.get("/search", async (req, res) => {
   let collection = await db.collection("expenses");
-  let query = {name: new ObjectId(req.params.search)};
+  let query = {name: new ObjectId(req.query.search)};
   let result = await collection.find(query);
 
   if (!result) res.send("Not found").status(404);
