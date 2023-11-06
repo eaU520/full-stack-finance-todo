@@ -88,6 +88,10 @@ const ExpenseList = () => {
               <th>Urgency</th>
               </tr>
             </thead>
+            <form>
+              <input>
+              </input>
+            </form>
             <tbody>{expenseList()}</tbody>
             </table>
             </div>
