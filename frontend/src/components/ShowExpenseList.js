@@ -88,9 +88,12 @@ const ExpenseList = () => {
               <th>Urgency</th>
               </tr>
             </thead>
-            <form>
-              <input>
+            <form onSubmit={onSubmit}>
+              <input  
+                value={form.name}
+                onChange={(e) => updateForm({ name: e.target.value})}>
               </input>
+
             </form>
             <tbody>{expenseList()}</tbody>
             </table>
