@@ -91,7 +91,7 @@ const ExpenseList = () => {
             <form onSubmit={onSubmit}>
               <input  
                 value={form.name}
-                onChange={(e) => updateForm({ name: e.target.value})}>
+                onChange={(e) => updateForm({ search: e.target.value})}>
               </input>
 
             </form>
