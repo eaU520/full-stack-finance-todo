@@ -90,6 +90,8 @@ const ExpenseList = () => {
             </thead>
             <form onSubmit={onSubmit}>
               <input  
+                type="text"
+                placeholder="Search expenses"
                 value={form.name}
                 onChange={(e) => updateForm({ search: e.target.value})}>
               </input>
