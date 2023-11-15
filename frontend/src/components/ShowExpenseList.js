@@ -95,7 +95,6 @@ const ExpenseList = () => {
                 value={form.name}
                 onChange={(e) => updateForm({ search: e.target.value})}>
               </input>
-
             </form>
             <tbody>{expenseList()}</tbody>
             </table>
