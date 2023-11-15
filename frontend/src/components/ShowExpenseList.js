@@ -38,6 +38,7 @@ const Expense = (props) => (
 const ExpenseList = () => {
   
   const [expenses, setExpenses] = useState(0);
+  const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
@@ -77,33 +78,29 @@ const ExpenseList = () => {
       );
     });
   }
+  function updateForm(value){
+    return setForm((prev)=> {
+      return {...prev, ...value};
+    });
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
 
-    const newExpense = {...form};
-
-    await fetch('http://localhost:5050/expense',{
-      method: "POST",
+    await fetch('http://localhost:5050/expense/search?term='+form.searchTerm,{
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newExpense),
+      }
     })
       .catch(error => {
         window.alert(error);
         return;
       });
         setForm({
-          name: '',
-          urgency:'',
-          amount:0,
-          description:'',
-          due_date:'',
-          type:'',
-          funded: false
+          term: ''
         });
-        navigate('/', {replace: true});//Adds to database
+        // navigate('/', {replace: true});//Adds to database
       }
 
       return (
@@ -130,6 +127,6 @@ const ExpenseList = () => {
             <tbody>{expenseList()}</tbody>
             </table>
             </div>
-      );
+      );//TODO: Pagination
     }
   export default ExpenseList;
