@@ -64,6 +64,8 @@ const ExpenseList = () => {
     const newExpenses = expenses.filter((el) => el._id !== id);
     setExpenses(newExpenses);
   }
+
+  
   function expenseList(){
     return Array.from(expenses).map((expense) => {
       return (
@@ -75,6 +77,35 @@ const ExpenseList = () => {
       );
     });
   }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    const newExpense = {...form};
+
+    await fetch('http://localhost:5050/expense',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newExpense),
+    })
+      .catch(error => {
+        window.alert(error);
+        return;
+      });
+        setForm({
+          name: '',
+          urgency:'',
+          amount:0,
+          description:'',
+          due_date:'',
+          type:'',
+          funded: false
+        });
+        navigate('/', {replace: true});//Adds to database
+      }
+
       return (
         
         <div>

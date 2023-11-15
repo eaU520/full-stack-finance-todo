@@ -49,7 +49,7 @@ userRouter.post("/register",
     };
   bcrypt.genSalt(saltSize)
     .then(salt => {//TODO: Cretae separate async function
-      return await bcrypt.hash(userAdd.password, salt)
+      return bcrypt.hash(userAdd.password, salt)
     })
     .then(hash=> {
       userHash = hash;
