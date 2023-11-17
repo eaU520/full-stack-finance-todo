@@ -87,7 +87,7 @@ const ExpenseList = () => {
   async function onSubmit(e) {
     e.preventDefault();
 
-    await fetch('http://localhost:5050/expense/search?term='+form.searchTerm,{
+    await fetch('http://localhost:5050/expense/search?term='+form.searchTerm,{//FIXME: create separate string first?
       method: "GET",
       headers: {
         "Content-Type": "application/json",
