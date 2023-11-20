@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
   if(req.body.session){
     let collection = await db.collection("expenses");
     let results = await collection.find({user:req.username}).toArray();
+    //TODO: Check if logged in
     if (!results) res.send("No expenses found").status(404);
     else res.status(200).send(results);
   }else{
@@ -24,7 +25,7 @@ router.get("/:id", async (req, res) => {
   let collection = await db.collection("expenses");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
-
+  //TODO: Check if logged in
   if (!result) res.send("Not found").status(404);
   else res.status(200).send(result);
 });
