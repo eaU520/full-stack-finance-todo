@@ -38,6 +38,9 @@ const Expense = (props) => (
 const ExpenseList = () => {
   
   const [expenses, setExpenses] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [expensesPerPage] = useState(3);//FIXME: Increase, low for testing
   const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
