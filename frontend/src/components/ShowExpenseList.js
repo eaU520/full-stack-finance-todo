@@ -69,7 +69,21 @@ const ExpenseList = () => {
     setExpenses(newExpenses);
   }
 
-  
+  useEffect(()=>{
+    await fetch("URL HERE", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then(res => {
+        
+        setLoading(false);
+      })
+      .catch(() => {
+
+      })
+  });
   function expenseList(){
     return Array.from(expenses).map((expense) => {
       return (
