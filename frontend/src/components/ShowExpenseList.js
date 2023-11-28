@@ -77,7 +77,7 @@ const ExpenseList = () => {
       }
     })
       .then(res => {
-        
+        setExpenses(res.data);
         setLoading(false);
       })
       .catch(() => {
