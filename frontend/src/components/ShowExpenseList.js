@@ -40,7 +40,8 @@ const ExpenseList = () => {
   const [expenses, setExpenses] = useState(0);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [expensesPerPage] = useState(3);//FIXME: Increase, low for testing
+  const expensesPerPage = 3;//FIXME: Increase, low for testing
+  const [totalPage, setTotalPages] = useState(0);
   const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
@@ -55,7 +56,16 @@ const ExpenseList = () => {
         }
         const expensesList = await response.json();
         setExpenses(expensesList);
+        setTotalPages(Math.ceil(response.data.length/expensesPerPage));
     }
+    const startIndex = currentPage*expensesPerPage;
+    const endIndex = startIndex + expensesPerPage;
+    const subset = expenses.slice(startIndex,endIndex);
+
+    const handlePageChange = (selectedPage) =>{
+      setCurrentPage(selectedPage.selected);
+    }
+
     getExpenses();
     return;
   },[expenses.length]);
