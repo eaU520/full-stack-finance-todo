@@ -61,6 +61,7 @@ const ExpenseList = () => {
     const startIndex = currentPage*expensesPerPage;
     const endIndex = startIndex + expensesPerPage;
     const subset = expenses.slice(startIndex,endIndex);
+    setExpenses(subset);
 
     const handlePageChange = (selectedPage) =>{
       setCurrentPage(selectedPage.selected);
