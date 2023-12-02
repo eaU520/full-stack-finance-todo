@@ -18,6 +18,7 @@ const App = () => {
       <Route path='/expenses/create_expense' element={<PrivateRoute Component={CreateExpense}/>} />
       <Route path='/users/register' element={<RegisterUser />} />
       <Route path='/users/forgot' element={<ForgotPassword />} />
+      <Route path='/users/calendar' element={<PrivateRoute Component={Calendar}/>} />
       </Routes>
   //  </BrowserRouter>
  );
