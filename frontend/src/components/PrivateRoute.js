@@ -10,6 +10,6 @@ const PrivateRoute = ({Component}) =>{
     console.log(`Authenticated ${authenticated}`);
     //TODO: session is stored in req.session.user
     
-    return authenticated ? <Component/> : <Navigate to="/user/login" />;
+    return authenticated ? <Component/> : <Navigate to="/users/login" />;
 }
 export default PrivateRoute;
