@@ -38,34 +38,38 @@ const Expense = (props) => (
 const ExpenseList = () => {
   
   const [expenses, setExpenses] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const expensesPerPage = 3;//FIXME: Increase, low for testing
-  const [totalPage, setTotalPages] = useState(0);
+  // const [loading, setLoading] = useState(true);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const expensesPerPage = 3;//FIXME: Increase, low for testing
+  // const [totalPage, setTotalPages] = useState(0);
   const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
           method: "GET",
           body:  {session: window.sessionStorage.getItem("session-id")}
-        });
+        }).then(res =>{
+          setExpenses(res.data);
+          // setLoading(false);
+        })
+        .catch();
        
         if (!response.ok){
           window.alert(`Error from displaying expenses:${response.statusText}`);
           return;
         }
-        const expensesList = await response.json();
-        setExpenses(expensesList);
-        setTotalPages(Math.ceil(response.data.length/expensesPerPage));
+        // const expensesList = await response.json();
+        // setExpenses(expensesList);
+        // setTotalPages(Math.ceil(response.data.length/expensesPerPage));
     }
-    const startIndex = currentPage*expensesPerPage;
-    const endIndex = startIndex + expensesPerPage;
-    const subset = expenses.slice(startIndex,endIndex);
-    setExpenses(subset);
+    // const startIndex = currentPage*expensesPerPage;
+    // const endIndex = startIndex + expensesPerPage;
+    // const subset = expenses.slice(startIndex,endIndex);
+    // setExpenses(subset);
 
-    const handlePageChange = (selectedPage) =>{
-      setCurrentPage(selectedPage.selected);
-    }
+    // const handlePageChange = (selectedPage) =>{
+    //   setCurrentPage(selectedPage.selected);
+    // }
 
     getExpenses();
     return;
@@ -80,21 +84,6 @@ const ExpenseList = () => {
     setExpenses(newExpenses);
   }
 
-  useEffect(()=>{
-    await fetch("URL HERE", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then(res => {
-        setExpenses(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-
-      })
-  });
   function expenseList(){
     return Array.from(expenses).map((expense) => {
       return (
