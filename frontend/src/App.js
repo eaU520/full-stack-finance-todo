@@ -6,6 +6,7 @@ import RegisterUser from "./components/RegisterUser.js";
 import ForgotPassword from "./components/ForgotPassword.js";
 import CreateExpense from "./components/CreateExpense.js";
 import PrivateRoute from "./components/PrivateRoute.js";
+import Calendar from "./components/Calendar.js";
 //TODO: Dark, contrast, light themes
 
 const App = () => {

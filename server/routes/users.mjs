@@ -34,7 +34,7 @@ userRouter.post("/register",
     return true;
   }),
   //TODO: Internationalization and non ASCII
-  (req, response)=>{
+  async (req, response)=>{
     const validationErrors = validationResult(req);
     if(!validationErrors.isEmpty()){
       return response.status(400).send(validationErrors.array().map((x)=>x["msg"]));
@@ -47,20 +47,30 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-  bcrypt.genSalt(saltSize)
+  console.log("The user being added 1: ",userAdd);
+  userAdd["password"] = await bcrypt.genSalt(saltSize)
     .then(salt => {//TODO: Cretae separate async function
       return bcrypt.hash(userAdd.password, salt)
     })
     .then(hash=> {
       userHash = hash;
-      console.log(`The hash is: ${userHash}`);
+      return hash;
     })
     .catch(err => console.error(err.message));
-    userAdd["password"] = userHash;
+    console.log("The user being added: ",userAdd);
     const collection = db.collection("users");
-    const existsEmail = collection.findOne({email:  userAdd.email});
-    const existsUsername = collection.findOne({username: userAdd.username});
-    if (existsEmail !== null  && existsUsername.length === 0){
+    const existsEmail = await collection.findOne({email:  userAdd.email}).then(res =>{
+      if(res !== null){
+        return res;
+      }
+    });
+    const existsUsername = await collection.findOne({username: userAdd.username}).then(res => {
+      if(res !== null){
+        return res;
+      }
+    });
+    console.log("Anyone exist? " , existsEmail, existsUsername);
+    if (existsEmail === undefined  && existsUsername === undefined){
       const result = collection.insertOne(userAdd);
       response.status(201).send(result);//201 Created
     }
@@ -74,6 +84,7 @@ userRouter.post("/register",
 // @description add a user
 // @access Public
 userRouter.post('/login', async (req, response) =>{
+  
   let userLog = {
     username : req.body.username,
     password: req.body.password,
@@ -86,10 +97,10 @@ userRouter.post('/login', async (req, response) =>{
   // user.forEach(console.log);
   if(user.username === undefined) return response.status(400).send("User does not exist");
   // console.log(`The user password is: ${user.password}, ${user.username} `);
-  bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
-    if(!isMatch) return response.status(404).send("Invalid crednetials");
+  await bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
+    if(!isMatch) return response.status(404).send("Invalid credentials");
     const userSession = {id:user.id, name: user.name, email: user.email};
-    req.session.user = userSession;
+    ressponse.session.user = userSession;
     window.sessionStorage.setItem("session-id", true);
     response.cookie = "session=true";
     response.status(200).send(`Successfully logged in ${userLog.username}`);
