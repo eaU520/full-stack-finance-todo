@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({Component}) =>{
-    const authenticated = window.sessionStorage.getItem("session-id");
+    const authenticated = localStorage.getItem("session");
     // const tempCook = response.clearCookie("session-id");
    // req.session.user = null;
    // response.cookie = "session=false";

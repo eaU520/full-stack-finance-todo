@@ -34,12 +34,6 @@ const LoginUser = (props) => {
         })
           .then(res => {
             localStorage.setItem("session",login.username);
-            // setLogin({
-            //     username: '',
-            //     password:''
-            // })
-            
-            console.log(localStorage);
             // JSON.parse((localStorage.setItem("currentSession",props.session)));
             navigate('/', {replace: true});//TODO: History, breadcrumbs?
           })

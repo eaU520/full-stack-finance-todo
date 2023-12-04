@@ -46,8 +46,7 @@ const ExpenseList = () => {
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
-          method: "GET",
-          body:  {session: localStorage.getItem("session")}
+          method: "GET"
         }).then(res =>{
           setExpenses(res.data);
           // setLoading(false);
