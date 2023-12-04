@@ -47,7 +47,7 @@ const ExpenseList = () => {
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
           method: "GET",
-          body:  {session: window.sessionStorage.getItem("session-id")}
+          body:  {session: localStorage.getItem("session")}
         }).then(res =>{
           setExpenses(res.data);
           // setLoading(false);

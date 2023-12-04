@@ -100,13 +100,11 @@ userRouter.post('/login', async (req, response) =>{
   await bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
     if(!isMatch) return response.status(404).send("Invalid credentials");
     const userSession = {id:user.id, name: user.name, email: user.email};
-    ressponse.session.user = userSession;
-    window.sessionStorage.setItem("session-id", true);
     response.cookie = "session=true";
     response.status(200).send(`Successfully logged in ${userLog.username}`);
   });
 });
-
+/*
 userRouter.delete('/logout', async (req, response) =>{
   req.session.destroy((error)=>{
     if(error) throw error;
@@ -117,7 +115,7 @@ userRouter.delete('/logout', async (req, response) =>{
     response.send("Logged out successfully");
   });
 });
-
+*/
 // @route GET /calendar
 // @description add a user
 // @access Public

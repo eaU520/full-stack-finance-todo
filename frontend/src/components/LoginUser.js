@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from 'react';
 import '../App.css';
 import Navigation from './Navigation';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const LoginUser = (props) => {
     // var session;
@@ -13,7 +13,7 @@ const LoginUser = (props) => {
       username: "",
       password: ""
     });
-    
+    const navigate = useNavigate();
     function updateLogin(value){
       return setLogin((prev)=> {
       return {...prev, ...value};
@@ -33,13 +33,15 @@ const LoginUser = (props) => {
           body: JSON.stringify(data),
         })
           .then(res => {
-            setLogin({
-                username: '',
-                password:''
-            })
-            // props.session = res;
+            localStorage.setItem("session",login.username);
+            // setLogin({
+            //     username: '',
+            //     password:''
+            // })
+            
+            console.log(localStorage);
             // JSON.parse((localStorage.setItem("currentSession",props.session)));
-            // this.props.history.push('/');//TODO: History, breadcrumbs?
+            navigate('/', {replace: true});//TODO: History, breadcrumbs?
           })
           .catch(err => {
             console.log("Error in Login!", err);
