@@ -46,10 +46,12 @@ const ExpenseList = () => {
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
-          method: "GET"
+          method: "GET",
+          session: localStorage.getItem("session")
         }).then(res =>{
           setExpenses(res.data);
-          // setLoading(false);
+          console.log(res.data);
+          
         })
         .catch();
        
@@ -72,7 +74,7 @@ const ExpenseList = () => {
 
     getExpenses();
     return;
-  },[expenses.length]);
+  });
     
   async function deleteExpense(id) {
     await fetch(`http://localhost:5050/expenses/${id}`, {
