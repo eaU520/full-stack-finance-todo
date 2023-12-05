@@ -1,17 +1,21 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
+import session from "express-session";
 import {body, validationResult} from 'express-validator';
+import mongoose from "mongoose";
 // /Users/ebonyarliciacalloway/Documents/full-stack-finance-todo/server/db/models/User.js
 // // Load User model
 // const User = require('../database/models/User');
 
 const userRouter = express.Router();
 const saltSize = 12;
+
 // // Connection to the database
 // const databaseObject = require("../database/db");
 // const { ObjectId } = require('mongodb');
-
+const app = express();
+// const mongDBStore = require("connect-mongodb-session")(session);
 // ID to Object
 // const objectID = require("mongodb").ObjectId;
 //TODO: encrypt and store password

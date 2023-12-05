@@ -15,7 +15,7 @@ export default function CreateExpense() {
           dueDate:'',
           urgency:'',
           funded:false,
-          username: sessionStorage.getItem("username")
+          username: sessionStorage.getItem("session")
       });
 
       const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function CreateExpense() {
     
         const newExpense = {...form};
     
-        await fetch('http://localhost:5050/expense',{
+        await fetch('http://localhost:5050/expenses',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

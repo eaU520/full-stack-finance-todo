@@ -129,6 +129,14 @@ const ExpenseList = () => {
         <div>
           <Navigation/>
           <h3 >Expenses List</h3>
+          <form onSubmit={onSubmit}>
+              <input  
+                type="text"
+                placeholder="Search expenses"
+                value={form.name}
+                onChange={(e) => updateForm({ search: e.target.value})}>
+              </input>
+            </form>
           <table className="table table-striped" style={{ marginTop:20}}>
             <thead>
               <tr>
@@ -137,16 +145,10 @@ const ExpenseList = () => {
               <th>Urgency</th>
               </tr>
             </thead>
-            <form onSubmit={onSubmit}>
-              <input  
-                type="text"
-                placeholder="Search expenses"
-                value={form.name}
-                onChange={(e) => updateForm({ search: e.target.value})}>
-              </input>
-            </form>
+            
             <tbody>{expenseList()}</tbody>
             </table>
+            
             </div>
       );//TODO: Pagination
     }
