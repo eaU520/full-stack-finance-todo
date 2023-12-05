@@ -33,7 +33,7 @@ const LoginUser = (props) => {
           body: JSON.stringify(data),
         })
           .then(res => {
-            localStorage.setItem("session",login.username);
+            sessionStorage.setItem("session",login.username);
             // JSON.parse((localStorage.setItem("currentSession",props.session)));
             navigate('/', {replace: true});//TODO: History, breadcrumbs?
           })

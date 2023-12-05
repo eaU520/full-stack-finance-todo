@@ -3,6 +3,7 @@ import {  useEffect, useState } from 'react';
 import '../App.css';
 import Navigation from './Navigation';
 import { Link } from 'react-router-dom';
+// import session from "express-session";
 
 //TODO: Session showing only that User's Expenses
 /*
@@ -37,7 +38,7 @@ const Expense = (props) => (
 );
 const ExpenseList = () => {
   
-  const [expenses, setExpenses] = useState(0);
+  const [expenses, setExpenses] = useState([]);
   // const [loading, setLoading] = useState(true);
   // const [currentPage, setCurrentPage] = useState(1);
   // const expensesPerPage = 3;//FIXME: Increase, low for testing
@@ -45,20 +46,22 @@ const ExpenseList = () => {
   const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
-        const response = await fetch(`http://localhost:5050/expenses/`,{
+        await fetch(`http://localhost:5050/expenses/`,{
           method: "GET",
-          session: localStorage.getItem("session")
+          headers:{
+            "session": sessionStorage.getItem("session")
+          }
         }).then(res =>{
-          setExpenses(res.data);
-          console.log(res.data);
-          
-        })
-        .catch();
+          if(typeof res === "string")
+            setExpenses([]);
+          else
+            setExpenses(res);
+        }).catch();
        
-        if (!response.ok){
-          window.alert(`Error from displaying expenses:${response.statusText}`);
-          return;
-        }
+        // if (!response.ok){
+        //   window.alert(`Error from displaying expenses:${response.statusText}`);
+        //   return;
+        // }
         // const expensesList = await response.json();
         // setExpenses(expensesList);
         // setTotalPages(Math.ceil(response.data.length/expensesPerPage));

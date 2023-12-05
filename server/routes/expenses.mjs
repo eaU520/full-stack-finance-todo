@@ -7,14 +7,12 @@ import {ObjectId} from "mongodb";
 const router = express.Router();
 // This section will help you get a list of all the expenses.
 router.get("/", async (req, res) => {
-  if(req.session){
+  if(req.headers["session"]){
     let collection = await db.collection("expenses");
     let results = await collection.find({user:req.username}).toArray();
-    console.log(results);
-    if (!results) res.send("No expenses found").status(404);
+    if (!results) res.send("No expenses found").status(204);//204 no content
     else res.status(200).send(results);
   }else{
-    console.log(`Is there a session ${req.body.session}`);
     res.status(401).send("You have to be logged in to view expenses");
   }
 });
