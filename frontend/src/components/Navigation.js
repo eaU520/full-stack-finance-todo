@@ -4,6 +4,7 @@ import '../App.css';
 export default function Navigation(){
         return (
           <div className="Navigation">
+            {/* //TODO: Add  logic for greeting/logout*/}
             <Link className="btn btn-link" to="/expenses/create_expense">Create an Expense</Link> |
             <Link className="btn btn-link" to="/users/login">Login</Link> |
             <Link className="btn btn-link" to="/">View All Expenses</Link> |
