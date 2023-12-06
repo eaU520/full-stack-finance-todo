@@ -9,7 +9,9 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   if(req.headers["session"]){
     let collection = await db.collection("expenses");
-    let results = await collection.find({user:req.username}).toArray();
+    const user = req.headers["session"];
+    let results = await collection.find({username:user}).toArray();
+    console.log(results);
     if (!results) res.send("No expenses found").status(204);//204 no content
     else res.status(200).send(results);
   }else{

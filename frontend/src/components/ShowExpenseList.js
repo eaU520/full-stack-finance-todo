@@ -46,24 +46,18 @@ const ExpenseList = () => {
   const [form, setForm] = useState({ searchTerm: ''});
     useEffect(() =>{
       async function getExpenses(){
-        await fetch(`http://localhost:5050/expenses/`,{
+        const response = await fetch(`http://localhost:5050/expenses/`,{
           method: "GET",
           headers:{
             "session": sessionStorage.getItem("session")
           }
-        }).then(res =>{
-          if(typeof res === "string")
-            setExpenses([]);
-          else
-            setExpenses(res);
-        }).catch();
-       
-        // if (!response.ok){
-        //   window.alert(`Error from displaying expenses:${response.statusText}`);
-        //   return;
-        // }
-        // const expensesList = await response.json();
-        // setExpenses(expensesList);
+        });
+        if (!response.ok){
+          window.alert(`Error from displaying expenses:${response.statusText}`);
+          return;
+        }
+        const expensesList = await response.json();
+        setExpenses(expensesList);
         // setTotalPages(Math.ceil(response.data.length/expensesPerPage));
     }
     // const startIndex = currentPage*expensesPerPage;
@@ -107,8 +101,9 @@ const ExpenseList = () => {
 
   async function onSubmit(e) {
     e.preventDefault();
-
-    await fetch('http://localhost:5050/expense/search?term='+form.searchTerm,{//FIXME: create separate string first?
+    const urlSearch = "http://localhost:5050/expense/search?term="+form.searchTerm;
+    console.log(form.searchTerm);
+    await fetch(urlSearch,{//FIXME: create separate string first?
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -136,6 +131,10 @@ const ExpenseList = () => {
                 value={form.name}
                 onChange={(e) => updateForm({ search: e.target.value})}>
               </input>
+              <input
+                        type="submit"
+                        className="btn btn-block mt-1"
+                    />
             </form>
           <table className="table table-striped" style={{ marginTop:20}}>
             <thead>
