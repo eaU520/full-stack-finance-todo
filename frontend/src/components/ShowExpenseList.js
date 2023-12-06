@@ -25,7 +25,7 @@ const Expense = (props) => (
     <td>{props.expense.description}</td>
     <td>{props.expense.urgency}</td>
     <td>
-      <Link className="btn btn-link" to={`/edit/${props.expense._id}`}>Edit</Link> |
+      <Link className="btn btn-link" to={`/expenses/${props.expense._id}`}>Edit</Link> |
       <button className="btn btn-link"
           onClick={() => {
             props.deleteExpense(props.expense._id);
@@ -60,6 +60,8 @@ const ExpenseList = () => {
         setExpenses(expensesList);
         // setTotalPages(Math.ceil(response.data.length/expensesPerPage));
     }
+    getExpenses();
+    return;
     // const startIndex = currentPage*expensesPerPage;
     // const endIndex = startIndex + expensesPerPage;
     // const subset = expenses.slice(startIndex,endIndex);
@@ -68,10 +70,7 @@ const ExpenseList = () => {
     // const handlePageChange = (selectedPage) =>{
     //   setCurrentPage(selectedPage.selected);
     // }
-
-    getExpenses();
-    return;
-  });
+  }, [expenses.length]);
     
   async function deleteExpense(id) {
     await fetch(`http://localhost:5050/expenses/${id}`, {

@@ -7,6 +7,7 @@ import ForgotPassword from "./components/ForgotPassword.js";
 import CreateExpense from "./components/CreateExpense.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import Calendar from "./components/Calendar.js";
+import EditExpense from "./components/EditExpense.js";
 //TODO: Dark, contrast, light themes
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       <Route path='/users/register' element={<RegisterUser />} />
       <Route path='/users/forgot' element={<ForgotPassword />} />
       <Route path='/users/calendar' element={<PrivateRoute Component={Calendar}/>} />
+      <Route path='/expenses/:id' element={<PrivateRoute Component={EditExpense}/>} />
       </Routes>
   //  </BrowserRouter>
  );
