@@ -3,8 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import '../App.css';
 import Navigation from './Navigation';
 //TODO: Clean up node_modules
-//TODO: Add username to the expense
-//TODO: Don't allow unless logged in
 export default function EditExpense() {
   const [form, setForm] = useState({
           name: '',
