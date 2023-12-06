@@ -4,16 +4,10 @@ import '../App.css';
 export default function Navigation(){
         return (
           <div className="Navigation">
-            {/* //TODO: Add  logic for greeting/logout*/}
             <Link className="btn btn-link" to="/expenses/create_expense">Create an Expense</Link> |
-            <Link className="btn btn-link" to="/users/login">Login</Link> |
+            <div>{sessionStorage.getItem("session") ? (<div>Logout</div>): (<div> <Link className="btn btn-link" to="/users/login">Login</Link> |</div>)}</div>
             <Link className="btn btn-link" to="/">View All Expenses</Link> |
             <Link className="btn btn-link" to="/users/calendar">Calendar-In progress</Link> 
-                  {/* <br /> */}
-                  {/* <Link to="/" className="btn btn-outline-warning float-left">
-                      Homepage
-                  </Link> */}
-
-            </div>
+            </div>//TODO: Better structured login/logout
         );
     }

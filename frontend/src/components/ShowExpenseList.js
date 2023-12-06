@@ -71,7 +71,7 @@ const ExpenseList = () => {
     //   setCurrentPage(selectedPage.selected);
     // }
   }, [expenses.length]);
-    
+    //FIXME: Two fetches
   async function deleteExpense(id) {
     await fetch(`http://localhost:5050/expenses/${id}`, {
       method: "DELETE"
