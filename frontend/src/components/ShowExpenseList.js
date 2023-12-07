@@ -3,22 +3,6 @@ import {  useEffect, useState } from 'react';
 import '../App.css';
 import Navigation from './Navigation';
 import { Link } from 'react-router-dom';
-// import session from "express-session";
-
-//TODO: Session showing only that User's Expenses
-/*
-// Save data to sessionStorage
-sessionStorage.setItem("key", "value");
-
-// Get saved data from sessionStorage
-let data = sessionStorage.getItem("key");
-
-// Remove saved data from sessionStorage
-sessionStorage.removeItem("key");
-
-// Remove all saved data from sessionStorage
-sessionStorage.clear();
-*/
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
@@ -36,14 +20,15 @@ const Expense = (props) => (
     </td>
   </tr>
 );
-const ExpenseList = () => {
+export default function ExpenseList(){
   
   const [expenses, setExpenses] = useState([]);
   // const [loading, setLoading] = useState(true);
   // const [currentPage, setCurrentPage] = useState(1);
   // const expensesPerPage = 3;//FIXME: Increase, low for testing
   // const [totalPage, setTotalPages] = useState(0);
-  const [form, setForm] = useState({ searchTerm: ''});
+  // const [form, setForm] = useState({ searchTerm: ''});
+  const [form, setForm] = useState([]);
     useEffect(() =>{
       async function getExpenses(){
         const response = await fetch(`http://localhost:5050/expenses/`,{
@@ -71,7 +56,7 @@ const ExpenseList = () => {
     //   setCurrentPage(selectedPage.selected);
     // }
   }, [expenses.length]);
-    //FIXME: Two fetches
+    //FIXME: Multiple fetches
   async function deleteExpense(id) {
     await fetch(`http://localhost:5050/expenses/${id}`, {
       method: "DELETE"
@@ -101,8 +86,9 @@ const ExpenseList = () => {
   async function onSubmit(e) {
     e.preventDefault();
     const urlSearch = "http://localhost:5050/expense/search?term="+form.searchTerm;
+    //FIXME: Not grabbing the string to search
     console.log(form.searchTerm);
-    await fetch(urlSearch,{//FIXME: create separate string first?
+    await fetch(urlSearch,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -149,5 +135,4 @@ const ExpenseList = () => {
             
             </div>
       );//TODO: Pagination
-    }
-  export default ExpenseList;
+}
