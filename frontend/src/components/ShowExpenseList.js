@@ -85,9 +85,8 @@ export default function ExpenseList(){
 
   async function onSubmit(e) {
     e.preventDefault();
-    const urlSearch = "http://localhost:5050/expense/search?term="+form.searchTerm;
-    //FIXME: Not grabbing the string to search
-    console.log(form.searchTerm);
+    const term = {...form};
+    const urlSearch = "http://localhost:5050/expense/search?term="+term.search;
     await fetch(urlSearch,{
       method: "GET",
       headers: {
