@@ -53,7 +53,7 @@ userRouter.post("/register",
     };
   console.log("The user being added 1: ",userAdd);
   userAdd["password"] = await bcrypt.genSalt(saltSize)
-    .then(salt => {//TODO: Cretae separate async function
+    .then(salt => {
       return bcrypt.hash(userAdd.password, salt)
     })
     .then(hash=> {
@@ -101,7 +101,7 @@ userRouter.post('/login', async (req, response) =>{
   // user.forEach(console.log);
   if(user.username === undefined) return response.status(400).send("User does not exist");
   // console.log(`The user password is: ${user.password}, ${user.username} `);
-  await bcrypt.compare(userLog.password, user.password).then((isMatch) =>{//FIXME: Hashing the user's input
+  await bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
     if(!isMatch) return response.status(404).send("Invalid credentials");
     const userSession = {id:user.id, name: user.name, email: user.email};
     response.cookie = "session=true";
@@ -123,19 +123,18 @@ userRouter.delete('/logout', async (req, response) =>{
 // @route GET /calendar
 // @description add a user
 // @access Public
-userRouter.route('/calendar').get(function (req, response){
-  let connection = databaseObject.getDb();
-  let userLog = {
-    username : req.body.username,
-  };
-  connection.collection("calendar").findOne(userLog, function (err, res){
-    if(err){
-       throw err;
-    }
-    //TODO: check the username then check the password matches bcrypt
-    response.json(res);
-  });
-});
+// userRouter.route('/calendar').get(function (req, response){
+//   let connection = databaseObject.getDb();
+//   let userLog = {
+//     username : req.body.username,
+//   };
+//   connection.collection("calendar").findOne(userLog, function (err, res){
+//     if(err){
+//        throw err;
+//     }
+//     response.json(res);
+//   });
+// });
 
 userRouter.post('/user/forgot', async (req, response) =>{
   response.send("Forgot password, put in username to get temporary password");
