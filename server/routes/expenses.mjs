@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
     let collection = await db.collection("expenses");
     const user = req.headers["session"];
     let results = await collection.find({username:user}).toArray();
-    console.log(results);
     if (!results) res.send("No expenses found").status(204);//204 no content
     else res.status(200).send(results);
   }else{
@@ -32,8 +31,8 @@ router.get("/:id", async (req, res) => {
 router.get("/search", async (req, res) => {
   let collection = await db.collection("expenses");
   let query = {name: new ObjectId(req.query.term)};
-  let result = await collection.find(query);
-
+  let result = await collection.find(query).toArray();
+  console.log("Result of search: ",result);
   if (!result) res.send("Not found").status(404);
   else res.status(200).send(result.toArray());
 });
@@ -51,14 +50,12 @@ router.post("/", async (req, res) => {
     username: req.body.username
   };
   let collection = await db.collection("expenses");
-  console.log("Adding a new expense");
   let result = await collection.insertOne(newDocument);
   res.send(result).status(204);
 });
 
 // This section will update an expense by id.
 router.patch("/:id", async (req, res) => {
-  console.log("Editting one expense");
   const query = { _id: new ObjectId(req.params.id) };
   const updates =  {
     $set: {

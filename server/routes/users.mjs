@@ -51,7 +51,6 @@ userRouter.post("/register",
       name: req.body.name,
       admin: false,
     };
-  console.log("The user being added 1: ",userAdd);
   userAdd["password"] = await bcrypt.genSalt(saltSize)
     .then(salt => {
       return bcrypt.hash(userAdd.password, salt)
