@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import '../App.css';
 import Navigation from './Navigation';
 //TODO: Clean up node_modules
-//TODO: Add username to the expense
-//TODO: Don't allow unless logged in
 export default function CreateExpense() {
   const [form, setForm] = useState({
           name: '',
@@ -52,7 +50,6 @@ export default function CreateExpense() {
               funded: false
             });
             navigate('/', {replace: true});//Adds to database
-            //FIXME: What is this error?
   
       }
     

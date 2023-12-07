@@ -14,8 +14,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'The password is a required field'],
-    minLength:[8, 'The password must be at least 8 characters'],
-    maxLength:[16, 'The password must be at most 16 characters']//TODO: Will this be already hashed, probably
+    minLength:[8, 'The password must be at least 10 characters']
   },
   username: {
     type: String,

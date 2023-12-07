@@ -25,7 +25,7 @@ const app = express();
 userRouter.post("/register", 
   body("email", "Must be a valid email format").trim().isEmail(),
   // body("email", "Your email is too short").isLength({min: 5}),normalizeEmail()?
-  body("password","Password must be 8-16 characters").isLength({min:8, max: 16}),//TODO: No maximum or much higher
+  body("password","Password must be at least 10 characters").isLength({min:10}),
   body("password","Password must contain at least one uppercase letter").matches("[A-Z]"),
   body("password","Password must contain at least one number").matches("[0-9]"),
   //TODO: minSymbols: 1,

@@ -11,7 +11,7 @@ import mongo from 'mongoose';
 
 
 const MongoDBStore = connection(session);
-//TODO:Remove commented lines
+
 const port = process.env.PORT || 5050;
 const app = express();
 
@@ -21,8 +21,6 @@ app.use(cookieParser());
 
 app.use("/expenses",expenses);
 app.use("/users",users);
-// get driver connection
-// const dbconn = require("./database/db");
 
 mongo.Promise = global.Promise
 mongo.connect(process.env.mongoURI,{
@@ -37,12 +35,10 @@ const sec = 1000;
 const min = 10;
 const millisec = 1;
 const hours = 1;
-// const maxSession = sec*min*millisec*hours;
-const maxSession = sec*min;
+const maxSession = sec*min*millisec*hours;
 
 
 app.use(
-  //TODO: Login creates session
   session({
     secret: process.env.secretKey,//FIXME: Generate dynamically
     name: 'session-id',//key field for postman

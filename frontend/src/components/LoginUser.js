@@ -8,7 +8,6 @@ const LoginUser = (props) => {
     // var session;
     const [login, setLogin] = useState({
       // username: props.session !== undefined ? props.session.username: ''
-      //TODO: sessions
       // password: session !== undefined ? session.password: '' Don't use this
       username: "",
       password: ""
