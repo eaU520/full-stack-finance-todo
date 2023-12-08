@@ -24,7 +24,7 @@ const LoginUser = (props) => {
 
         const data = { ...login};
         
-        await fetch('http://localhost:5050/users/login',{
+        const response = await fetch('http://localhost:5050/users/login',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,15 +32,14 @@ const LoginUser = (props) => {
           body: JSON.stringify(data),
         })
           .then(res => {
-            sessionStorage.setItem("session",login.username);
-            // JSON.parse((localStorage.setItem("currentSession",props.session)));
-            navigate('/', {replace: true});//TODO: History, breadcrumbs?
-          })
-          .catch(err => {
-            console.log("Error in Login!", err);
+            console.log("What is returned",response );
+            if(res.ok) {
+              sessionStorage.setItem("session",login.username);
+              navigate('/');//TODO: History, breadcrumbs?
+            }else{
+              console.log("Response message",);
+            }
           });
-
-          // navigate('/', {replace: true});
       }
     
         return (

@@ -1,9 +1,9 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import bcrypt from "bcryptjs";
-import session from "express-session";
+// import session from "express-session";
 import {body, validationResult} from 'express-validator';
-import mongoose from "mongoose";
+// import mongoose from "mongoose"; 
 // /Users/ebonyarliciacalloway/Documents/full-stack-finance-todo/server/db/models/User.js
 // // Load User model
 // const User = require('../database/models/User');
@@ -60,7 +60,6 @@ userRouter.post("/register",
       return hash;
     })
     .catch(err => console.error(err.message));
-    console.log("The user being added: ",userAdd);
     const collection = db.collection("users");
     const existsEmail = await collection.findOne({email:  userAdd.email}).then(res =>{
       if(res !== null){
@@ -97,13 +96,10 @@ userRouter.post('/login', async (req, response) =>{
   }
   const collection = db.collection("users");
   const user = await collection.findOne({username: userLog.username});
-  // user.forEach(console.log);
-  if(user.username === undefined) return response.status(400).send("User does not exist");
+  if(user === null) return response.status(400).json({msg:"User does not exist"});
   // console.log(`The user password is: ${user.password}, ${user.username} `);
   await bcrypt.compare(userLog.password, user.password).then((isMatch) =>{
     if(!isMatch) return response.status(404).send("Invalid credentials");
-    const userSession = {id:user.id, name: user.name, email: user.email};
-    response.cookie = "session=true";
     response.status(200).send(`Successfully logged in ${userLog.username}`);
   });
 });
