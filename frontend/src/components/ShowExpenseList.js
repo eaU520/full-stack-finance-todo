@@ -86,7 +86,7 @@ export default function ExpenseList(){
   async function onSubmit(e) {
     e.preventDefault();
     const term = {...form};
-    const urlSearch = "http://localhost:5050/expense/search?term="+term.search;
+    const urlSearch = "http://localhost:5050/expenses/search/"+term.search;
     await fetch(urlSearch,{
       method: "GET",
       headers: {

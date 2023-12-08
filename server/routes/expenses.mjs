@@ -18,8 +18,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// This section will help you get expenses by search
+router.get("/search/:term", async (req, res) => {
+  let collection = await db.collection("expenses");
+  let query = { $or: [{name: {$regex: req.params.term}}, {description: {$regex:  req.params.term}}]};//TODO: Performance, collation w/indices
+  // let query = {$match: {description:  req.params.term}};FIXME: Searching crunchy
+  let result = await collection.find(query).collation({locale: "en_US", strength: 1}).toArray();
+  console.log("Result of search: ",result);
+  if (!result) res.send("Not found").status(404);
+  else res.status(200).send(result);
+});
+
 // This section will get a single expense by id
-router.get("/:id", async (req, res) => {
+router.get("/:id/", async (req, res) => {
+  console.log("Here wrong",req.params.id);
   let collection = await db.collection("expenses");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
@@ -27,15 +39,6 @@ router.get("/:id", async (req, res) => {
   else res.status(200).send(result);
 });
 
-// This section will help you get expenses by search
-router.get("/search", async (req, res) => {
-  let collection = await db.collection("expenses");
-  let query = {name: new ObjectId(req.query.term)};
-  let result = await collection.find(query).toArray();
-  console.log("Result of search: ",result);
-  if (!result) res.send("Not found").status(404);
-  else res.status(200).send(result.toArray());
-});
 
 // This section will create a new expense.
 router.post("/", async (req, res) => {
