@@ -45,7 +45,7 @@ export default function CreateExpense() {
               urgency:'',
               amount:0,
               description:'',
-              due_date:'',
+              dueDate:'',
               type:'',
               funded: false
             });
@@ -115,8 +115,8 @@ export default function CreateExpense() {
                     <div className='form-group'>
                       <input
                         type='date'
-                        placeholder='due_date'
-                        id='due_date'
+                        placeholder='dueDate'
+                        id='dueDate'
                         className='form-control'
                         value={form.dueDate}
                         onChange={(e) => updateForm({ dueDate: e.target.value})}
