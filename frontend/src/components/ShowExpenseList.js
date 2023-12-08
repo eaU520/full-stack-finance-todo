@@ -7,7 +7,8 @@ const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
     <td>{props.expense.description}</td>
-    <td>{props.expense.urgency}</td>
+    <td>{props.expense.amount}</td>
+    <td>{props.expense.dueDate}</td>
     <td>
       <Link className="btn btn-link" to={`/expenses/${props.expense._id}`}>Edit</Link> |
       <button className="btn btn-link"
@@ -125,7 +126,8 @@ export default function ExpenseList(){
               <tr>
               <th>Name</th>
               <th>Description</th>
-              <th>Urgency</th>
+              <th>Amount</th>
+              <th>Due Date</th>
               </tr>
             </thead>
             

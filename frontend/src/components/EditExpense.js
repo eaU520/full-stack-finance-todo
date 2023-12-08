@@ -12,7 +12,8 @@ export default function EditExpense() {
           dueDate:'',
           urgency:'',
           funded:false,
-          username: sessionStorage.getItem("session")
+          expenses: [],
+          username: sessionStorage.getItem("session")//TODO: Can maybe remove?
       });
       const params = useParams();
       const navigate = useNavigate();
@@ -131,8 +132,8 @@ export default function EditExpense() {
                     <div className='form-group'>
                       <input
                         type='date'
-                        placeholder='due_date'
-                        id='due_date'
+                        placeholder='Due Date'
+                        id='dueDate'
                         className='form-control'
                         value={form.dueDate}
                         onChange={(e) => updateForm({ dueDate: e.target.value})}
@@ -161,6 +162,7 @@ export default function EditExpense() {
                     <input
                         type="submit"
                         className="btn btn-primary"
+                        value="Update Expense"
                     />
                   </form>
               </div>

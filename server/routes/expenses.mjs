@@ -1,5 +1,3 @@
-//TODO: Sort by date, amount, name
-//TODO: Pagination of expenses
 import express from "express";
 import db from "../db/conn.mjs";
 import {ObjectId} from "mongodb";
@@ -31,7 +29,6 @@ router.get("/search/:term", async (req, res) => {
 
 // This section will get a single expense by id
 router.get("/:id/", async (req, res) => {
-  console.log("Here wrong",req.params.id);
   let collection = await db.collection("expenses");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
@@ -66,7 +63,7 @@ router.patch("/:id", async (req, res) => {
       urgency: req.body.urgency,
       amount: req.body.amount,
       description: req.body.description,
-      dueDate: req.body.dueDaate,
+      dueDate: req.body.dueDate,
       type: req.body.type,
       funded: req.body.funded,
       username: req.body.username
