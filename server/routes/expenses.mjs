@@ -39,7 +39,7 @@ router.get("/:id/", async (req, res) => {
 
 // This section will create a new expense.
 router.post("/", async (req, res) => {
-  let newDocument = {
+  const newDocument = {
     name: req.body.name,
     urgency: req.body.urgency,
     amount: req.body.amount,
@@ -49,8 +49,8 @@ router.post("/", async (req, res) => {
     funded: req.body.funded,
     username: req.body.username
   };
-  let collection = await db.collection("expenses");
-  let result = await collection.insertOne(newDocument);
+  const collection = await db.collection("expenses");
+  const result = await collection.insertOne(newDocument);
   res.send(result).status(204);
 });
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import Navigation from './Navigation';
-//TODO: Clean up node_modules
+//TODO: Checkbox logic
 export default function CreateExpense() {
   const [form, setForm] = useState({
           name: '',
@@ -28,7 +28,12 @@ export default function CreateExpense() {
         e.preventDefault();
     
         const newExpense = {...form};
-    
+        if (newExpense.funded === "false"){
+          newExpense.funded = false;
+        }else{
+          newExpense.funded = true;
+        }
+        console.log(newExpense);
         await fetch('http://localhost:5050/expenses',{
           method: "POST",
           headers: {
@@ -138,7 +143,7 @@ export default function CreateExpense() {
                         type='checkbox'
                         id='funded'
                         className='form-control'
-                        value={form.funded}
+                        value={form.funded !== "false"}
                         onChange={(e) => updateForm({ funded: e.target.value})}
                       />
                     </div>

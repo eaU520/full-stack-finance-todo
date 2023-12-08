@@ -2,7 +2,7 @@ import React, { useState , useEffect} from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import '../App.css';
 import Navigation from './Navigation';
-//TODO: Clean up node_modules
+//TODO: Checkbox logic
 export default function EditExpense() {
   const [form, setForm] = useState({
           name: '',
@@ -55,7 +55,7 @@ export default function EditExpense() {
             description: form.description,
             dueDate: form.dueDate,
             urgency: form.urgency,
-            funded: form.funded,//TODO: FUNDED and DATE are cleared
+            funded: form.funded === "false"? false:true,//TODO: FUNDED is cleared
             username: sessionStorage.getItem("session")
         };
     
@@ -155,7 +155,7 @@ export default function EditExpense() {
                         type='checkbox'
                         id='funded'
                         className='form-control'
-                        value={form.funded}
+                        value={form.funded !== "false"}
                         onChange={(e) => updateForm({ funded: e.target.value})}
                       />
                     </div>
