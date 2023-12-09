@@ -24,7 +24,7 @@ const LoginUser = (props) => {
 
         const data = { ...login};
         
-        const response = await fetch('http://localhost:5050/users/login',{
+        await fetch('http://localhost:5050/users/login',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const LoginUser = (props) => {
           body: JSON.stringify(data),
         })
           .then(res => {
-            console.log("What is returned",response );
+            console.log("What is returned",res.msg );
             if(res.ok) {
               sessionStorage.setItem("session",login.username);
               navigate('/');//TODO: History, breadcrumbs?
