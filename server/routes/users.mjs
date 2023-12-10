@@ -7,10 +7,32 @@ import {body, validationResult} from 'express-validator';
 // /Users/ebonyarliciacalloway/Documents/full-stack-finance-todo/server/db/models/User.js
 // // Load User model
 // const User = require('../database/models/User');
+import mail from 'nodemailer';
 
 const userRouter = express.Router();
 const saltSize = 12;
+const transport = mail.createTransport({
+  // host: "smtp.forwardmail.net",
+  service: "yahoo",
+  port: 5050,
+  secure: true,
+  auth:{
+    user:"enterprisea@myyahoo.com",
+    pass:"TestingPassword3#"
+  }
+});
 
+// async function mailTo(from, to, subject,body){
+async function mailTo(){
+  const bulk = await transport.sendMail({
+    from:"ecallowayllc@gmail.com",
+    to:"ecal590@gmail.com",
+    subject: "Testing email",
+    text:"Testxing 123",
+    html: "<h2>Testing 123</h2>"
+  });
+
+}
 // // Connection to the database
 // const databaseObject = require("../database/db");
 // const { ObjectId } = require('mongodb');
@@ -18,7 +40,6 @@ const app = express();
 // const mongDBStore = require("connect-mongodb-session")(session);
 // ID to Object
 // const objectID = require("mongodb").ObjectId;
-//TODO: encrypt and store password
 // @route POST /register
 // @description add a user
 // @access Public
@@ -30,7 +51,8 @@ userRouter.post("/register",
   body("password","Password must contain at least one number").matches("[0-9]"),
   //TODO: minSymbols: 1,
   body("name", "Name must be at least two chracters long").trim().isLength({min: 2}),
-  body("name", "Name must only be contain letters").isAlpha(),
+  // body("name", "Name must only be contain letters").isAlpha(),
+  //FIXME: handle spaces...
   body("passwordAgain", "Password not the same as the confirm password").trim().custom((value, {req}) =>{
     if(value !== req.body.password){
       throw new Error('Password not the same as the confirm password');
@@ -43,7 +65,6 @@ userRouter.post("/register",
     if(!validationErrors.isEmpty()){
       return response.status(400).send(validationErrors.array().map((x)=>x["msg"]));
     }
-    let userHash = "";
     let userAdd = {
       username : req.body.username,
       email: req.body.email, 
@@ -56,7 +77,6 @@ userRouter.post("/register",
       return bcrypt.hash(userAdd.password, salt)
     })
     .then(hash=> {
-      userHash = hash;
       return hash;
     })
     .catch(err => console.error(err.message));
@@ -71,7 +91,6 @@ userRouter.post("/register",
         return res;
       }
     });
-    console.log("Anyone exist? " , existsEmail, existsUsername);
     if (existsEmail === undefined  && existsUsername === undefined){
       const result = collection.insertOne(userAdd);
       response.status(201).send(result);//201 Created
@@ -79,7 +98,7 @@ userRouter.post("/register",
     else{
       response.status(409).send("Username and/or email already in use");//409 Conflict
     }
-    console.log("The user being added: ",userAdd);
+    mailTo().catch(console.error);
 });
 
 // @route POST /login
@@ -103,33 +122,7 @@ userRouter.post('/login', async (req, response) =>{
     response.status(200).send(`Successfully logged in ${userLog.username}`);
   });
 });
-/*
-userRouter.delete('/logout', async (req, response) =>{
-  req.session.destroy((error)=>{
-    if(error) throw error;
-    response.clearCookie("session-id");
-    req.session.user = null;
-    response.cookie = "session=false";
-    window.sessionStorage.setItem("session-id", false);
-    response.send("Logged out successfully");
-  });
-});
-*/
-// @route GET /calendar
-// @description add a user
-// @access Public
-// userRouter.route('/calendar').get(function (req, response){
-//   let connection = databaseObject.getDb();
-//   let userLog = {
-//     username : req.body.username,
-//   };
-//   connection.collection("calendar").findOne(userLog, function (err, res){
-//     if(err){
-//        throw err;
-//     }
-//     response.json(res);
-//   });
-// });
+
 
 userRouter.post('/user/forgot', async (req, response) =>{
   response.send("Forgot password, put in username to get temporary password");

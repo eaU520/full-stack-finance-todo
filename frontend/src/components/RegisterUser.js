@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navigation from './Navigation';
-
+import {useNavigate} from 'react-router-dom';
 import '../App.css';
 //TODO: Using facebook, Google, etc.
 const CreateUser = (props) => {
@@ -13,7 +13,7 @@ const CreateUser = (props) => {
           email: "",
           error: "",
     });
-    
+    const navigate = useNavigate();
     function updateForm(value){
       return setForm((prev)=> {
         if(value.password !== value.passwordAgain){
@@ -52,7 +52,8 @@ const CreateUser = (props) => {
                 admin: false,
                 email: '',
                 error: "Success!" || res.text
-              })
+              });
+              navigate("/");
             }
         });
       }
