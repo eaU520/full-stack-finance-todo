@@ -10,7 +10,8 @@
       ],
       ["@babel/preset-react", {
         "runtime": "automatic"
-      }]
+      }],
+      "es2015", "stage0", "react"
     ],
     "plugins": ["@babel/plugin-proposal-class-properties" , "ignore-html-and-css-imports", "@babel/plugin-syntax-jsx"]
   }

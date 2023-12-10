@@ -1,8 +1,8 @@
 import React from "react";
 import {  useEffect, useState } from 'react';
-import '../App.css';
 import Navigation from './Navigation';
 import { Link } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.css";
 const Expense = (props) => (
   <tr>
     <td>{props.expense.name}</td>
@@ -121,13 +121,14 @@ export default function ExpenseList(){
                         className="btn btn-block mt-1"
                     />
             </form>
-          <table className="table table-striped" style={{ marginTop:20}}>
+          <table class="table table-striped" style={{ marginTop:20}}>
+          {/* <table class="table"> */}
             <thead>
               <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Due Date</th>
+              <th data-field="name" data-sortable>Name</th>
+              <th data-field="description" data-sortable>Description</th>
+              <th data-field="amount" data-sortable>Amount</th>
+              <th data-field="dueDate" data-sortable>Due Date</th>
               </tr>
             </thead>
             
