@@ -11,6 +11,10 @@ module.exports = {
           use: ['style-loader', 'css-loader'],
         },
         {
+          test: /\.json$/,
+          use: 'json-loader',
+        },
+        {
           test: /\.gif$/,
           type: 'asset/inline',
         },
