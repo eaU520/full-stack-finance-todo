@@ -34,14 +34,13 @@ const LoginUser = (props) => {
           .then(res => {
             console.log("What is returned",res.msg );
             if(res.ok) {
-              sessionStorage.setItem("session",login.username);
-              navigate('/');//TODO: History, breadcrumbs?
+              sessionStorage.setItem("session",login.username)
             }else{
               console.log("Response message",);
             }
           });
       }
-    
+      navigate('/');//TODO: History, breadcrumbs?
         return (
           <div className="Login">
             <Navigation/> 
