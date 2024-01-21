@@ -88,9 +88,9 @@ export default function ExpenseList(){
     e.preventDefault();
     const term = {...form};
     const urlSearch = "http://localhost:5050/expenses/search/"+term.search;
-    await fetch(urlSearch,{
+    const response = await fetch(urlSearch,{
       method: "GET",
-      headers: {
+      headers:{
         "Content-Type": "application/json",
       }
     })
@@ -98,6 +98,8 @@ export default function ExpenseList(){
         window.alert(error);
         return;
       });
+      const expensesList = await response.json();
+      setExpenses(expensesList);
         setForm({
           term: ''
         });
