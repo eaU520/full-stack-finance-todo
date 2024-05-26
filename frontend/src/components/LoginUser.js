@@ -40,7 +40,6 @@ const LoginUser = (props) => {
             }
           });
       }
-      navigate('/');//TODO: History, breadcrumbs?
         return (
           <div className="Login">
             <Navigation/> 
@@ -87,5 +86,6 @@ const LoginUser = (props) => {
               </div>
 
         );
+        navigate('/');//TODO: History, breadcrumbs?
     }
 export default LoginUser;
