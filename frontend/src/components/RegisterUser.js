@@ -34,6 +34,7 @@ const CreateUser = (props) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
+          // form.error = body;
         })
         .then(
           res => {
@@ -41,7 +42,7 @@ const CreateUser = (props) => {
               setForm({error: res.msg}); 
             }else if(res.ok === false && res.status === 400){
               setForm({error: res.text});
-              console.log(res.msg);
+              console.log("Here",res.msg);
               console.log(`The status code is ${res.status}`)
             }else{
               setForm({
@@ -151,7 +152,7 @@ const CreateUser = (props) => {
                     />
                     {/*TODO: Check and update the page on error or success <span>{form.error}</span> */}
                   </form>
-                  
+                  <span onChange={(e) => updateForm({ error : e.target.value})}>{form.error}</span>
                   {/* //TODO:Accessibility in form */}
               </div>
 
