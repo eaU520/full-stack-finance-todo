@@ -150,9 +150,9 @@ const CreateUser = (props) => {
                         type="submit"
                         className="btn btn-outline-warning btn-block mt-4"
                     />
+                    <span defaultValue = "WHY?" onChange={(e) => updateForm({ error : e.target.value})}>{form.error}</span>
                     {/*TODO: Check and update the page on error or success <span>{form.error}</span> */}
                   </form>
-                  <span onChange={(e) => updateForm({ error : e.target.value})}>{form.error}</span>
                   {/* //TODO:Accessibility in form */}
               </div>
 
