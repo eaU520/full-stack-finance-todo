@@ -20,7 +20,7 @@ describe("Attempting to create new users", () =>{
     render(<RegisterComponent data={{user}}/>);
 
     test("New user", async () =>{
-        // const newUser = await registerComponent.CreateUser(user);
-        // expect(newUser).toEqual(expect.objectContaining(newUser));
+        const newUser = await registerComponent.CreateUser(user);
+        expect(newUser).toEqual(expect.objectContaining(newUser));
     });
 });
