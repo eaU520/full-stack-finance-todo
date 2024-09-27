@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {useNavigate} from 'react-router-dom';
 import '../App.css';
 //TODO: Using facebook, Google, etc.
-const CreateUser = (props) => {
+const CreateUser = ({onSubmit}) => {
     const [form, setForm] = useState({
           name: "",
           username: "",

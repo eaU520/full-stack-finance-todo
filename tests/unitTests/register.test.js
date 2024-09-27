@@ -1,13 +1,11 @@
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import {fireEvent, render, screen } from "@testing-library/react";
 import RegisterComponent from "../../frontend/src/components/RegisterUser";
 
 
 afterEach(cleanup);
 
-test("Register Component renders", () =>{
-    expect(<RegisterComponent/>);
-});
-describe("Attempting to create new users", () =>{
+describe("Register Component renders", () =>{
+    test("Attempting to create new users", () =>{
     const user ={
         name: "Test Name",
         username: "testerman",
