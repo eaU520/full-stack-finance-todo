@@ -27,7 +27,7 @@ const CreateUser = ({onSubmit}) => {
         e.preventDefault();
        
         const data = { ...form};
-
+        //TODO: Add clear/reset register form button
         await fetch('http://localhost:5050/users/register',{
           method: "POST",
           headers: {
