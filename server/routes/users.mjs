@@ -13,6 +13,7 @@ const userRouter = express.Router();
 const saltSize = 12;
 const transport = mail.createTransport({
   // host: "smtp.forwardmail.net",
+  //TODO: What is this doing?
   service: "yahoo",
   port: 5050,
   secure: true,
