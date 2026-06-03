@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {useNavigate} from 'react-router-dom';
 import '../App.css';
 //TODO: Using facebook, Google, etc.
-const CreateUser = (props) => {
+const CreateUser = ({onSubmit}) => {
     const [form, setForm] = useState({
           name: "",
           username: "",
@@ -27,7 +27,7 @@ const CreateUser = (props) => {
         e.preventDefault();
        
         const data = { ...form};
-
+        //TODO: Add clear/reset register form button
         await fetch('http://localhost:5050/users/register',{
           method: "POST",
           headers: {
