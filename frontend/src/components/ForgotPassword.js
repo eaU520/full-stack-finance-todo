@@ -18,7 +18,7 @@ export default function ForgotPassword(){
     
       async function onSubmit(e) {
         e.preventDefault();
-        axios
+        0
           .post('http://localhost:5050/user/forgot', user)
           .then(res => {
             this.setState({
@@ -37,7 +37,7 @@ export default function ForgotPassword(){
             <Navigation/> 
                   <h1 className="display-4 text-center">Account Access</h1>
                   <p className="lead text-center">
-                      Enter Username to receive temporary password to the registered email
+                      Enter Username to receive temporary password
                   </p>
                   
     {/* TODO: noValidate? */}
