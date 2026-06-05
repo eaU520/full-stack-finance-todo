@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import {useNavigate} from 'react-router-dom';
 import '../App.css';
 //TODO: Using facebook, Google, etc.
-const CreateUser = ({onSubmit}) => {
+const RegisterUser = ({onSubmit}) => {
     const [form, setForm] = useState({
           name: "",
           username: "",
@@ -28,6 +28,7 @@ const CreateUser = ({onSubmit}) => {
        
         const data = { ...form};
         //TODO: Add clear/reset register form button
+        //TODO: Extract the port
         await fetch('http://localhost:5050/users/register',{
           method: "POST",
           headers: {
@@ -42,7 +43,7 @@ const CreateUser = ({onSubmit}) => {
               setForm({error: res.msg}); 
             }else if(res.ok === false && res.status === 400){
               setForm({error: res.text});
-              console.log("Here",res.text);
+              //console.log("Here",res.text);
               // console.log(`The status code is ${res.status}`)
             }else{
               setForm({
@@ -66,9 +67,9 @@ const CreateUser = ({onSubmit}) => {
                   <Link to="/" className="btn btn-outline-warning float-left">
                       Show Expense List
                   </Link> */}
-                  <h1 className="display-4 text-center">Add User</h1>
+                  <h1 className="display-4 text-center">Register</h1>
                   <p className="lead text-center">
-                      Create new user
+                      Create a new Account
                   </p>
                   
                   <form noValidate onSubmit={onSubmit}>
@@ -158,4 +159,4 @@ const CreateUser = ({onSubmit}) => {
 
         );
 }
-export default CreateUser; 
+export default RegisterUser; 
