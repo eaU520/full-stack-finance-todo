@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 test('renders App', () => {
-  render(<App />);//Issue with navigate and list of expenses
+  render(<App />);//FIXME: Issue with navigate and list of expenses
   // .toBeInTheDocument();
 
 });
