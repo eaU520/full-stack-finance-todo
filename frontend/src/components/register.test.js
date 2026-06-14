@@ -18,9 +18,8 @@ describe("Register Component renders", () =>{
             passwordAgain:"Test",
             admin: false,
             email: "test@hotmail.com"
-        }
+        }.flatten();
         const submit = jest.fn();
-
         render(
             <BrowserRouter>
                 <RegisterComponent onSubmit={submit} body={user} />
