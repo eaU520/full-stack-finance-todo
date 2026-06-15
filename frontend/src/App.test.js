@@ -12,6 +12,6 @@ afterEach(() => {
 
 test('renders App', () => {
   render(<App />);//FIXME: Issue with navigate and list of expenses
-  // .toBeInTheDocument();
+  expect(screen.getAllByRole('link').toBeInTheDocument());
 
 });
