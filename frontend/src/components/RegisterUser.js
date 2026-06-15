@@ -43,8 +43,6 @@ const RegisterUser = ({onSubmit}) => {
               setForm({error: res.msg}); 
             }else if(res.ok === false && res.status === 400){
               setForm({error: res.text});
-              //console.log("Here",res.text);
-              // console.log(`The status code is ${res.status}`)
             }else{
               setForm({
                 name: '',
