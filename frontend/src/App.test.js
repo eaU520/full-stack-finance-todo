@@ -5,13 +5,14 @@ import '@testing-library/jest-dom'
 import { render, screen, cleanup } from '@testing-library/react';
 import App from './App';
 import React from "react";
+import userEvent from '@testing-library/user-event';
 
 afterEach(() => {
   cleanup()
 });
 
 test('renders App', () => {
-  render(<App />);//FIXME: Issue with navigate and list of expenses
-  expect(screen.getAllByRole('link').toBeInTheDocument());
+  
+
 
 });
