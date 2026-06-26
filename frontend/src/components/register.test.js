@@ -10,8 +10,8 @@ afterEach(() => {
 });
 
 describe("Register Component renders", () =>{
-    it("Attempting to create a new user with valid inputs", () =>{
-        const user ={
+    it("Attempting to create a new user with valid inputs", async () =>{
+        const fakeUser ={
             name: "Test Name",
             username: "testerman",
             password:"Test",
@@ -24,8 +24,7 @@ describe("Register Component renders", () =>{
                 <RegisterComponent onSubmit={jest.fn()} body={user} />
             </BrowserRouter>
         );
-        const nameField = screen.getByPlaceholderText("Name");
-        fireEvent.change(nameField, {target: {value: user.name }});
+        jest.spyOn(global, "fetch");
         //TODO: Every user field, but it gets cleared
         const submitButton = screen.getByRole("button");
         fireEvent.click(submitButton);

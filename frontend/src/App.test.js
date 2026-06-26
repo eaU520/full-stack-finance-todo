@@ -11,7 +11,7 @@ afterEach(() => {
   cleanup()
 });
 
-test('renders App', () => {
+it('renders App', () => {
   
 
 
